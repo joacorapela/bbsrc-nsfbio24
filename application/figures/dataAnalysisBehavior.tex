@@ -1,0 +1,18 @@
+\begin{tikzpicture}[
+        node distance=4cm and 1cm,
+        behaviorNode/.style={ellipse, draw=cyan!60, fill=cyan!5, very thick,
+        minimum size=7mm, align=center},
+        problemNode/.style={rectangle, draw=gray!60, fill=gray!5, very thick,
+        minimum size=5mm, align=center},
+        arrow/.style={thick, <-, >=stealth},
+    ]
+    \node[behaviorNode] (behavior)    {Behavior};
+        \path (behavior) ++(190:1.0in) node[problemNode] (mbpTracking) {Multi\\Body Part\\Tracking};
+        \path (behavior) ++(230:1.0in) node[problemNode] (kinematicsInference) {Kinematics\\Inference};
+        \path (behavior) ++(310:1.0in) node[problemNode] (statesInference) {State\\Inference};
+        \path (behavior) ++(350:1.0in) node[problemNode] (policyInference) {Policy\\Inference};
+    \draw[arrow] (behavior) -- (mbpTracking);
+    \draw[arrow] (behavior) -- (kinematicsInference);
+    \draw[arrow] (behavior) -- (statesInference);
+    \draw[arrow] (behavior) -- (policyInference);
+\end{tikzpicture}

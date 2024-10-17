@@ -1,0 +1,113 @@
+\subsubsection{Context}
+
+Conventional systems neuroscience experiments are typically short in duration
+and often place significant constraints on subject behavior to simplify data
+analysis.
+%
+However, these restrictions may limit our ability to observe critical
+aspects of brain function and behavior that only manifest in more naturalistic
+and extended conditions.
+
+At the Sainsbury Wellcome Centre (SWC) for Neural Circuits and Behaviour, we
+are pioneering Naturalistic, Long-Duration, and Continual (NaLoDuCo) foraging
+experiments in mice that span weeks to months. During these extended
+experiments, we collect high-resolution recordings of both behavioral and
+neural activity in naturalistic settings.
+%
+In collaboration with the Gatsby Computational Neuroscience Unit (GCNU), we are
+developing novel analytical methods to interpret this new class of data.
+
+This novel experimental approach will enable researchers to explore neural
+mechanisms underlying behavior over extended periods for the first time,
+offering the possibility of uncovering insights across a wide range of
+phenomena, including long-term behavioral adaptation, neural plasticity, and
+learning.
+%
+The data generated from NaLoDuCo experiments represent an entirely
+new resource in neuroscience, with the potential to drive breakthroughs and
+discoveries that are beyond the reach of traditional experiments.
+
+Our vision is to empower research centers worldwide to adopt this
+groundbreaking approach.
+%
+However, the scale and complexity of the data generated pose significant
+challenges in data acquisition, visualisation, and analysis.
+%
+In this proposal, we will address these challenges, developing and sharing
+openly the necessary expertise, hardware, and software to enable this
+transformative type of experimentation on a global scale.
+
+\subsubsection{Focus areas}
+
+Below, we outline the key focus areas we aim to address
+(Figure~\ref{fig:focusAreas}), along with their associated challenges.
+%
+These challenges primarily revolve around the collection and analysis of
+continuously recorded, extremely large datasets--on the order of hundreds of
+terabytes--gathered from experiments spanning weeks to months.
+
+While experiments in neuroscience that are naturalistic, long-duration, or
+continuous have been conducted in the past
+\citep[e.g.,][]{jhuangEtAl10,maoEtAl21,volohEtAl23}, to the best of our
+knowledge, we are the first to integrate all three of these features in a
+single experimental paradigm.
+%
+This combination introduces unprecedented complexities in data processing, as
+we aim to capture behavior and brain activity in their most ecologically valid,
+extended, and uninterrupted forms.
+
+The focus areas of the proposed project are (Figure~\ref{fig:focusAreas}):
+
+\begin{description}
+
+    \item[Data Collection \& Management] Efficiently gathering and organizing
+        massive datasets over extended periods.
+
+    \item[Data Sharing] Providing easy access to large-scale datasets
+        to researchers around the globe using cloud-based technologies.
+
+    \item[Data Visualization] Developing efficient web-based tools to visualize
+        very large behavioral and neural datasets.
+
+    \item[Spike Sorting] Assigning spikes to neurons reliably, and tracking
+        individual neurons across long-periods of time in real time.
+
+    \item[Data Analysis] Evaluating existing methods, and developing new ones,
+        when necessary, to address key problems in behavioral and neural data
+        analysis (Figure~\ref{fig:dataAnalysis}).
+
+    \item[Inference-Driven Experimentation] Creating a new type of
+        experimentation driven by real-time behavioral and neural inferences.
+
+\end{description}
+
+These focus areas represent key technical and analytical challenges that, once
+addressed, will faciliate a transformative shift in neuroscience research.
+
+\begin{figure}
+    \begin{center}
+        \resizebox{4.0in}{!}{%
+            \input{figures/focusAreas}
+        }
+    \end{center}
+    \caption{Project theme (blue) and focus areas (red).}
+    \label{fig:focusAreas}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \subfloat[]{
+        \resizebox{3.0in}{!}{%
+            \input{figures/dataAnalysisBehavior}
+        }
+    }
+    \hfill
+    \subfloat[]{
+        \resizebox{3.0in}{!}{%
+            \input{figures/dataAnalysisNeural}
+        }
+    }
+    \caption{Behavioral (a) and neural (b) data analysis problems to address.}
+    \label{fig:dataAnalysis}
+\end{figure}
+

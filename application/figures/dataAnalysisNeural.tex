@@ -1,0 +1,18 @@
+\begin{tikzpicture}[
+        node distance=4cm and 1cm,
+        neuralNode/.style={ellipse, draw=magenta!60, fill=magenta!5, very thick,
+        minimum size=5mm, align=center},
+        problemNode/.style={rectangle, draw=gray!60, fill=gray!5, very thick,
+        minimum size=5mm, align=center},
+        arrow/.style={thick, <-, >=stealth},
+    ]
+    \node[neuralNode] (neural)    {Neural\\Activity};
+        \path (neural) ++(190:1.0in) node[problemNode] (spikeSorting) {Spike\\Sorting};
+        \path (neural) ++(230:1.0in) node[problemNode] (latentsInference) {Latents\\Inference};
+        \path (neural) ++(310:1.0in) node[problemNode] (stateInference) {State\\Inference};
+        \path (neural) ++(350:1.0in) node[problemNode] (decoding) {Decoding};
+    \draw[arrow] (neural) -- (spikeSorting);
+    \draw[arrow] (neural) -- (latentsInference);
+    \draw[arrow] (neural) -- (stateInference);
+    \draw[arrow] (neural) -- (decoding);
+\end{tikzpicture}

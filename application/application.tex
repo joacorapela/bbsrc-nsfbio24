@@ -6,14 +6,16 @@
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{tikz}
 \usepackage{caption}
-\usepackage{subcaption}
+% \usepackage{subcaption}
 \usepackage{verbatim}
 \usepackage{lineno}
+\usepackage{subfig}
 
 \linenumbers
 \setpagewiselinenumbers
 
 \usetikzlibrary{positioning,arrows}
+\usetikzlibrary{shapes.geometric}
 
 % \setlength{\parindent}{0pt}
 
@@ -31,7 +33,7 @@ Neuroscience Experimentation with Advanced Machine Learning}
 
 \maketitle
 
-\section{Summary (2 words)}
+\section{Summary}
 
 {\color{red}
 Word limit: 2
@@ -91,7 +93,7 @@ Please state the research theme you are applying under. Choose one of the follow
 
 biological informatics
 
-\section{Vision}
+\subsection{Vision}
 
 {\color{red}
 Word limit: 500
@@ -149,7 +151,7 @@ Images are not required for this section.
 
 % \input{approach}
 
-\section{US applicants}
+\subsection{US applicants}
 
 {\color{red}
 
@@ -173,7 +175,7 @@ Please do not include details of US applicants in the ‘Core team’ section.
 
 }
 
-\section{Resources}
+\subsection{Resources}
 
 {\color{red}
 
@@ -222,6 +224,11 @@ Total funder contribution estimate:
 
 }
 
+\appendix
+
+\section{More details about the vision}
+
+\input{visionLong}
 
 \bibliographystyle{apalike}
 \bibliography{foraging,linearDynamicalSystems,stateSpaceModels,machineLearning,epilepsy,latentsVariablesModels,deepNeuralNets,monitoringBehavior,dataSharing,misc,naturalExperimentation,neuroEthology,bci,neuralDecoders,replay,optogenetics,tracking,benchmarks,physiology}

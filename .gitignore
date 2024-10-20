@@ -1,0 +1,13 @@
+*~
+*.swp
+bbr24_application.pdf
+
+old/
+
+application/application.*
+!application/application.tex
+!application/application.pdf
+
+application/figures/*
+!application/figures/resourceFig.tex
+!application/figures/inferenceDrivenExp.tex

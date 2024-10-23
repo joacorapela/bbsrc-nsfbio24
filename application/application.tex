@@ -2,7 +2,7 @@
 
 \usepackage{xcolor}
 \usepackage{natbib}
-\usepackage{apalike}
+% \usepackage{apalike}
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{tikz}
 \usepackage{caption}
@@ -17,6 +17,7 @@
 \usetikzlibrary{positioning,arrows}
 \usetikzlibrary{shapes.geometric}
 
+\newcommand{\referencessection}{\section*{References}}
 % \setlength{\parindent}{0pt}
 
 \title{Intention to submit document for the
@@ -224,13 +225,16 @@ Total funder contribution estimate:
 
 }
 
+\referencessection
+\addcontentsline{toc}{section}{References}
+
+\bibliographystyle{plain}
+\bibliography{foraging,linearDynamicalSystems,stateSpaceModels,machineLearning,epilepsy,latentsVariablesModels,deepNeuralNets,monitoringBehavior,dataSharing,misc,naturalExperimentation,neuroEthology,bci,neuralDecoders,replay,optogenetics,tracking,benchmarks,physiology,aeon,others,spikeSorting}
+
 \appendix
 
 \section{More details about the vision}
 
 \input{visionLong}
-
-\bibliographystyle{plain}
-\bibliography{foraging,linearDynamicalSystems,stateSpaceModels,machineLearning,epilepsy,latentsVariablesModels,deepNeuralNets,monitoringBehavior,dataSharing,misc,naturalExperimentation,neuroEthology,bci,neuralDecoders,replay,optogenetics,tracking,benchmarks,physiology,aeon,others,spikeSorting}
 
 \end{document}

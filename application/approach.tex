@@ -10,9 +10,6 @@ arena.
 %
 Using this platform we have collected several week long datasets both with
 single mouse and multiple mice.
-%
-These datasets capture a rich behavioural repertoire including a foraging
-behaviour,  social learning task, defensive and nesting behaviours.
 
 \input{figures/figArena}
 
@@ -28,12 +25,9 @@ Integration (DANDI), which uses Amazon S3 buckets, and we will provide software
 to visualize and analyze data in Amazon EC2 instances, to avoid costly data
 transfers.
 
-CatalystNeuro has played a pivotal role in supporting the development and
-operations of DANDI.
-
 \subsubsection{Data visualisation}
 
-Visualisations are essential for scientific discovery. Our visualisation tools
+Our visualisation tools
 need to display very large datasets at different temporal scales, from
 milliseconds to weeks and months, and they need to be web based.
 %
@@ -43,31 +37,17 @@ various resolutions, and use the approriate resolution for each zoom level.
 Web-based visualisation will be optimized using web workers
 \citep{webWorkers}.
 
-Dr.~Magland has extensive experience buidling web based visualizations (e.g.,
-Neurosift \citep{neurosift})
-
 \subsubsection{Spike sorting}
 
 Spike sorting is specially challenging in NaLoDuCo experimentation since we
 want to track individual neurons of freely moving mice for weeks to months.
 %
-In addition, spike sorting needs to be done online, to allow experiments driven
+In addition, we need online spike sorting, to allow experiments driven
 by real-time machine learning inference, as described below.
-%
-Furthermore, sorting algorithms need to operate on probes with hundreads of
-channels.
 
-Methods have been proposed for tracking neurons for long periods of time
+We will evaluate methods for tracking neurons over long periods of time
 \citep[e.g.,][]{yuanEtAl24,vanBeestEtAl24} and for online sorting
-\citep[e.g.,][]{rutishauserEtAl06,santhanamEtAl04}. We will rigorously evaluate these
-methods and report the results of these evaluation, so that researchers can
-choose the method that best fits their needs.
-
-Prof.~Sahani pioneered the use of Bayesian inference methods for spike sorting
-\citep{sahani99}. Dr. Jeremy Magland has significantly advanced the field of
-spike sorting, particularly through his development of MountainSort
-\citep{mountainSort5} and his contributions to
-SpikeInterface\citep{spikeInterface}.
+\citep[e.g.,][]{rutishauserEtAl06,santhanamEtAl04}.
 
 \subsubsection{Data analysis}
 
@@ -75,40 +55,45 @@ The very large size of NaLoDuCo experimental data, the fact that the statistics
 of these data change across time, and the requirement for real-time and
 close-loop inference create new challenges to conventional machine learning
 methods.
+%
+We will evaluate existing methods targeting the experimental problems
+in Figure~\ref{fig:dataAnalysis} and, if necessary, modify them, or create new
+ones, to address the previous challenges.
 
-We have selected a few data analysis problems in NaLoDuCo experimentation to
-address in this project (Figure~\ref{fig:dataAnalysis}).
-%
-For each of these problems we will evaluate a few existing machine learning
-methods and, if needed, develop new ones.
-%
-We will document the results of these evaluations, and create benchmarks
-comparing methods performance.
-%
-We will create a resource where scientists performing NaLoDuCo experimentation
-can use to choose the data analysis methods that best fits there needs.
+For behavioral data, we will evaluate methods to:
 
-For behavioral data, we will evaluate methods to track multiple body parts of
+\begin{itemize}
+
+    \item track multiple body parts of
 animals \citep[e.g.,][and a switching-linear-dyanamical method using RFIDs that
 we will develop]{mathisEtAl18,pereiraEtAl22,bidermanEtAl24},
-%
-to infer kinematics of foraging mice \citep[e.g.,][]{ldspython,challaEtAl11},
-%
-to segment behavior into discrete states \citep[e.g.,][and a hierarchical HMM
+
+    \item infer kinematics of foraging mice \citep[e.g.,][]{ldspython,challaEtAl11},
+
+    \item segment behavior into discrete states \citep[e.g.,][and a hierarchical HMM
 that we will develop]{wiltschkoEtAl15,hsuAndYttri21},
-%
-and to infer the rules that govern mice behavior from behavioral observations
+
+    \item infer the rules that govern mice behavior from behavioral observations
 only (i.e., policy inference) \citep[e.g.,][]{ziebartEtAl08,zhuEtAl23}.
 
-For neural data, we will evaluate methods to estimate low-dimensional continual
-representations of high-dimensional spiking activity (i.e., latents inference)
-\citep[e.g.,][]{mackeEtAl11,dunckerAndSahani18,pandarinathEtAl18,saniEtAl21},
-%
-to segment neural activity into discrete states
-\citep[e.g.,][]{chenEtAl09,escolaEtAl11},
-%
-and to decode environment variables from neural activity
-\citep[e.g.,][]{dengEtAl15,kloostermanEtAl14,tampuuEtAl19}.
+\end{itemize}
+
+For neural data, we will evaluate methods to:
+
+\begin{itemize}
+
+    \item estimate low-dimensional continual representations of
+        high-dimensional spiking activity (i.e., latents inference)
+        \citep[e.g.,][]{mackeEtAl11,dunckerAndSahani18,pandarinathEtAl18,saniEtAl21},
+
+    \item segment neural activity into discrete states
+        \citep[e.g.,][]{chenEtAl09,escolaEtAl11},
+
+    \item decode environment variables from neural activity
+        \citep[e.g.,][]{dengEtAl15,kloostermanEtAl14,tampuuEtAl19}.
+
+\end{itemize}
+
 
 \subsubsection{Inference-driven experimentation}
 
@@ -119,12 +104,13 @@ these inferences can change the experiment in real time.
 We will apply inference-driven experimentation to test if patterns of neural
 activity are causally related to foraging behaviors.
 %
-We would first check that a pattern of neural activity a brain region always
-precedes a given foraging behavior. We would then detect the occurence of the
-pattern and in real time optogenetically inactivate the brain region.
+We would first check that a pattern of neural activity always precedes a given
+foraging behavior. We would then detect the occurence of the pattern and in
+real time optogenetically inactivate the neurons responsible for the pattern.
+%
 If the behavior dissapears the causality argument would be supported.
 
-We will use the Bonsai ecosystem for experimental control~\citep{bonsai} and
-online machine learning functionality that, funded by a BBSRC
-award~\citep{bbsrcAward}, we are adding to Bonsai~\citep{bonsaiML}.
+For this we will use the Bonsai ecosystem for experimental
+control~\citep{bonsai} and online machine learning functionality that we are
+adding to Bonsai~\citep{bonsaiML}, funded by a BBSRC award~\citep{bbsrcAward}.
 

@@ -7,11 +7,9 @@
         arrow/.style={thick, <-, >=stealth},
     ]
     \node[neuralNode] (neural)    {Neural\\Activity};
-        \path (neural) ++(190:1.0in) node[problemNode] (spikeSorting) {Spike\\Sorting};
-        \path (neural) ++(230:1.0in) node[problemNode] (latentsInference) {Latents\\Inference};
-        \path (neural) ++(310:1.0in) node[problemNode] (stateInference) {State\\Inference};
-        \path (neural) ++(350:1.0in) node[problemNode] (decoding) {Decoding};
-    \draw[arrow] (neural) -- (spikeSorting);
+        \path (neural) ++(225:1.0in) node[problemNode] (latentsInference) {Latents\\Inference};
+        \path (neural) ++(270:1.0in) node[problemNode] (stateInference) {State\\Inference};
+        \path (neural) ++(315:1.0in) node[problemNode] (decoding) {Decoding};
     \draw[arrow] (neural) -- (latentsInference);
     \draw[arrow] (neural) -- (stateInference);
     \draw[arrow] (neural) -- (decoding);

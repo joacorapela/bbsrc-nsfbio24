@@ -10,3 +10,5 @@ application/application.*
 
 application/figures/*
 !application/figures/*.tex
+!application/figures/arena.png
+!application/figures/patch.png

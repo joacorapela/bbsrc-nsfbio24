@@ -10,13 +10,13 @@
         \node[centralNode] (naloducoExp)    {Enabling\\Naturalistic,\\Long-Duration\\and Continual\\Experimentation};
         % \node[itemNode]    (dataCol)        at (naloducoExp) ++(40:2cm) {DataCollection\\\& Management};
             \path (naloducoExp) ++(90:1.5in) node[itemNode] (dataCol) {DataCollection\\\& Management};
-            \path (naloducoExp) ++(30:1.5in) node[itemNode] (dataSharing) {Data\\Sharing};
+            \path (naloducoExp) ++(30:1.5in) node[itemNode] (sharingDataMethods) {Sharing Data\\\& Methods};
             \path (naloducoExp) ++(330:1.5in) node[itemNode] (dataVis) {Data\\Visualization};
             \path (naloducoExp) ++(270:1.5in) node[itemNode] (spikeSort) {Spike\\Sorting};
             \path (naloducoExp) ++(210:1.5in) node[itemNode] (dataAnalysis) {Data\\Analysis};
             \path (naloducoExp) ++(150:1.5in) node[itemNode] (inferenceDExp) {Inference-Driven\\Experimentation};
         \draw[arrow] (naloducoExp) -- (dataCol);
-        \draw[arrow] (naloducoExp) -- (dataSharing);
+        \draw[arrow] (naloducoExp) -- (sharingDataMethods);
         \draw[arrow] (naloducoExp) -- (dataVis);
         \draw[arrow] (naloducoExp) -- (spikeSort);
         \draw[arrow] (naloducoExp) -- (dataAnalysis);

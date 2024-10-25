@@ -15,24 +15,36 @@ neurons simultaneously spanning the entire brain depth.
 This setup has allowed us to collect several week-long datasets with single and
 multiple mice per arena.
 
-To facilitate the replication of our experimental setup by other groups,
-we will share instructions for building foraging arenas, as well as
-specifications of hardware used in them,
+To facilitate the replication of our experimental setup by other groups, we
+will share instructions for building foraging arenas, as well as specifications
+of hardware used in them,
 %
-and we will further document the above software repositories for data acquisition
-and management.
+and we will improve the documentation of the software repositories for data
+acquisition and management.
 
 \input{figures/figArena}
 
 \subsubsection{Sharing data and methods}
 
-NaLoDuCo experiments generate extremely large datasets, often exceeding hundreds of terabytes, which makes traditional data distribution methods impractical. Instead, users will need to interact with the data where it is stored. Cloud technologies have matured significantly, offering efficient, scalable solutions for this.
+NaLoDuCo experiments produce vast datasets, often exceeding hundreds of
+terabytes, making traditional methods of data distribution inefficient and
+impractical. Instead, users will interact with the data directly where it is
+stored. The maturation of cloud technologies now enables scalable and efficient
+solutions for handling such large volumes of data.
 
-We will store data in the Distributed Archives for Neuroscience1 Data Integration (DANDI), which uses Amazon S3 buckets, and we will provide software to visualise and analyse data in Amazon EC2 instances, to avoid costly data transfers.
+We will leverage the Distributed Archives for Neuroscience Data Integration
+(DANDI), which utilizes Amazon S3 storage, for hosting the data. Additionally,
+we will provide software to visualize and analyze data using Amazon EC2
+instances, thereby minimizing the need for costly and time-consuming data
+transfers.
 
-This will be a challenging task, since we are the first group openly sharing continuous behavioral and neural recordings on the order of hundreds of terabytes. 
-
-Cloud-based processing of very large volumes of data is a key concern. To address this, we will study the performance of methods addressing the tasks in Figure~\ref{fig:dataAnalysis}. If current methods introduce unacceptable delays, we will explore advanced solutions, including parallel processing techniques and optimizing cloud resource usage.
+Handling and sharing continuous behavioral and neural recordings of this scale
+presents unique challenges. For instance, analyzing such large datasets
+efficiently is a key concern. We will assess the computational performance of
+the methods used to address the problems in Figure~\ref{fig:dataAnalysis}. If
+we encounter unacceptable delays, we will explore advanced optimization
+strategies, such as parallel processing and resource-efficient cloud
+configurations.
 
 \subsubsection{Data visualisation}
 

@@ -2,10 +2,10 @@
 
 We have developed an innovative platform for housing of mice in large arenas
 (\textgreater 2m diameter) enabling precise behavioural manipulation and
-high-resolution monitoring \citep[Figure~\ref{fig:arena}, ][]{campagnerEtAl24}.
+high-resolution monitoring [Figure~\ref{fig:arena}, \cite{campagnerEtAl24}].
 %
 We have openly shared software for supporting data acquisition
-\citep{aeonacquisition} and management \citep{aeonmecha} in this
+[\cite{aeonacquisition}] and management [\cite{aeonmecha}] in this
 arena.
 %
 Additionally, the platforms supports continuous, long term monitoring of neural
@@ -26,23 +26,19 @@ acquisition and management.
 
 \subsubsection{Sharing data and methods}
 
-NaLoDuCo experiments produce vast datasets, often exceeding hundreds of
-terabytes, making traditional methods of data distribution inefficient and
-impractical. Instead, users will interact with the data directly where it is
-stored. The maturation of cloud technologies now enables scalable and efficient
-solutions for handling such large volumes of data.
+The very large datasets produced by NaLoDuCo experiments make traditional
+methods of data distribution impractical. Instead, users will interact with the
+data directly where it is stored. The maturation of cloud technologies now
+makes this possible.
 
 We will leverage the Distributed Archives for Neuroscience Data Integration
-(DANDI), which utilizes Amazon S3 storage, for hosting the data. Additionally,
-we will provide software to visualize and analyze data using Amazon EC2
-instances, thereby minimizing the need for costly and time-consuming data
-transfers.
+(DANDI), which utilises Amazon S3 storage, for hosting the data. Additionally,
+we will provide software to visualise and analyse data using Amazon EC2
+instances, thereby minimising the need for time-consuming data transfers.
 
-Handling and sharing continuous behavioral and neural recordings of this scale
-presents unique challenges. For instance, analyzing such large datasets
-efficiently is a key concern. We will assess the computational performance of
-the methods used to address the problems in Figure~\ref{fig:dataAnalysis}. If
-we encounter unacceptable delays, we will explore advanced optimization
+Handling and sharing continuous behavioural and neural recordings of this scale
+presents unique challenges. Runtime performance is one of them. If we
+encounter unacceptable delays, we will explore advanced optimisation
 strategies, such as parallel processing and resource-efficient cloud
 configurations.
 
@@ -56,19 +52,20 @@ We will use multi-resolution visualisation techniques, which store data at
 various resolutions, and use the appropriate resolution for each zoom level.
 %
 Web-based visualisation will be optimised using web workers
-\citep{webWorkers}.
+[\cite{webWorkers}].
 
 \subsubsection{Spike sorting}
 
 Spike sorting is specially challenging in NaLoDuCo experimentation since we
 want to track individual neurons of freely moving mice for weeks to months.
-
+%
 In addition, we need online spike sorting, to allow experiments driven
 by real-time machine learning inference, as described below.
-
+%
 We will evaluate methods for tracking neurons over long periods of time
-\citep[e.g.,][]{yuanEtAl24,vanBeestEtAl24} and for online sorting
-\citep[e.g.,][]{rutishauserEtAl06,santhanamEtAl04}.
+[e.g., \cite{yuanEtAl24,vanBeestEtAl24}] and for online sorting
+[e.g., \cite{rutishauserEtAl06,santhanamEtAl04}]. If needed, we will develop
+new methods, as we have experience on the subject~[\cite{sahani99}].
 
 \subsubsection{Data analysis}
 
@@ -86,16 +83,17 @@ For behavioural data, we will evaluate methods to:
 \begin{itemize}
 
     \item track multiple body parts of
-animals \citep[e.g.,][and a switching-linear-dynamical method using RFIDs that
-we will develop]{mathisEtAl18,pereiraEtAl22,bidermanEtAl24},
+animals [e.g., \cite{mathisEtAl18,pereiraEtAl22,bidermanEtAl24} and a switching-linear-dynamical method using RFIDs that
+we will develop],
 
-    \item infer kinematics of foraging mice \citep[e.g.,][]{ldspython,challaEtAl11},
+    \item infer kinematics of foraging mice [e.g.,
+        \cite{ldspython,challaEtAl11}],
 
-    \item segment behaviour into discrete states \citep[e.g.,][and a hierarchical HMM
-that we will develop]{wiltschkoEtAl15,hsuAndYttri21},
+    \item segment behaviour into discrete states [e.g., \cite{wiltschkoEtAl15,hsuAndYttri21} and a hierarchical HMM
+that we will develop],
 
     \item infer the rules that govern mice behaviour from behavioural observations
-only (i.e., policy inference) \citep[e.g.,][]{ziebartEtAl08,zhuEtAl23}.
+        only (i.e., policy inference) [e.g., \cite{ziebartEtAl08,zhuEtAl23}].
 
 \end{itemize}
 
@@ -105,13 +103,14 @@ For neural data, we will evaluate methods to:
 
     \item estimate low-dimensional continual representations of
         neural activity (i.e., latents inference)
-        \citep[e.g.,][]{mackeEtAl11,dunckerAndSahani18,walkerEtAl23,pandarinathEtAl18,saniEtAl21},
+        [e.g.,
+        \cite{mackeEtAl11,dunckerAndSahani18,walkerEtAl23,pandarinathEtAl18,saniEtAl21}],
 
     \item segment neural activity into discrete states
-        \citep[e.g.,][]{chenEtAl09,escolaEtAl11},
+        [e.g., \cite{chenEtAl09,escolaEtAl11}],
 
     \item decode environment variables from neural activity
-        \citep[e.g.,][]{dengEtAl15,kloostermanEtAl14,tampuuEtAl19}.
+        [e.g., \cite{dengEtAl15,kloostermanEtAl14,tampuuEtAl19}].
 
 \end{itemize}
 
@@ -132,6 +131,6 @@ real time optogenetically inactivate the neurons responsible for the pattern.
 If the behaviour disappears the causality argument would be supported.
 
 For this we will use the Bonsai ecosystem for experimental
-control~\citep{bonsai} and online machine learning functionality that we are
-adding to Bonsai~\citep{bonsaiML}, funded by a BBSRC award~\citep{bbsrcAward}.
+control~\cite{bonsai} and online machine learning functionality that we are
+adding to Bonsai~\cite{bonsaiML}, funded by a BBSRC award~\cite{bbsrcAward}.
 

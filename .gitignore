@@ -1,15 +1,13 @@
 *~
 *.bak
 *.swp
+*.log
 bbr24_application.pdf
 
 old/
 
-application/application.*
-!application/application.tex
-!application/application.pdf
+application/loi.*
+!application/loi.tex
+!application/loi.pdf
 
 application/figures/*
-!application/figures/*.tex
-!application/figures/arena.png
-!application/figures/patch.png

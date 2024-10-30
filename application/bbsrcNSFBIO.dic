@@ -1,12 +1,14 @@
-personal_ws-1.1 en 50 
+personal_ws-1.1 en 55 
 AIND
 BBSRC
 DANDI
+FW
 GCNU
 NaLoDuCo
 NeuroGEARS
 Neuropixels
 RFIDs
+Runtime
 SWC
 Sainsbury
 Wellcome
@@ -24,6 +26,7 @@ dengEtAl
 dunckerAndSahani
 electrophysiological
 escolaEtAl
+foragingArena
 hsuAndYttri
 jhuangEtAl
 kloostermanEtAl
@@ -32,9 +35,11 @@ ldspython
 mackeEtAl
 maoEtAl
 mathisEtAl
+nsfbio
 optogenetically
 pandarinathEtAl
 pereiraEtAl
+png
 rutishauserEtAl
 sahani
 saniEtAl

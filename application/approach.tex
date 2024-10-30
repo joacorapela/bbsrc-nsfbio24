@@ -1,4 +1,4 @@
-\subsubsection{Foundational progress: data collection \& management}
+\subsubsection{Foundational progress: experimental control, data acquisition \& management}
 
 We have developed an innovative platform for housing of mice in large arenas
 (\textgreater 2m diameter) enabling precise behavioural manipulation and
@@ -14,11 +14,27 @@ management~[\href{https://github.com/SainsburyWellcomeCentre/aeon_mecha}{4}] in 
 arena.
 %
 Additionally, the platform supports continuous, long term monitoring of neural
-activity with Neuropixels probes, capable of recording from thousands of
-neurons simultaneously spanning the entire brain depth.
+activity with Neuropixels probes.
 %
 This setup has allowed us to collect several week-long datasets with single and
 multiple mice per arena.
+
+
+\subsubsection{Intelligent experimental control}
+
+Bonsai is an unparalleled software for experimental control that both the SWC
+and the AIND are using to control their foraging experiments.
+%
+We are currently adding machine learning functionality to Bonsai, funded by
+BBSRC
+[\href{https://gow.bbsrc.ukri.org/grants/AwardDetails.aspx?FundingReference=BB\%2FW019132\%2F1}{5}].
+
+We will continue enhancing Bonsai with machine learning methods developed in
+this project.
+%
+Our goal is to enable a new type of experimentation, driven by sophisticated
+inferences from behavioural and neural recordings. This innovative approach
+could be transformative for foraging research.
 
 % To facilitate the replication of our experimental setup by other groups, we
 % will share instructions for building foraging arenas, as well as specifications
@@ -34,7 +50,7 @@ methods of data distribution impractical. Instead, users will interact with the
 data directly where it is stored. The maturation of cloud technologies now
 makes this possible.
 
-We will leverage \href{https://www.dandiarchive.org/}{DANDI}, which utilises
+We will leverage DANDI [\href{https://www.dandiarchive.org/}{6}], which utilises
 Amazon S3 storage, for hosting the data. Additionally, we will provide software
 to visualise and analyse data using Amazon EC2 instances, thereby minimising
 the need for time-consuming data transfers.
@@ -76,42 +92,43 @@ of these data change across time, and the requirement for real-time and
 close-loop inference create new challenges to conventional machine learning
 data analysis methods.
 %
-We will evaluate how existing methods targeting the focus areas described above
-cope with these challenges and, if necessary, create new ones.
+We will evaluate how existing methods targeting the focus areas cope with these
+challenges and, if necessary, create new ones.
 
 For behavioural data, we will investigate methods to:
 
-\begin{itemize}
+\begin{description}
 
-    \item track multiple body parts of animals (e.g.,
+    \item[track multiple body parts of animals] (e.g.,
         [\href{https://pubmed.ncbi.nlm.nih.gov/30127430/}{7}] and a
         switching-linear-dynamical method using RFIDs that we will develop),
 
-    \item infer kinematics of foraging mice (e.g.,
+    \item[infer kinematics of foraging mice] (e.g.,
         [\href{https://github.com/joacorapela/lds\_python}{8},\href{https://www.cambridge.org/core/books/fundamentals-of-object-tracking/A543B0EA12957B353BE4B5D0602EE945}{9}]),
 
-    \item segment behaviour into discrete states (e.g.,
+    \item[segment behaviour into discrete states] (e.g.,
         [\href{https://pubmed.ncbi.nlm.nih.gov/26687221/}{10}]
         and a hierarchical HMM that we will develop),
 
-    \item infer the rules that govern mice behaviour from behavioural
-        observations only (i.e., policy inference) (e.g.,
+    \item[infer the rules that govern mice behaviour from behavioural
+        observations only] (i.e., policy inference) (e.g.,
         [\href{https://arxiv.org/abs/2311.13870v2}{11}]).
 
-\end{itemize}
+\end{description}
 
 For neural data, we will investigate methods to:
 
-\begin{itemize}
+\begin{description}
 
-    \item estimate low-dimensional continual representations of neural activity
+    \item[estimate low-dimensional continual representations of neural
+        activity]
         (i.e., latents inference) (e.g.,
         [\href{https://papers.nips.cc/paper_files/paper/2011/hash/7143d7fbadfa4693b9eec507d9d37443-Abstract.html}{12}]),
 
-    \item segment neural activity into discrete states (e.g.,
+    \item[segment neural activity into discrete states] (e.g.,
         [\href{https://pubmed.ncbi.nlm.nih.gov/21299424/}{13}]),
 
-    \item decode environment variables from neural activity (e.g.,
+    \item[decode environment variables from neural activity] (e.g.,
         [\href{https://pubmed.ncbi.nlm.nih.gov/25973549/}{14}]).
 
-\end{itemize}
+\end{description}

@@ -63,14 +63,13 @@ configurations.
 
 \subsubsection{Data visualisation}
 
-Our visualisation tools need to display very large datasets at different
-temporal scales, from milliseconds to weeks and months, and they need to be web
-based.
-%
-We will use multi-resolution visualisation techniques, which store data at
-various resolutions, and use the appropriate resolution for each zoom level.
-%
-Web-based visualisation will be optimised using web workers.
+Our visualization tools must efficiently display very large datasets across a
+range of temporal scales, from milliseconds to weeks and months, in a web-based
+format, as the data will be stored online. To accomplish this, we will
+implement multi-resolution visualization techniques that store data at various
+resolutions, dynamically adjusting to the appropriate resolution based on zoom
+level. Additionally, we will optimize web-based visualizations using web
+workers to improve performance and responsiveness.
 
 % \subsubsection{Spike sorting}
 

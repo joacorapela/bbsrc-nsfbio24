@@ -7,6 +7,7 @@
 *.blg
 *.out
 *.toc
+*.nfs*
 
 bbr24_application.pdf
 

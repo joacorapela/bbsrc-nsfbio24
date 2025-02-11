@@ -3,8 +3,12 @@
 *.swp
 *.log
 *.bib
-
-old/
+*.aux
+*.bbl
+*.blg
+*.out
+*.toc
+*.nfs*
 
 loi/*.csh
 loi/loi.*

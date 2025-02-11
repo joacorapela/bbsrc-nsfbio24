@@ -1,0 +1,84 @@
+\subsection{Deliverables}
+
+\begin{enumerate}
+
+    \item hardware specifications for long-duration recordings of behaviour and
+        neural activity (foraging arenas, video cameras, ultrasound
+        microphones, weight scales, Neuropixels probes, commutator,
+        \href{https://www.nature.com/articles/s41592-024-02521-1}{ONIX})
+
+    \item software for managing long-duration recordings (data storage, data
+        indexing)
+
+    \item software for online/offline quality control
+
+    \item software for online data visualisation
+
+    \item software for online data analysis
+
+    \item software for intelligent close-loop control of experiments
+
+\end{enumerate}
+
+\subsection{Previous work}
+
+\begin{itemize}
+
+    \item  at the SWC we have performed foraging experiments
+
+    \begin{itemize}
+
+        \item lasting xx weeks and recording behaviour only
+        \item lasting yy weeks and recording behaviour and electrophysiology
+        \item data is stored in files and in a MySQL database
+
+    \end{itemize}
+
+    \item  items 1--3: above have been completed for the SWC foraging experiments
+
+    \item  item 4: we have developed some online data visualisation tools in Bonsai
+
+    \item  items 5 and 6: funded by BBSRC, we have integrated into Bonsai tools for online data
+  analysis, to be used for the close-loop control of experiments
+
+    \begin{itemize}
+
+        \item estimate kinematics of mice
+
+        \item estimate kinematic states of mice using Hidden Markov Models
+
+        \item clusterless point-process decoder of mice position and replay from spikes
+
+    \end{itemize}
+
+    \item  disseminated detailed documentation on software used at the SWC to control
+        NaLoDuCo experiments (see
+        \href{https://github.com/SainsburyWellcomeCentre/aeon_mecha.}{repo})
+
+    \item  disseminated detailed documentation on machine learning methods integrated
+  into Bonsai for analyzing behavioral and neural tie series in real time (see
+        \href{https://bonsai-rx.org/machinelearning/.}{repo})
+
+\end{itemize}
+
+\subsection{Future work}
+
+\begin{itemize}
+
+    \item item 3: at the SWC and at the AIND we have developed several tools for offline quality control. We next need to build online versions of them.
+
+    \item item 4: develop more software for data visualisation.
+
+    \item items 5 and 6: develop more software for online data analysis.
+
+    \begin{itemize}
+
+        \item online estimate of latent variables from Neuropixels recordings.
+
+        \item online estimate of RL models.
+
+    \end{itemize}
+
+    \item help Dr.~Carl Schoonover (AIND) use hardware and software developed at the SWC/GCNU to create his olfaction NaLoDuCo experiments.
+
+\end{itemize}

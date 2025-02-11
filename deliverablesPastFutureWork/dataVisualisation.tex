@@ -1,0 +1,84 @@
+
+\subsection{Need for cloud-based visualisation}
+
+A unique feature of the NaLoDuCo recordings collected at the SWC and the AIND,
+is that they are long-duration and continual. Greatest insights will come from
+investigating these recordings as a whole, and not by analysing separately its
+parts. For example, the analysis of shorter duration recordings will not be
+able to capture long-term temporal dependencies in neural activity, that could
+be critical to understand infradian modulations of behaviour. Thus, we need
+software infrastructure to browse and visualise week- to month-long
+experimental recordings on the order of hundreds of terabytes. It is not
+feasible to download these huge datasets in order to visualise them. Hence,
+\textbf{offline data visualisation needs to be done on the cloud}, as in Neurosift.
+
+\subsection{Deliverables}
+
+\begin{enumerate}
+
+    \item web-based dashboard for \textbf{online} visualisation of quality control
+    measures.
+
+    \item web-based dashboard for \textbf{online} data analysis and visualisation of
+    its results.
+
+    \item web-based dashboard for \textbf{offline} visualisation of NaLoDuCo
+    behavioural and neural recordings on DANDI.
+
+    \item web-based dashboard for \textbf{offline} visualisation of data analysis
+    results on DANDI.
+
+\end{enumerate}
+
+\subsection{Questions}
+
+\begin{itemize}
+
+    \item can I see the visualisation tools from the AIND?
+
+    \item does the AIND has visualisation tools running on the cloud?
+
+    \item what visualisation tools do we have at the SWC? developed by
+    Datajoint?
+
+    \item is the AIND collaborating with Jeremy Magland?
+
+\end{itemize}
+
+\subsection{Previous work}
+
+\begin{itemize}
+
+    \item Neurosift
+        (\href{https://github.com/flatironinstitute/neurosift}{repo},
+        \href{https://joss.theoj.org/papers/10.21105/joss.06590}{paper}) allows to
+    visualise shorter-duration behavioural and neural recordings in DANDI.
+
+    \item Dendro (\href{https://github.com/magland/dendro}{repo}) allows to
+    perform analysis on the cloud and visualise the results of such analysis
+
+    \item offline and precomputed visualisations developed at the SWC, with the
+    help of Datajoint.
+
+    \item offline and precomputed quality control visualisations developed at
+    the AIND.
+
+    \item offline and precomputed visualisations developed at the AIND for
+    shorter-duration experiments.
+
+    \item offline and precomputed visualisations from IBL for short-duration
+    experiments.
+
+\end{itemize}
+
+\subsection{Future work}
+
+\begin{itemize}
+
+    \item Neurosift has been designed to visualise relatively short duration
+    datasets. We will extend it with data pyramids (e.g.,
+    \url{https://github.com/carbonplan/ndpyramid}) to enable it to operate on
+    long-duration recordings.
+
+\end{itemize}
+

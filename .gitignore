@@ -2,13 +2,12 @@
 *.bak
 *.swp
 *.log
-bbr24_application.pdf
 
 old/
 
-application/*.csh
-application/loi.*
-!application/loi.tex
-!application/loi.pdf
+loi/*.csh
+loi/loi.*
+!loi/loi.tex
+!loi/loi.pdf
 
-application/figures/*
+loi/figures/*

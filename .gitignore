@@ -6,6 +6,7 @@ bbr24_application.pdf
 
 old/
 
+application/*.csh
 application/loi.*
 !application/loi.tex
 !application/loi.pdf

@@ -2,12 +2,19 @@
 *.bak
 *.swp
 *.log
+*.aux
+*.bbl
+*.blg
+*.out
+*.toc
+
 bbr24_application.pdf
 
 old/
 
-application/loi.*
-!application/loi.tex
-!application/loi.pdf
+loi/loi.*
+!loi/loi.tex
+!loi/loi.pdf
 
-application/figures/*
+loi/.nsf*
+loi/figures/*

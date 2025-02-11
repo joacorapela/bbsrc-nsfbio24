@@ -1,7 +1,7 @@
-all: deliverablesPastAndFutureWork.pdf
+all: deliverablesPastFutureWork.pdf
 
-deliverablesPastAndFutureWork.pdf: deliverablesPastAndFutureWork.tex vision.tex acquisition.tex dataVisualisation.tex spikeSorting.tex dataAnalysis.tex
-	pdflatex deliverablesPastAndFutureWork.tex
-	bibtex deliverablesPastAndFutureWork.aux
-	pdflatex deliverablesPastAndFutureWork.tex
-	pdflatex deliverablesPastAndFutureWork.tex
+deliverablesPastFutureWork.pdf: deliverablesPastFutureWork.tex vision.tex acquisition.tex dataVisualisation.tex spikeSorting.tex dataAnalysis.tex
+	pdflatex deliverablesPastFutureWork.tex
+	bibtex deliverablesPastFutureWork.aux
+	pdflatex deliverablesPastFutureWork.tex
+	pdflatex deliverablesPastFutureWork.tex

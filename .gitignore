@@ -11,3 +11,7 @@ loi/loi.*
 !loi/loi.pdf
 
 loi/figures/*
+
+deliverablesPastFutureWork/deliverablesPastFutureWork.*
+!deliverablesPastFutureWork/deliverablesPastFutureWork.tex
+!deliverablesPastFutureWork/deliverablesPastFutureWork.pdf

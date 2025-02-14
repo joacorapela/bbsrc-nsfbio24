@@ -1,4 +1,15 @@
 
+\subsection{Non-Stationarity}
+
+Most current data analysis methods assumme some sort of stationarity in the
+data used to estimate and evaluate their models. This assumption may be
+reasonable for experimental data from short duration experiments. However, for
+long-duration experiments, with subjects learning and adapting over time, this
+stationarity assumption is questionable~\citep{ditzlerEtAl15}.
+
+Here we will rigorously test data stationarity and adapt the proposed methods
+to work in non-stationary evnvironments, when necessary.
+
 \subsection{Deliverables}
 
 \begin{enumerate}
@@ -17,6 +28,8 @@
 
         \item segment behaviour into discrete states
 
+        \item characterize short- and long-term periodicities in behavior
+
         \item infer the rules that govern mice behaviour from behavioural
         observations only] (i.e., policy inference).
 
@@ -25,12 +38,13 @@
     For neural data, we will investigate methods to:
     \begin{itemize}
 
-        \item track multiple body parts of animals
-
         \item estimate low-dimensional continual representations of neural
-        activity (i.e., latents inference) 
+        activity (i.e., latents inference)
 
         \item segment neural activity into discrete states
+
+        \item characterize short- and long-term periodicities in neural
+            activity
 
         \item decode environment variables from neural activity
 

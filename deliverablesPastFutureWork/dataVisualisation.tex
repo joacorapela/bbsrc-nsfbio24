@@ -1,5 +1,5 @@
 
-\subsection{Need for cloud-based visualisation}
+\subsection{Need for cloud-based visualisation on the cloud}
 
 A unique feature of the NaLoDuCo recordings collected at the SWC and the AIND,
 is that they are long-duration and continual. Greatest insights will come from
@@ -16,14 +16,20 @@ feasible to download these huge datasets in order to visualise them. Hence,
 
 \begin{enumerate}
 
-    \item web-based dashboard for \textbf{online} visualisation of quality control
-    measures.
+    \item web-based dashboard for \textbf{online} experiment monitoring.
 
-    \item web-based dashboard for \textbf{online} data analysis and visualisation of
-    its results.
+    \item web-based dashboard for \textbf{online} data analysis and
+    visualisation of its results.
 
     \item web-based dashboard for \textbf{offline} visualisation of NaLoDuCo
     behavioural and neural recordings on DANDI.
+
+    These visualizations should allow users to efficiently explore very large
+    behavioral, neural and data analysis datasets. For instance, users should
+    be able to quickly visualise videos of mice when they were next to any
+    location of the arena, at any time of the day, and in any behavioral state
+    (as inferred by a Hidden Markov Model). These efficient data explorations
+    will require sophisticated data indexing schemes.
 
     \item web-based dashboard for \textbf{offline} visualisation of data analysis
     results on DANDI.
@@ -57,11 +63,13 @@ feasible to download these huge datasets in order to visualise them. Hence,
     \item Dendro (\href{https://github.com/magland/dendro}{repo}) allows to
     perform analysis on the cloud and visualise the results of such analysis
 
-    \item offline and precomputed visualisations developed at the SWC, with the
-    help of Datajoint.
+    \item the SWC has developed visualisations in Bonsai for experimental
+    monitoring.
 
-    \item offline and precomputed quality control visualisations developed at
-    the AIND.
+    \item offline and precomputed visualisations developed at the SWC, of some
+    experimental variables (e.g., total distance that animals have moved the
+    wheel, proportion of time animals spent on the nest, corridor or food
+    patches).
 
     \item offline and precomputed visualisations developed at the AIND for
     shorter-duration experiments.
@@ -75,10 +83,25 @@ feasible to download these huge datasets in order to visualise them. Hence,
 
 \begin{itemize}
 
-    \item Neurosift has been designed to visualise relatively short duration
+    \item create web-based dashboard to monitor NaLoDuCo experiments.
+
+    \item create web-based dashboard for \textbf{online} data analysis and
+    visualisation of its results.
+
+    \item create web-based dashboard for \textbf{offline} visualisation of NaLoDuCo
+    behavioural and neural recordings on DANDI.
+
+    Neurosift has been designed to visualise relatively short duration
     datasets. We will extend it with data pyramids (e.g.,
     \url{https://github.com/carbonplan/ndpyramid}) to enable it to operate on
     long-duration recordings.
+
+    \item web-based dashboard for \textbf{offline} visualisation of data analysis
+    results on DANDI.
+
+    Dendro has been used to analyze on the cloud relatively small datasets. We
+    will extend Dendro to analyze very large datasets and visualize the results
+    of these analysis.
 
 \end{itemize}
 

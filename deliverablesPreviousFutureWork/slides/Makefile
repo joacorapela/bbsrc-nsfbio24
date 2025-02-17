@@ -1,0 +1,7 @@
+all: deliverablesPreviousFutureWork.pdf
+
+deliverablesPreviousFutureWork.pdf: deliverablesPreviousFutureWork.tex
+	pdflatex deliverablesPreviousFutureWork.tex
+	bibtex deliverablesPreviousFutureWork.aux
+	pdflatex deliverablesPreviousFutureWork.tex
+	pdflatex deliverablesPreviousFutureWork.tex

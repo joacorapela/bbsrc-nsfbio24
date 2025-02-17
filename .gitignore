@@ -1,8 +1,9 @@
 *~
+*.nav
+*.snm
 *.bak
 *.swp
 *.log
-*.bib
 *.aux
 *.bbl
 *.blg

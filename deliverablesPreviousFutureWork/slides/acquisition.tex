@@ -1,0 +1,122 @@
+
+\begin{frame}
+    \frametitle{Deliverables}
+
+    \begin{enumerate}
+
+        \item hardware specifications for recordings of behaviour and neural
+        activity used at the
+        SWC/GCNU\footnote{\url{https://sainsburywellcomecentre.github.io/aeon\_docs/reference/hardware.html}}
+        and at the AIND for head-fixed
+        foraging\footnote{\url{https://www.allenneuraldynamics.org/platforms/behavior}}
+        and freely moving odour exploration.
+
+        \item software for managing long-duration recordings (e.g., data storage, data
+        indexing).
+
+        \item software for online/offline quality control.
+
+        \item software for creating alerts.
+
+        \item software for online (behavioural and neural) data visualisation.
+
+        \item software for online (behavioural and neural) data analysis.
+
+    \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Previous work}
+
+    \begin{itemize}
+
+        \only<1>{
+        \item the SWC has performed foraging experiments
+
+        \begin{itemize}
+
+            \item lasting 2 weeks and recording behaviour only
+            \item lasting 27 hours and recording behaviour and electrophysiology
+            \item data is stored in files and in a MySQL database
+
+        \end{itemize}
+
+        \item the AIND has performed foraging experiments in head-fixed mice.
+            These experiments are a few hours long.
+
+        \item the AIND is setting up odour exploration experiments that
+            will last several days.
+
+        \item  items 1--2: above have been completed for the SWC foraging experiments
+
+        \item item 3: the SWC has developed several quality control for behaviour.
+
+        \item item 4: alerts have been developed for behaviour and electrophysiology.
+        }
+        \only<2>{
+        \item  item 5: the SWC has developed some online behavioural data
+            visualisation tools in Bonsai.
+        \item  item 6: funded by BBSRC, we have integrated into Bonsai tools for online data
+      analysis:
+
+        \begin{itemize}
+
+            \item estimate kinematics of mice
+
+            \item estimate kinematic states of mice using Hidden Markov Models
+
+            \item clusterless point-process decoder of mice position and replay
+                from electrophysiology recordings.
+
+        \end{itemize}
+
+        \item  disseminated documentation of hardware used at the AIND to perform
+            head-fixed foraging
+            experiments\footnote{\url{https://www.allenneuraldynamics.org/platforms/behavior}}
+            in virtual reality setups.
+        }
+        \only<3>{
+
+        \item  disseminated documentation on software used at the SWC to control
+            NaLoDuCo foraging experiments (see
+            \href{https://github.com/SainsburyWellcomeCentre/aeon_mecha.}{repo})
+
+        \item  disseminated documentation on machine learning methods integrated
+            into Bonsai for analysing behavioural and neural time series in real time
+            (see \href{https://bonsai-rx.org/machinelearning/.}{repo})
+        }    
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Future work}
+
+    \begin{itemize}
+
+        \item item 3: the SWC and the AIND have developed several
+        tools for offline quality control. Next, we need to build online
+        versions of them.
+
+        \item item 4: develop more software for data visualisation.
+
+        \item items 5 and 6: develop more software for online data analysis.
+
+        \begin{itemize}
+
+            \item online estimate of latent variables from Neuropixels
+            recordings.
+
+            \item online estimate of RL models.
+
+        \end{itemize}
+
+        \item assist Dr.~Carl Schoonover (AIND) on the use hardware and
+        software developed at the SWC/GCNU to create olfactory learning
+        NaLoDuCo experiments.
+
+    \end{itemize}
+
+\end{frame}
+

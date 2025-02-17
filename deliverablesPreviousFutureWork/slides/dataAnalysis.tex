@@ -1,0 +1,72 @@
+
+\begin{frame}
+    \frametitle{Deliverables}
+
+    \begin{enumerate}
+
+        \item methods to analyse behavioural and electrophysiological
+        recordings from NaLoDuCo experiments that are \textbf{online} and
+        \textbf{adaptive to non-stationarity} in measurements.
+
+        \begin{scriptsize}
+        For behavioural data, we will investigate methods to
+
+        \begin{itemize}
+
+			\begin{scriptsize}
+            \item track multiple body parts of animals (deep neural networks)
+
+            \item infer kinematics of foraging mice (linear dynamical systems)
+
+            \item segment behaviour into discrete states
+
+            \item characterise short- and long-term periodicities in behaviour
+
+            \item infer the rules that govern mice behaviour from behavioural
+            observations only] (i.e., policy inference).
+			\end{scriptsize}
+
+        \end{itemize}
+
+        For neural data, we will investigate methods to:
+        \begin{itemize}
+
+			\begin{scriptsize}
+            \item estimate low-dimensional continual representations of neural
+            activity (i.e., latents inference)
+
+            \item segment neural activity into discrete states
+
+            \item characterise short- and long-term periodicities in neural
+                activity
+
+            \item decode environment variables from neural activity
+			\end{scriptsize}
+
+        \end{itemize}
+        \end{scriptsize}
+
+        \item integration of these methods into DANDI, as in Dendro, so that users
+        can run them on NaLoDuCo datasets stored in DANDI.
+
+    \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Previous work}
+
+    \begin{enumerate}
+
+		\item At the Gatsby we have invented several methods for the
+		characterisation of neural time
+		series~\citep[e.g.,][]{yuEtAl09,dunckerAndSahani18,ruttenEtAl20,yuEtAl24,buesingEtAl12a,buesingEtAl12b,mackeEtAl15,soulatEtAl21,walkerEtAl23,turnerAndSahani14,osheaEtAl22,pachitariuEtAl13a,pachitariuEtAl13b}
+
+		\item \href{https://github.com/magland/dendro}{Dendro} allows to
+		perform advanced data analysis on DANDI. It allows to reuse previous
+		analysis.
+
+    \end{enumerate}
+
+\end{frame}
+

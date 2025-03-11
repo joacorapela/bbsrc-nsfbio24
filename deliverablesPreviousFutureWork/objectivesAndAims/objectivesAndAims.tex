@@ -81,10 +81,13 @@
 
         \item \textbf{Extend the AEON hardware and software infrastructure} to
             support new long-duration experiments, starting with novel
-            olfactory learning experiments at AIND.
+            olfactory learning experiments at AIND. \textcolor{red}{Fields
+            project?}.
 
         \item \textbf{Develop software for neural and behavioural time-series
             visual exploration}, enabling continuous and event-aligned views.
+            (\href{https://neurosift.app/dandi}{\textcolor{red}{Neurosift}},
+            \href{https://github.com/magland/dendro}{\textcolor{red}{DENDRO}})
 
         \item \textbf{Design advanced statistical data analysis methods} for very
             long-duration and non-stationary time-series.
@@ -98,6 +101,70 @@
 
     \end{enumerate}
 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Advanced statistical data analysis methods}
+
+    Challenges:
+
+    \begin{description}
+
+        \item[long-duration]: batch $\rightarrow$ online
+
+        \item[non-stationarity]: alternatives
+
+            \begin{enumerate}
+                \item detect performance degradation $\rightarrow$ retrain
+
+                \item use non-stationary methods
+            \end{enumerate}
+
+    \end{description}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Advanced statistical data analysis methods}
+
+    \small
+For behavioural data, we will investigate methods to:
+
+\begin{description}
+
+    \item[track multiple body parts of animals] (e.g.,
+        [\href{https://pubmed.ncbi.nlm.nih.gov/30127430/}{7}] and a
+        switching-linear-dynamical method using RFIDs that we will develop),
+
+    \item[infer kinematics of foraging mice] (e.g.,
+        [\href{https://github.com/joacorapela/lds\_python}{8},\href{https://www.cambridge.org/core/books/fundamentals-of-object-tracking/A543B0EA12957B353BE4B5D0602EE945}{9}]),
+
+    \item[segment behaviour into discrete states] (e.g.,
+        [\href{https://pubmed.ncbi.nlm.nih.gov/26687221/}{10}]
+        and a hierarchical HMM that we will develop),
+
+    \item[infer rules that govern mice behaviour from behavioural
+        observations only] (i.e., policy inference) (e.g.,
+        [\href{https://arxiv.org/abs/2311.13870v2}{11}]).
+
+\end{description}
+
+For neural data, we will investigate methods to:
+
+\begin{description}
+
+    \item[estimate low-dimensional continual representations of neural
+        activity]
+        (i.e., latents inference) (e.g.,
+        [\href{https://papers.nips.cc/paper_files/paper/2011/hash/7143d7fbadfa4693b9eec507d9d37443-Abstract.html}{12}]),
+
+    \item[segment neural activity into discrete states] (e.g.,
+        [\href{https://pubmed.ncbi.nlm.nih.gov/21299424/}{13}]),
+
+    \item[decode environment variables from neural activity] (e.g.,
+        [\href{https://pubmed.ncbi.nlm.nih.gov/25973549/}{14}]).
+
+\end{description}
 \end{frame}
 
 \section{Use Case}

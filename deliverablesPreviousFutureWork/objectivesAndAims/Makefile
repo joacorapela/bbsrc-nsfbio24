@@ -1,4 +1,4 @@
-all: objectivesAndAims.pdf
+all: objectivesAndAims.pdf simulationAim.pdf
 
 %.pdf: %.tex
 	pdflatex $*

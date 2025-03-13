@@ -1,0 +1,125 @@
+\subsubsection{Context}
+
+Conventional systems neuroscience experiments are typically short in duration
+and often place significant constraints on subjects behaviours to simplify data
+analysis.
+%
+However, these restrictions may limit our ability to observe critical
+aspects of brain function and behaviour that only manifest in more naturalistic
+and extended conditions.
+
+At the Sainsbury Wellcome Centre (SWC) and Gatsby Computational Neuroscience
+Unit (GCNU) we are pioneering Naturalistic, Long-Duration, and Continual
+(NaLoDuCo) foraging experiments in mice that span weeks to months. During these
+experiments, we collect high-resolution behavioural and neural recordings in
+naturalistic settings.
+
+This novel  approach will enable researchers to explore neural mechanisms
+underlying ethological behaviours in naturalistic environments over months, for
+the first time.  The experiments will shed new light on a wide range of poorly
+understood neural mechanisms, including how the brain structures complex
+behavioural sequences as a function of the animal needs, learning, adaptation,
+sleep-dependent memory consolidation and social dynamics.
+%
+The data generated from NaLoDuCo experiments represent an entirely new resource
+in neuroscience, with the potential to drive breakthroughs and discoveries that
+are beyond the reach of traditional experiments.
+
+While naturalistic, long-duration, or continuous neuroscience experiments have
+been conducted in the past
+\citep{nagyEtAl23,hoEtAl23,rayEtAl25,weissbrodEtAl13,dhawaleEtAl17}, to the
+best of our knowledge, we are the first to integrate all three of these
+features in a single experimental paradigm.
+%
+Experiments of this type have been advocated by experts in the field years ago
+\citep[][p19]{dattaEtAl19}, yet they have not been implemented so far.
+
+This new type of experimentation will become mainstream in the coming years.
+%
+However, experiments spanning weeks to months generate extremely large
+datasets—often reaching hundreds of terabytes—which present substantial
+challenges across data acquisition, management, distribution, visualisation,
+and analysis.
+%
+Together, with our US partner, the Allen Institute for Neural Dynamics (AIND),
+we will address these challenges building software infrastructure to help
+scientists around the world perform NaLoDuCo experiments.
+
+Since the project started in 2021, our UK business partner, NeuroGEARS Ltd.\
+has been contracted by the SWC to lead the implementation of the NaLoDuCo
+experimental framework. It also provides services to the AIND.
+
+\subsubsection{Focus areas}
+
+Developing \textbf{platform technologies} to enable:
+
+
+\begin{description}
+
+    \item[Scalable Data Sharing] – Establishing infrastructure for \textbf{efficient storage and sharing} of massive, long-duration behavioral and neural datasets across research communities.
+
+	\item[Interactive Data Exploration] – Creating high-performance visualization tools to navigate and analyze multi-scale behavioral and neural recordings, enabling \textbf{immediate} insights into complex datasets.
+
+	\item[Advanced Data Analysis] – Developing \textbf{online and distributed} machine learning algorithms to characterize \textbf{non-stationary} behavioral and neural dynamics in continuous, high-dimensional data streams.
+
+	\item[Scalable Spike Sorting] – Designing \textbf{robust and adaptive spike sorting methods} to accurately assign spikes to neurons in \textbf{long-duration, non-stationary recordings}, supporting both \textbf{real-time and offline analysis}.
+
+	\item[Adaptive Neural Perturbations] – Implementing \textbf{real-time neuromodulatory interventions} to test causal relationships between neural activity and behavior over \textbf{extended time scales}.
+
+\end{description}
+
+\subsubsection{Synergistic developments}
+
+Currently, both GCNU and AIND are independently developing methods to address
+the previous focus areas. We will join forces to co-develop these methods and
+our foraging research programs, leveraging our combined expertise for greater
+impact.
+
+\subsubsection{Use case}
+
+A user connects to a dashboard to examine recordings from a one month long
+foraging experiments in micce. She begins by \textbf{visualising continuous
+behavioural measurements}, such as the kinematics (speed and acceleration) of a
+mouse during a months-long experiment measured by the IMU of an ONIX probe.
+
+Next, she \textbf{examines the results of a machine learning analysis},
+such as behavioural states inferred by a Switching Hidden Markov Model (SHMM)
+using kinematic data.
+
+The SHMM was initially trained on the first two hours of the experiment
+and was periodically retrained to \textbf{adapt to non-stationarities},
+such as sensor fluctuations, changes in motivation, fatigue, or learning.
+
+She then \textbf{visualises epoched data}, such as SHMM states aligned to
+key events—e.g., the onset of a foraging bout in the richer patch at a
+specific time of day.
+
+Curious about the neural basis of these SHMM states, she checks the neural
+recordings but realises they have not yet been spike-sorted. She runs our
+\textbf{offline spike sorting method}, developed for very long continuous
+recordings, and performs quality control on its results.
+
+Based on quality metrics, she detects drift in the recorded signal,
+adjusts the drift correction parameters, and reruns the sorting algorithm.
+
+		After examining the sorted spikes from a large neural population,  she
+finds it challenging to interpret activity across so many neurons.  So she
+decides to summarise the population spiking activity by \textbf{estimating
+continuous latent variables}.
+
+She then returns to the behavioural visualisation software, integrates
+machine learning indices corresponding to these latent variables, and
+\textbf{visualises behavioural data aligned to the newly estimated latents}.
+
+Through these explorations, she hypothesises that a peak in a neural latent
+variable from the prefrontal cortex signals the moment when mice decide
+to begin a foraging bout.
+
+To test this, she \textbf{runs an online machine learning model} to estimate
+latent variables from prefrontal cortex activity, predicting when this
+peak will occur. She then \textbf{optogenetically inactivates the neural
+population} at the forecasted time.
+
+Because inactivation prevented the mouse from initiating a foraging bout,
+her hypothesis was supported.
+

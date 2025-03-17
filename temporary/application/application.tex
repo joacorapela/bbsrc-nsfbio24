@@ -1,6 +1,7 @@
 
 \documentclass[12pt]{article}
 
+\usepackage{graphicx}
 \usepackage{natbib}
 
 \title{Enabling naturalistic, long-duration and continual animal experimentation}
@@ -14,9 +15,9 @@
 For over four years, at the Sainsbury Wellcome Centre and Gatsby Computational
 Neuroscience Unit, we have been developing the AEON platform, a set of hardware
 and software tools that support a new type of experimentation, where animals
-are allowed to express ethologically-relevant behaviors in naturalistic
-conditions and in long-duration experiments, while detailed behavioral and
-neural activity is measured for weeks to months.
+are allowed to express ethologically-relevant behaviors, in naturalistic
+environments, and in long-duration experiments, while their behavior and
+neural activity is monitored continuously for weeks to months.
 %
 We have used this platform to characterize foraging behavior in both solitary
 and groups of mice~\citep{aeonRepo} (Figure~\ref{fig:aeonPlatform}).
@@ -30,7 +31,15 @@ This is an unprecedented type of experimentation that \ldots
 Several groups around the world are performing this new type of
 experimentation~\cite{}.
 
-\subsection{Aim 1: create software for visual exploration and statistical data
+\begin{figure}
+    \begin{center}
+        \includegraphics[width=5in]{figures/aims.png}
+    \end{center}
+    \caption{Proposal aims}
+    \label{fig:aims}
+\end{figure}
+
+\subsection*{Aim 1: create software for visual exploration and statistical data
 analysis of NaLoDuCo experimental data on the cloud}
 
 Using the AEON platform we and others have recorded unprecedented data. We next
@@ -44,7 +53,7 @@ these datasets over standard Internet connections.
 So, instead of bringing data to users, we will bring users to data, by storing
 datasets in the cloud, and providing \textbf{cloud software to allow users to visually
 explore and statistically analyse behavioural and neural NaLoDuCo datasets
-where they live}.
+where they live} (Figure~\ref{fig:aims}, left box).
 
 Our statistical analysis of neural time series will require knowledge of the
 spiking activity of single units; i.e., spike sorting. In long-duration
@@ -52,9 +61,10 @@ experiments with freely moving animals spike sorting is a challenging problem,
 because movements of recording probes change the shape of spike waveforms over
 time and complicate the assignment of spikes to units based on spike waveforms.
 We will address this problem by developing \textbf{spike sorting methods for
-long-duration and continual, long-duration and high-channel-count recordings}.
+long-duration and continual, long-duration and high-channel-count recordings}
+(Figure~\ref{fig:aims}, left box).
 
-\subsection{Aim 2: create real-time machine learning methods for intelligent
+\subsection*{Aim 2: create real-time machine learning methods for intelligent
 experimentation}
 
 In small-animal Neuroscience, most often statistical processing of neural time series is
@@ -80,17 +90,16 @@ long-duration of these experiments provide a large amount of data to accurately
 fit expressive online methods.
 
 We will \textbf{optimize methods developed for Aim~1 so that they can operate
-in real time}. We will focus on the following two applications of these online
-methods.
+in real time}, and focus on the following two applications of these online
+methods (Figure~\ref{fig:aims}, right box).
 
 \subsubsection*{Intelligent neuromodulation}
 
 Brain activity can be modulated optically, chemically and
 electrically~\citep{}.
 %
-Most commonly this modulations is done at fixed experimental times (e.g., when
-the animal is in a wait period before choosing an option), or based on simple
-behavioral or neural observations.
+Most commonly this modulations is done at fixed experimental times, or based on
+simple behavioral or neural observations.
 
 We will guide optogenetic manipulations based on inferences from advanced
 machine learning methods.
@@ -108,16 +117,18 @@ mouse from initiating a foraging bout, her hypothesis is supported.
 As the duration of NaLoDuCo experiments become longer, and the richness of the                                                              
 behavioral and neural recordings become larger, it will be unfeasible to                                                                
 store all raw data. We will be forced to intelligently decide, in real time,                                                                
-subsets of data to store.
+subsets of data to discard.
                                                                                                                                             
 For instance, if we are recording videos from a mouse foraging in a large arena
-with ten high-resolution cameras, it would save considerable storage to only
-save videos from cameras capturing the mouse at a given time point. This could
-be done by tracking the position of the mouse in real time with probabilistic
-machine learning methods. Then, when the accuracy of the tracking is high, we would only save
-videos of cameras capturing the mouse at the tracked position, but when the
-accuracy of the tracking is not high, we would save all videos.
+with ten high-resolution cameras, it would save considerable storage if at any
+time we only save videos from cameras capturing the mouse at that time.  This
+could be done by tracking the position of the mouse in real time with
+probabilistic machine learning methods. Then, when the confidence of the
+tracking is high, we would only save videos of cameras capturing the mouse at
+the tracked position, but when the confidence is low, we would save all videos.
 
-% \section{Approach}
+\section{Approach}
+
+\subsection{Offline data analysis on the cloud}
 
 \end{document}

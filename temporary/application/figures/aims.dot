@@ -1,0 +1,22 @@
+digraph g {
+  subgraph cluster_cloud { 
+    visualExploration [label=<<FONT COLOR="BLACK">visual<br/>explorations</FONT>>];
+    dataAnalysis [label=<<FONT COLOR="BLACK">offline<br/>data<br/>analysis</FONT>>];
+    offlineSpikeSorting [label=<<FONT COLOR="BLACK">offline<br/>spike<br/>sorting</FONT>>];
+    visualExploration -> dataAnalysis [dir=both];
+    offlineSpikeSorting -> dataAnalysis;
+    label="Cloud";
+    graph[style=dotted];
+  }
+  subgraph cluster_experiment { 
+    realTimeAnalysis [label=<<FONT COLOR="BLACK">real-time<br/>data<br/>analysis</FONT>>];
+    onlineSpikeSorting [label=<<FONT COLOR="BLACK">online<br/>spike<br/>sorting</FONT>>];
+    neuroModulation [label=<<FONT COLOR="BLACK">intelligent<br/>neuro-<br/>modulation</FONT>>];
+    selectiveStorage [label=<<FONT COLOR="BLACK">intelligent<br/>data<br/>storage</FONT>>];
+    onlineSpikeSorting -> realTimeAnalysis;
+    realTimeAnalysis -> neuroModulation;
+    realTimeAnalysis -> selectiveStorage;
+    label="Experiment";
+    graph[style=dotted];
+  }
+}

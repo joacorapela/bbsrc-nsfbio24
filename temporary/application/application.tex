@@ -161,30 +161,68 @@ the tracked position, but when the confidence is low, we would save all videos.
 
 \section{Approach}
 
-\subsubsection{Use Case}
-\label{sec:useCase}
-
-% foraging problem
-%
-% problems:
-%   - body part tracking,
-%   - kinematics inference,
-%   - pose estimation,
-%   - regression to test relations between the probability of entering a patch and regressors,
-%   - policy inference,
-%   - low-dimensional representation of neural activity,
-%   - testing causality (neural manipulation)
-%
-% methods we could use to address the previous problems:
-%
-
 \subsection{Offline machine learning}
+
+We have collected unprecedented NaLoDuCo datasets at the SWC. However, these
+very large datasets are of not much use without methods for visual exploration
+and data analysis. The next section describes methods we will disseminate for
+data analysis, Section~\ref{sec:visualExploration} presents those for
+visualisation, Section~\ref{sec:relatedResearchOfflineAnalysis} discusses
+related research, and Section~\ref{sec:outputOfflineAnalysis} mentions outputs
+from this aim.
+
+\subsubsection{Analysis methods to disseminate}
+
+We will disseminate advanced statistical methods to analyze recordings from NaLoDuCo
+foraging experiments performed at the SWC, where mice forage freely in large
+arenas, 24 hours a day and seven days a week, for weeks to months, while their
+behavioral and neural activity is recorded with high resolution.
+
+We will create a variety of new methods or adapt existing ones to aid the
+exploration of NaLoDuCo recordings at the behavioral and neural levels. These
+methods should be robust to process non-stationary data and run efficiently on
+distributed computing system (see below).
+
+The first step in the analysis of NaLoDuCo foraging behavioral data is
+\textbf{tracking multiple body parts} in mice. For this we will use
+\textbf{deep learning} methods, as in
+\citep{https://pubmed.ncbi.nlm.nih.gov/30127430/}.
+%
+Next, we will use the previous tracking outputs to \textbf{infer mice
+kinematics} with \textbf{linear dynamical models}, as in
+\citep{https://github.com/joacorapela/lds}.
+%
+We will combine the tracking outputs with the kinematics inferences to
+\textbf{infer behavioral states} with \textbf{hidden Markov models}, as in
+\citep{https://pubmed.ncbi.nlm.nih.gov/26687221/}.
+%
+Further, we will \textbf{related kinematics and behavioral states to the
+probability of foraging events}, like leaving a patch, with \textbf{generalized
+linear models}, as in \citep{}, and \textbf{artificial neural networks}, as in \citep{}.
+%
+The final step of the behavioral analysis will be to \textbf{infer mice policy
+from behavioral measures} with \textbf{inverse reinforcement learning}, as in
+\cite{https://arxiv.org/abs/2311.13870v2}.
+
+The characterization of neural data will begin with the \textbf{estimation of latent
+variables models}, to reduced the dimensionality of multielectrode recordings of
+hundreds or even thousands of neurons to a small number of latent variables,
+using \textbf{latent variable models}, with linear~\citep{dunckerAndSahanai18}
+and nonlinear~\citep{pandarinathEtAl} latent dynamics..
+%
+We will use the estimated latent variables as inputs to
+\textbf{infer neural states}, using \textbf{HMMs}, as in~\citep{}.
+%
+Next, we will \textbf{decode mice position} from hippocampal recordings, and
+\textbf{study
+replay} during long-duration \textbf{foraging}, with \textbf{point process
+decoders}, as in \citep{ppDecoder}.
+
+\subsubsection{Challenges}
 
 Extracting meaning from long-duration and continual recordings opens
 challenges and opportunities that we will address and exploit in this project,
-as we describe below.
-
-\subsubsection{Challenges}
+as we describe in this and the next sections.
 
 \subsubsection*{Non-stationarities}
 
@@ -201,14 +239,14 @@ characterize non-stationary systems. There is no unique solution to optimally
 process any non-stationary signal. Instead, adaptations to specific algorithms
 have been developed to improve their performance in non-stationary
 environments.
-%
+
 For example, the recursive least-squares algorithm \citep[][Chapter
 9]{haykin02} is an adaptation of the ordinary least square algorithm to perform
 linear regression with non-stationary data.
 %
-For artificial neural networks, a very large number of strategies have been
-developed to address data non-stationarity. To mention a few, continual
-learning has introduced algorithms like  Elastic Weight
+For non-linear regression using artificial neural networks, a very large number
+of strategies have been developed to address data non-stationarity. To mention
+a few, continual learning has introduced algorithms like  Elastic Weight
 Consolidation~\citep[EWC][]{} and Learning Without Forgetting~\citep[LwF][]{}
 to allow models to adapt to changes over time without catastrophic forgetting.
 Also from this subfield is the Experience Replay (ER) algorithm that stores
@@ -217,6 +255,13 @@ training. A different type of strategy is used by ensemble methods~\citep{},
 which combine multiple models trained on different time windows to capture
 evolving data patterns.
 
+Algorithms for state-space models, like the Kalman filter, perform well in some
+simpler non-stationary environments producing Gaussian data with varying mean and
+covariance.
+%
+For more complex non-stationarities one can use switching state-pace models,
+like the switching linear dynamical system~\cite{} or the switching Hidden
+Markov model~\cite{}.
 
 \subsubsection*{Long processing times for very large datasets}
 
@@ -249,15 +294,163 @@ learning functionality.
 
 \subsubsection{Opportunities}
 
+\paragraph{More expressive models}
+%
+Our long-duration recordings, spanning weeks to months and generating hundreds
+of terabytes per experiment, will be transformative for neuroscience, much like
+the advent of large-scale datasets in computer vision.  Just as the creation of
+MNIST—and later, ImageNet—enabled the training of deeper neural networks,
+leading to unprecedented performance breakthroughs, our massive,
+high-resolution neural and behavioral datasets will allow the estimation of far
+more expressive models than previously possible.
+%
+For instance, large NaLoDuCo datasets will allo to estimate latent variable
+models with highly nonlinear and expressive models of observation given latent
+variables using recognition parametrised models~\citep{walkerEtAl23}.
+%
+By capturing neural dynamics over extended timescales, we may uncover novel
+insights into learning, memory, and long-term neural adaptations that remain
+inaccessible with conventional short-duration studies.
+
+\paragraph{Study very slow behavioral and neural rhythmic patterns}
+%
+Continuously monitoring detailed behavioral and neural activity over weeks to
+months enables the study of slow rhythmic processes that extend beyond
+traditional circadian (~24-hour) rhythms, including ultradian (hours),
+infradian (days to weeks), and even multi-month cycles. These long-duration
+fluctuations influence learning, memory consolidation, motivation, and
+cognitive function, yet they remain largely unexplored in controlled
+experiments. By capturing these dynamics, we can gain new insights into neural
+plasticity, attention, and mood regulation, as well as the progression of
+neurological disorders like Parkinson’s disease and depression, which exhibit
+slow symptom fluctuations.
+
+\paragraph{New neuromodulation opportunities}
+%
+In traditional short-duration experiments, the effects of neuromodulation are
+tested immediately. In contrast, our long-duration experiments will enable
+repeated neuromodulation over extended periods and allow us to assess its
+impact over much longer timescales.
+%
+For instance, in a mouse model of Alzheimer's disease, we could apply
+optogenetic stimulation to the hippocampus for one hour per day over the course
+of a month and assess its impact on memory retention and synaptic plasticity in
+the following weeks. This approach could reveal whether intermittent
+neuromodulation promotes long-term neural circuit stability and delays
+cognitive decline.
+
+\subsubsection{Related research}
+\label{sec:relatedResearchOfflineAnalysis}
+
+\paragraph{Neural data analysis methods from the Gatsby Unit}
+%
+The Gatsby Unit has developed world-class neural data analysis methods for
+%
+inferring latent variables using Gaussian
+processes~\citep{yuEtAl09,dunckerAndSahani18,ruttenEtAl20,yuEtAl24}, or variants
+of linear dynamical systems~\citep{buesinEtAl12,mackeEtAl15}, or recognition
+parameterised models~\citep{walkerEtAl23},
+%
+for separating contributions of different factors to spiking activity using
+tensor decompositions~\citep{soulatEtAl21},
+%
+and for understanding the effects of neural perturbations~\citep{oSheaEtAl22},
+just to mention a few.
+
+\paragraph{Distributed computing for small animal Neuroscience}
+%
+\citet{freemanEtAl14} introduced a
+package\footnote{https://github.com/thunder-project/thunder} for analysing
+two-photon imaging records on distributed computing platforms.  This has
+been a pioneering development. However, it used short duration recordings and
+it implemented simple data analysis methods.
+
+\paragraph{Continuous epilepsy monitoring}
+%
+Continuous epilepsy monitoring is a critical tool for diagnosing,
+understanding, and managing epilepsy.
+%
+One major advancement in this field is the use of implantable devices, such as
+the NeuroPace Responsive Neurostimulation (RNS) system, which continuously
+records for extended periods of time (i.e., years) electrocorticographic brain
+activity, and delivers electrical stimulation in response to detected seizure
+precursors.
+%
+This  technology has lead to substantial improvement in the treatment of
+epilepsy~\citep{rao21}. Yet it has two major limitations, first, it is
+invasive, and second, it can only save a few hours of continuous brain activity
+for later analysis, limiting its ability for understanding long-duration brain
+dynamics.
+
+These limitations are ameliorated by recent technologies for sub-scalp
+ultra-long EEG recording monitoring~\citep{duunHenriksenEtAl20}, which record
+EEG signals with electrodes implanted under the scalp and over the skull. This
+technology is less invasive and, importantly, streams EEG measurements to the
+cloud, enabling the characterization of long-duration brain dynamics, with
+simultaneous behavioral measurements recorded by other devices.
+
+These devices have significantly improved seizure
+control for patients with drug-resistant epilepsy by enabling closed-loop
+neuromodulation. Additionally, recent developments in subscalp EEG technology
+offer a less invasive alternative to intracranial monitoring while still
+providing high-quality long-term recordings, improving patient comfort and
+accessibility.
+
+Beyond clinical applications, continuous epilepsy monitoring has deepened our
+understanding of epileptic networks and brain dynamics. Studies have revealed
+that seizure activity is often modulated by circadian and ultradian rhythms,
+with certain times of day showing increased seizure susceptibility. Advances in
+machine learning and big-data analysis have further enhanced our ability to
+analyze long-duration recordings, leading to more accurate seizure prediction
+and classification. As technology continues to evolve, continuous epilepsy
+monitoring is expected to play an increasingly central role in both clinical
+and research settings, offering new insights into the mechanisms of epilepsy
+and improving patient outcomes.
+
 \subsubsection{Outputs}
+\label{sec:outputOfflineAnalysis}
+
+Software repository containing implementations of machine learning algorithms
+relevant to NaLoDuCo experimentation, adapted to work with non-stationary data,
+and optimized to run on distributed computing environments (e.g., public clouds
+or institutional high-performance-computing clusters).
 
 \subsection{Visual Exploration}
+\label{sec:visualExploration}
+
+\subsubsection{Outputs}
+
+Visualisations for continuous behavioral and neural recording
+
+Visualisations for epoched behavioral and neural recording
+
+Visualisations for model outputs
+
+Indexing system
 
 \subsection{Spike Sorting}
 
+\subsubsection{Outputs}
+
+Repository with implementations and benchmarking of offline spike sorting algorithms for long-duration recordings
+
+Repository with implementations and benchmarking of online spike sorting algorithms
+
 \subsection{Dissemination}
+\label{sec:dissemination}
+
+\subsubsection{Outputs}
+
+- web application for the visualisation and analysis of SWC foraging NaLoDuCo recordings in AWS
+- documentation on how to build arenas and use the AEON platform and software
+- documentation on how to use the online machine learning software
 
 \subsection{Online Machine Learning}
+
+\subsubsection{Outputs}
+
+- Bonsai packages implementing real-time ML functionality for experimetal control
+- Documentation of these packages
 
 \subsection{Software and Infrastructure}
 % Python, Kubernetes, Apache Spark, Ray, Bonsai, Bonsai.ML

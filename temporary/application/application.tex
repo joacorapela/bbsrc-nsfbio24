@@ -304,7 +304,7 @@ leading to unprecedented performance breakthroughs, our massive,
 high-resolution neural and behavioral datasets will allow the estimation of far
 more expressive models than previously possible.
 %
-For instance, large NaLoDuCo datasets will allo to estimate latent variable
+For instance, large NaLoDuCo datasets will allow to estimate latent variable
 models with highly nonlinear and expressive models of observation given latent
 variables using recognition parametrised models~\citep{walkerEtAl23}.
 %
@@ -361,57 +361,52 @@ just to mention a few.
 %
 \citet{freemanEtAl14} introduced a
 package\footnote{https://github.com/thunder-project/thunder} for analysing
-two-photon imaging records on distributed computing platforms.  This has
-been a pioneering development. However, it used short duration recordings and
-it implemented simple data analysis methods.
+two-photon imaging records on distributed computing platforms.  This has been a
+pioneering development by introducing distributing computing into neuroscience
+data analysis. However, it used short duration imaging recordings and it
+implemented simple data analysis methods.
 
 \paragraph{Continuous epilepsy monitoring}
 %
-Continuous epilepsy monitoring is a critical tool for diagnosing,
-understanding, and managing epilepsy.
-%
-One major advancement in this field is the use of implantable devices, such as
-the NeuroPace Responsive Neurostimulation (RNS) system, which continuously
-records for extended periods of time (i.e., years) electrocorticographic brain
-activity, and delivers electrical stimulation in response to detected seizure
-precursors.
-%
-This  technology has lead to substantial improvement in the treatment of
-epilepsy~\citep{rao21}. Yet it has two major limitations, first, it is
-invasive, and second, it can only save a few hours of continuous brain activity
-for later analysis, limiting its ability for understanding long-duration brain
-dynamics.
+Continuous epilepsy monitoring is a transformative technology for diagnosing,
+understanding, and managing epilepsy. By capturing long-term brain activity, it
+provides crucial insights into seizure patterns and underlying neural dynamics.
 
-These limitations are ameliorated by recent technologies for sub-scalp
-ultra-long EEG recording monitoring~\citep{duunHenriksenEtAl20}, which record
-EEG signals with electrodes implanted under the scalp and over the skull. This
-technology is less invasive and, importantly, streams EEG measurements to the
-cloud, enabling the characterization of long-duration brain dynamics, with
-simultaneous behavioral measurements recorded by other devices.
+A major advancement in this field is the development of implantable devices,
+such as the NeuroPace Responsive Neurostimulation (RNS) system, which
+continuously records electrocorticographic (ECoG) brain activity over extended
+periods (e.g., years). In addition to monitoring, RNS delivers targeted
+electrical stimulation in response to detected seizure precursors,
+significantly improving epilepsy treatment outcomes \citep{rao21}. However, RNS
+has two key limitations: (1) it is invasive, requiring surgical implantation,
+and (2) it can only store a limited amount of brain activity (typically a few
+hours) for later analysis, restricting its utility for studying long-term
+neural dynamics.
 
-These devices have significantly improved seizure
-control for patients with drug-resistant epilepsy by enabling closed-loop
-neuromodulation. Additionally, recent developments in subscalp EEG technology
-offer a less invasive alternative to intracranial monitoring while still
-providing high-quality long-term recordings, improving patient comfort and
-accessibility.
+To overcome these challenges, researchers have developed subscalp ultra-long
+EEG recording technologies \citep{duunHenriksenEtAl20}, which use electrodes
+implanted under the scalp but above the skull. This approach is less invasive
+than intracranial devices and offers continuous EEG monitoring, with the added
+benefit of streaming data directly to the cloud. This capability enables
+long-term characterization of brain activity.
 
-Beyond clinical applications, continuous epilepsy monitoring has deepened our
-understanding of epileptic networks and brain dynamics. Studies have revealed
-that seizure activity is often modulated by circadian and ultradian rhythms,
-with certain times of day showing increased seizure susceptibility. Advances in
-machine learning and big-data analysis have further enhanced our ability to
-analyze long-duration recordings, leading to more accurate seizure prediction
-and classification. As technology continues to evolve, continuous epilepsy
-monitoring is expected to play an increasingly central role in both clinical
-and research settings, offering new insights into the mechanisms of epilepsy
-and improving patient outcomes.
+Subscalp EEG monitoring has already provided valuable insights into epilepsy.
+For example, it has revealed that seizure susceptibility is often modulated by
+circadian and ultradian rhythms, with specific times of day associated with
+increased seizure likelihood. However, compared to the AEON platform, subscalp
+EEG provides lower-resolution measurements of both neural and behavioral
+activity. Additionally, the data modeling methods used in subscalp EEG research
+remain largely proprietary, as much of this technology is developed by private
+companies. Furthermore, current implementations are primarily designed for
+seizure detection and forecasting, rather than for broader investigations into
+long-term brain dynamics.
 
 \subsubsection{Outputs}
 \label{sec:outputOfflineAnalysis}
 
 Software repository containing implementations of machine learning algorithms
-relevant to NaLoDuCo experimentation, adapted to work with non-stationary data,
+relevant to NaLoDuCo experimentation, adapted to operate in non-stationary
+environments,
 and optimized to run on distributed computing environments (e.g., public clouds
 or institutional high-performance-computing clusters).
 

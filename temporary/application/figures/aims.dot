@@ -1,26 +1,19 @@
 digraph g {
-  subgraph cluster_cloud { 
-    dissemination [label=<<FONT COLOR="BLACK">Infrastructure for<br/>NaLoDuCo data<br/>dissemination</FONT>>];
-    visualExploration [label=<<FONT COLOR="BLACK">intelligent<br/>visual<br/>exploration</FONT>>];
-    dataAnalysis [label=<<FONT COLOR="BLACK">machine learning<br/>data analysis</FONT>>];
-    offlineSpikeSorting [label=<<FONT COLOR="BLACK">offline<br/>spike<br/>sorting</FONT>>];
-    dissemination -> visualExploration;
-    dissemination -> dataAnalysis;
-    dataAnalysis -> offlineSpikeSorting;
-    label="Cloud";
-    graph[style=dotted];
-  }
-  subgraph cluster_local { 
-    aeonExtension [label=<<FONT COLOR="BLACK">AEON platform<br/>extension</FONT>>];
-    realTimeML [label=<<FONT COLOR="BLACK">real-time<br/>machine learning<br/>functionality</FONT>>];
-    onlineSpikeSorting [label=<<FONT COLOR="BLACK">online<br/>spike<br/>sorting</FONT>>];
-    neuroModulation [label=<<FONT COLOR="BLACK">intelligent<br/>neuro-modulation</FONT>>];
-    selectiveStorage [label=<<FONT COLOR="BLACK">intelligent<br/>data storage</FONT>>];
-    aeonExtension -> realTimeML;
-    realTimeML -> neuroModulation;
-    realTimeML -> selectiveStorage;
-    neuroModulation -> onlineSpikeSorting;
-    label="Local";
-    graph[style=dotted];
-  }
+  extractMeaning [label=<<FONT COLOR="BLACK">Aim 1:<br/>knowledge extraction</FONT>>,shape=box,style=filled,fillcolor=lightblue];
+  visualExploration [label=<<FONT COLOR="BLACK">intelligent<br/>visual<br/>exploration</FONT>>];
+  offlineML [label=<<FONT COLOR="BLACK">offline<br/>machine<br/>learning</FONT>>];
+  offlineSpikeSorting [label=<<FONT COLOR="BLACK">offline<br/>spike<br/>sorting</FONT>>];
+  dissemination [label=<<FONT COLOR="BLACK">Aim 2:<br/>dissemination</FONT>>,shape=box,style=filled,fillcolor=lightblue];
+  extension [label=<<FONT COLOR="BLACK">Aim 3:<br/>AEON extension</FONT>>,shape=box,style=filled,fillcolor=lightblue];
+  realTimeML [label=<<FONT COLOR="BLACK">real-time<br/>machine<br/>learning</FONT>>];
+  onlineSpikeSorting [label=<<FONT COLOR="BLACK">online<br/>spike<br/>sorting</FONT>>];
+
+  extractMeaning -> visualExploration;
+  extractMeaning -> offlineML;
+  dissemination;
+  offlineSpikeSorting -> offlineML;
+  extension -> realTimeML;
+  onlineSpikeSorting -> realTimeML;
+
+  {rank=sink; offlineSpikeSorting; onlineSpikeSorting;}
 }

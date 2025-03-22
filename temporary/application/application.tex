@@ -129,6 +129,7 @@ methods (Figure~\ref{fig:aims}, right box).
 Brain activity can be modulated optically, chemically and
 electrically~\citep{}.
 %
+<<<<<<< HEAD
 Most commonly these modulations are done at fixed experimental times, or based on
 simple behavioral or neural observations.
 %
@@ -152,6 +153,30 @@ subsets of data to discard. Real-time machine learning methods can guide the
 decision of what subset of data to discard, as exemplified below.
 
 If we are recording videos from a mouse foraging in a large arena
+=======
+Most commonly this modulations is done at fixed experimental times, or based on
+simple behavioral or neural observations.
+
+We will guide optogenetic manipulations based on inferences from advanced
+machine learning methods.
+%
+For example, a scientists may hypothesize that a peak in a neural latent
+variable, inferred from a prefrontal cortex population, signals the moment when
+mice decide to begin a foraging bout.  To test this, she runs an online machine
+learning model to estimate latent variables from prefrontal cortex activity,
+predicting when this peak will occur. She then optogenetically inactivates the
+neural population at the forecasted time.  Because inactivation prevented the
+mouse from initiating a foraging bout, her hypothesis is supported.
+
+\subsubsection*{Intelligent experimental data storage}
+
+As the duration of NaLoDuCo experiments become longer, and the richness of the                                                              
+behavioral and neural recordings become larger, it will be unfeasible to                                                                
+store all raw data. We will be forced to intelligently decide, in real time,                                                                
+subsets of data to discard.
+                                                                                                                                            
+For instance, if we are recording videos from a mouse foraging in a large arena
+>>>>>>> 012b2c18957df08a98d3938bac383b1ba41e6a06
 with ten high-resolution cameras, it would save considerable storage if at any
 time we only save videos from cameras capturing the mouse at that time.  This
 could be done by tracking the position of the mouse in real time with

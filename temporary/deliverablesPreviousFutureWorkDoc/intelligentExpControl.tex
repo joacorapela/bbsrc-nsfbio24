@@ -1,0 +1,69 @@
+
+\subsection{Relevance}
+
+Most experiments in Neuroscience are controled by predefined rules or by simple
+neural and/or behavioral observations. Here we propose to control neuroscience
+experiments using advanced inferences on behavioral and/or neural data.
+
+Intelligent experimental control is relevant to long-duration naturalistic
+experimentation for at least two reasons. First the extremely large size of
+recorded dataset may forbid storing all raw data and online machine learning
+algorithms can help decide what data to store. For instance, we want to record
+the behaviour of multiple animals in large arenas with high resolution. This
+requires using multiple high-definition cameras to record videos of different
+parts of the arena. It is not feasible to store the videos by all cameras in
+long duration experiments. To overcome this problem, we can use probabilistic
+machine learning methods to track online the positions of the mice in the
+arena. When the tracking confidence of this methods is high, we would only save
+the highresolution videos of the cameras filming mice, but when their
+confidence is low we would save the videos of all cameras.
+
+Second, we want to make neural interventions informed by online inferences from
+machine learning methods. For example, in a foraging experiment we could find
+that a neural latent variable peaks before the instant when a mouse starts
+accelerating to leave the current patch (the latent variable could be estimated
+using a Poisson linear dynamical system and the acceleration using a linear
+dynamical system). We could hypothesise that the neural population associated
+with the latent variable is responsible for the decision of leaving a patch.
+We could then test this hypothesis by optogenetically silencing this population
+while an animal is on a patch and checking if it leaves the patch or not.
+
+\subsection{Deliverables}
+
+\begin{enumerate}
+
+    \item software, hardware and papers demonstrating applications of
+        intelligent experimental control in neuroscience experimentation.
+
+\end{enumerate}
+
+\subsection{Previous work}
+
+\begin{itemize}
+
+    \item Bonsai is an excellent software for close-loop
+        neuroscience experimental control.
+
+    \item funded by a BBSRC
+        award\footnote{\url{https://gow.bbsrc.ukri.org/grants/AwardDetails.aspx?FundingReference=BB\%2FW019132\%2F1}}
+        we are integrating machine learning methods into Bonsai.
+
+\end{itemize}
+
+\subsection{Future work}
+
+\begin{itemize}
+
+    \item Bonsai has been used for close-loop control using direct
+        observations. With the advanced machine learning methods that we have
+        added to Bonsai, we can know infer subtle patterns in behavioral and
+        neural recordings not visible to the nacked eye. Now we will find
+        applications where these patterns can be used for experimental control.
+        Fortunately, we work at the SWC, where such applications abound.
+
+    \item it would be very useful to perform control based on patterns inferred
+        from spiking activity recorded by Neuropixels probes. To do so, we need
+        online spike sorting methods for Neuropixels probes. These methods are
+        underdeveloped and, if neccessary, we will need to develop one.
+
+\end{itemize}

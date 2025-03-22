@@ -9,6 +9,7 @@
     colorlinks = true,
     linkcolor = {green},
 }
+\usepackage{verbatim}
 
 \newenvironment{instruction}{\par\color{red}}{\par}
 
@@ -16,7 +17,7 @@
 Advanced Machine Learning Methods}
 
 \begin{document}
-\defaultbibliography{longDurationExperimentation,neuroEthology}
+\defaultbibliography{longDurationExperimentation,neuroEthology,machineLearning,signalProcessing}
 \defaultbibliographystyle{plain}
 
 \section{Summary}
@@ -77,7 +78,10 @@ References may be included within this section.
 \pagebreak
 \subsection{Approach}
 
+\begin{bibunit}
 \input{approach}
+\putbib
+\end{bibunit}
 
 \pagebreak
 \subsection{Applicant and team capability to deliver}

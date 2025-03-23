@@ -129,31 +129,6 @@ methods (Figure~\ref{fig:aims}, right box).
 Brain activity can be modulated optically, chemically and
 electrically~\citep{}.
 %
-<<<<<<< HEAD
-Most commonly these modulations are done at fixed experimental times, or based on
-simple behavioral or neural observations.
-%
-We will guide optogenetic manipulations based on inferences from advanced
-machine learning methods.
-
-For example, a scientists may hypothesize that a peak in a neural latent
-variable, inferred from a prefrontal cortex population, signals the moment when
-mice decide to begin a foraging bout.  To test this, she estimates latent
-variables from prefrontal cortex activity online, and forecasts when this peak
-will occur. She then optogenetically inactivates the neural population at the
-forecasted time.  Because the inactivations prevented the mouse from initiating
-a foraging bout, her hypothesis is supported.
-
-\subsubsection*{Intelligent experimental data storage}
-
-As the duration of NaLoDuCo experiments becomes longer, and the volume of the
-behavioral and neural recordings becomes larger, it will be unfeasible to
-store all raw data. We will be forced to intelligently decide, in real time,
-subsets of data to discard. Real-time machine learning methods can guide the
-decision of what subset of data to discard, as exemplified below.
-
-If we are recording videos from a mouse foraging in a large arena
-=======
 Most commonly this modulations is done at fixed experimental times, or based on
 simple behavioral or neural observations.
 
@@ -170,13 +145,12 @@ mouse from initiating a foraging bout, her hypothesis is supported.
 
 \subsubsection*{Intelligent experimental data storage}
 
-As the duration of NaLoDuCo experiments become longer, and the richness of the                                                              
-behavioral and neural recordings become larger, it will be unfeasible to                                                                
-store all raw data. We will be forced to intelligently decide, in real time,                                                                
+As the duration of NaLoDuCo experiments become longer, and the richness of the
+behavioral and neural recordings become larger, it will be unfeasible to
+store all raw data. We will be forced to intelligently decide, in real time,
 subsets of data to discard.
-                                                                                                                                            
+
 For instance, if we are recording videos from a mouse foraging in a large arena
->>>>>>> 012b2c18957df08a98d3938bac383b1ba41e6a06
 with ten high-resolution cameras, it would save considerable storage if at any
 time we only save videos from cameras capturing the mouse at that time.  This
 could be done by tracking the position of the mouse in real time with
@@ -186,27 +160,50 @@ the tracked position, but when the confidence is low, we would save all videos.
 
 \section{Approach}
 
-\subsection{Offline machine learning}
-
 We have collected unprecedented NaLoDuCo datasets at the SWC. However, these
 very large datasets are of not much use without methods for visual exploration
 and data analysis. The next section describes methods we will disseminate for
-data analysis, Section~\ref{sec:visualExploration} presents those for
-visualisation, Section~\ref{sec:relatedResearchOfflineAnalysis} discusses
-related research, and Section~\ref{sec:outputOfflineAnalysis} mentions outputs
-from this aim.
+data analysis and Section~\ref{sec:visualExploration} presents those for
+visualisation.
 
-\subsubsection{Analysis methods to disseminate}
+\subsection{Offline analysis methods}
 
-We will disseminate advanced statistical methods to analyze recordings from NaLoDuCo
-foraging experiments performed at the SWC, where mice forage freely in large
-arenas, 24 hours a day and seven days a week, for weeks to months, while their
-behavioral and neural activity is recorded with high resolution.
+We will disseminate an open-source library of advanced statistical methods
+adapted to \textbf{efficiently} process \textbf{non-stationary} recordings from
+NaLoDuCo experiments.
+%
+We will benchmark the performance of these methods for processing behavioral
+and neural time series recorded from the SWC NaLoDuCo foraging experiments.
 
-We will create a variety of new methods or adapt existing ones to aid the
-exploration of NaLoDuCo recordings at the behavioral and neural levels. These
-methods should be robust to process non-stationary data and run efficiently on
-distributed computing system (see below).
+The initial list of methods in this library is given in
+Section~\ref{sec:methodsToDisseminate} and includes regression, classification,
+supervised, unsupervised and reinforcement learning, state space models and
+artificial neural networks.
+%
+Implementations of these methods will follow high software engineering
+standards, and will include detailed documentation, so that users can easily
+apply them to process their own NaLoDuCo datasets.
+%
+If a user needs a machine learning method to process NaLoDuCo recordings not
+included in the library, she could use implementations of similar algorithms
+included in the library, and their corresponding documentation, to adapt this
+algorithm to efficiently process her recordings.
+%
+This library should be built for all and by all, and become essential to the
+rapidly expanding community of scientists performing NaLoDuCo experimentation
+in small animals around the world~\citep{}.
+
+In Neuroscience we don't have methods to characterise long-duration and
+continual time series, to learn from time series whose statistical properties
+fluctuate over time, to forecast time series of long horizons (e.g., hours,
+days, week or months.
+%
+This library should find applicability beyond the realm of small-animal
+neuroscience and, for example, be useful to characterize long-duration and
+continual neural processes in human brain activity measured with subscalp EEG
+electrodes.
+
+\subsection{Initial list of methods}
 
 The first step in the analysis of NaLoDuCo foraging behavioral data is
 \textbf{tracking multiple body parts} in mice. For this we will use
@@ -257,19 +254,22 @@ time (i.e., that the probability of the data is time invariant --
 stationarity). This assumption may be valid for shorter experiments. However,
 for long-duration experiments, where animals learn and adapt, where their
 motivation fluctuates, and their activity is modulated by circadian, utradiem
-and peridiem rhythms, the stationarity assumption may not hold.
+and peridiem rhythms, this assumption may not hold.
+In nonstationary environments,
+a non-adaptive model trained under the false stationarity
+assumption is bound to become obsolete in time, and perform
+sub-optimally at best, or fail catastrophically at worst.
 
-The field of adaptive signal processing~\citep{haykin02} develops algorithms to
-characterize non-stationary systems. There is no unique solution to optimally
-process any non-stationary signal. Instead, adaptations to specific algorithms
-have been developed to improve their performance in non-stationary
+The field of adaptive signal processing develops algorithms to characterize
+non-stationary systems~\citep{haykin02}. In this field adaptations to specific
+algorithms have been developed to improve their performance in non-stationary
 environments.
 
 For example, the recursive least-squares algorithm \citep[][Chapter
 9]{haykin02} is an adaptation of the ordinary least square algorithm to perform
-linear regression with non-stationary data.
-%
-For non-linear regression using artificial neural networks, a very large number
+\textbf{linear regression} with non-stationary data.
+
+For non-linear regression using \textbf{artificial neural networks}, a very large number
 of strategies have been developed to address data non-stationarity. To mention
 a few, continual learning has introduced algorithms like  Elastic Weight
 Consolidation~\citep[EWC][]{} and Learning Without Forgetting~\citep[LwF][]{}
@@ -280,13 +280,152 @@ training. A different type of strategy is used by ensemble methods~\citep{},
 which combine multiple models trained on different time windows to capture
 evolving data patterns.
 
-Algorithms for state-space models, like the Kalman filter, perform well in some
+Algorithms for \textbf{state-space models}, like the Kalman filter, perform well in some
 simpler non-stationary environments producing Gaussian data with varying mean and
 covariance.
 %
 For more complex non-stationarities one can use switching state-pace models,
 like the switching linear dynamical system~\cite{} or the switching Hidden
-Markov model~\cite{}.
+Markov model~\cite{}, or particle filters~\citep{}.
+
+# RL
+
+# concept drift
+
+In the machine learning literature, non-stationary methods are developed to
+address the problem of concept drift. It refers to the phenomenon where the
+statistical properties of data change over time, leading to a shift in the
+underlying relationships between variables. This presents a significant
+challenge for machine learning models, as assumptions made during training may
+become invalid, leading to degraded performance.
+%
+Differently from adaptive signal processing, the methods developed to tackle
+concept drift are model agnostic and can be used with multiple machine learning
+models.
+
+Concept drift can be categorized into different types based on the nature and
+rate of change:
+
+\begin{description}
+
+    \item[Sudden Drift:] A rapid and abrupt change in the data distribution
+        (e.g., fraud detection after a major security breach).
+
+    \item[Gradual Drift:] A slow transition from one concept to another over
+        time (e.g., changing consumer preferences in e-commerce).
+
+    \item[Incremental Drift:] A continuous and progressive evolution of
+        concepts (e.g., aging-related changes in medical diagnosis models).
+
+    \item[Recurring or Seasonal Drift:] Periodic shifts in data distribution
+        that return to previous states (e.g., seasonal demand fluctuations in
+        retail, temperature variations affecting energy consumption, or annual
+        trends in influenza outbreaks).
+
+\end{description}
+
+Detecting and adapting to concept drift is crucial for maintaining model
+performance. The primary approaches include:
+- **Statistical Tests and Distribution Monitoring:** Methods such as
+Kullback-Leibler divergence, Kolmogorov-Smirnov tests, and hypothesis testing
+can identify drift by comparing past and present distributions.
+- **Windowing Techniques:** Sliding windows, fixed or adaptive, monitor recent
+data points and adjust the model accordingly.
+- **Ensemble Methods:** Combining multiple models with different levels of
+adaptability to mitigate the effects of drift.
+- **Online Learning and Incremental Updates:** Continuously updating models
+with new data to reflect the latest trends.
+- **Drift-Aware Bayesian and Probabilistic Models:** Approaches such as
+Bayesian Online Learning allow probabilistic reasoning over changing data
+distributions.
+- **Unsupervised Drift Detection:** Methods such as clustering evolution,
+density estimation changes, and autoencoder-based monitoring can detect drift
+without labeled data.
+
+**Concept Drift: A Review**
+
+### 1. Introduction
+Concept drift refers to the phenomenon where the statistical properties of data
+change over time, leading to a shift in the underlying relationships between
+variables. This presents a significant challenge for machine learning models,
+as assumptions made during training may become invalid, leading to degraded
+performance. Concept drift affects a broad range of learning paradigms,
+including **supervised, unsupervised, and reinforcement learning**. In
+supervised learning, it impacts predictive models by altering the relationship
+between input features and target variables. In unsupervised learning, it
+affects clustering, anomaly detection, and density estimation models by
+shifting the underlying data distribution. In reinforcement learning,
+non-stationary environments can cause learned policies to become suboptimal
+over time. Concept drift is particularly relevant in dynamic environments such
+as financial markets, healthcare, cybersecurity, and personalized
+recommendation systems.
+
+### 2. Types of Concept Drift
+Concept drift can be categorized into different types based on the nature and
+rate of change:
+- **Sudden Drift:** A rapid and abrupt change in the data distribution (e.g.,
+fraud detection after a major security breach).
+- **Gradual Drift:** A slow transition from one concept to another over time
+(e.g., changing consumer preferences in e-commerce).
+- **Incremental Drift:** A continuous and progressive evolution of concepts
+(e.g., aging-related changes in medical diagnosis models).
+- **Recurring or Seasonal Drift:** Periodic shifts in data distribution that
+return to previous states (e.g., seasonal demand fluctuations in retail,
+temperature variations affecting energy consumption, or annual trends in
+influenza outbreaks).
+
+### 3. Detection and Adaptation Strategies
+Detecting and adapting to concept drift is crucial for maintaining model
+performance. The primary approaches include:
+- **Statistical Tests and Distribution Monitoring:** Methods such as
+Kullback-Leibler divergence, Kolmogorov-Smirnov tests, and hypothesis testing
+can identify drift by comparing past and present distributions.
+- **Windowing Techniques:** Sliding windows, fixed or adaptive, monitor recent
+data points and adjust the model accordingly.
+- **Ensemble Methods:** Combining multiple models with different levels of
+adaptability to mitigate the effects of drift.
+- **Online Learning and Incremental Updates:** Continuously updating models
+with new data to reflect the latest trends.
+- **Drift-Aware Bayesian and Probabilistic Models:** Approaches such as
+Bayesian Online Learning allow probabilistic reasoning over changing data
+distributions.
+- **Unsupervised Drift Detection:** Methods such as clustering evolution,
+density estimation changes, and autoencoder-based monitoring can detect drift
+without labeled data.
+
+### 4. Applications and Challenges
+Concept drift affects a wide range of applications, including:
+- **Finance:** Stock market prediction and credit risk assessment, where market
+conditions evolve unpredictably.
+- **Healthcare:** Medical diagnosis models that must adapt to new patient
+demographics and evolving disease patterns.
+- **Cybersecurity:** Intrusion detection systems that face new and evolving
+cyber threats.
+- **E-commerce and Personalization:** Recommendation systems that must adjust
+to changing user preferences and behaviors.
+- **Energy and Climate Science:** Seasonal variations in temperature, energy
+consumption, and climate patterns require models that account for recurrent
+changes over time.
+- **Anomaly Detection in Unsupervised Learning:** Concept drift affects
+clustering and outlier detection models used in fraud detection and network
+security.
+
+Challenges in concept drift research include efficiently detecting drift in
+high-dimensional data, reducing false alarms, and designing adaptive algorithms
+that balance stability and flexibility. Future research aims to develop hybrid
+approaches that combine machine learning, probabilistic modeling, and
+explainable AI to better handle non-stationary environments.
+
+### 5. Conclusion
+Concept drift remains a fundamental challenge in real-world machine learning
+applications. Addressing it requires a combination of detection techniques,
+adaptive learning strategies, and robust evaluation metrics. As data-driven
+decision-making becomes increasingly prevalent, developing effective
+methodologies to handle drift is essential for building reliable and resilient
+AI systems.
+
+
+# bayesian online learning
 
 \subsubsection*{Long processing times for very large datasets}
 

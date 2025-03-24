@@ -288,9 +288,9 @@ For more complex non-stationarities one can use switching state-pace models,
 like the switching linear dynamical system~\cite{} or the switching Hidden
 Markov model~\cite{}, or particle filters~\citep{}.
 
-# RL
+% RL
 
-# concept drift
+% concept drift
 
 In the machine learning literature, non-stationary methods are developed to
 address the problem of concept drift. It refers to the phenomenon where the
@@ -308,40 +308,58 @@ rate of change:
 
 \begin{description}
 
-    \item[Sudden Drift:] A rapid and abrupt change in the data distribution
-        (e.g., fraud detection after a major security breach).
+    \item[Sudden Drift:] A rapid and abrupt change in neural activity or
+        behavioral response (e.g., a sudden change in neural firing patterns in
+        response to a novel stimulus or a pharmacological intervention).
 
-    \item[Gradual Drift:] A slow transition from one concept to another over
-        time (e.g., changing consumer preferences in e-commerce).
+    \item[Gradual Drift:] A slow transition in neural representations or
+        behavior over time (e.g., gradual adaptation to a learned task, where
+        neural activity patterns shift as the animal refines motor skills or
+        cognitive performance).
 
-    \item[Incremental Drift:] A continuous and progressive evolution of
-        concepts (e.g., aging-related changes in medical diagnosis models).
+    \item[Incremental Drift:] A continuous and progressive evolution of neural
+        activity or behavior (e.g., long-term potentiation (LTP) or synaptic
+        plasticity leading to a steady, cumulative change in neural circuit
+        function over time).
 
-    \item[Recurring or Seasonal Drift:] Periodic shifts in data distribution
-        that return to previous states (e.g., seasonal demand fluctuations in
-        retail, temperature variations affecting energy consumption, or annual
-        trends in influenza outbreaks).
+    \item[Recurring or Seasonal Drift:] Periodic shifts in neural dynamics or
+        behavior that return to previous states (e.g., circadian rhythm
+        variations in neural firing rates, sleep/wake cycle-related changes in
+        brain activity, or seasonal shifts in animal behavior such as
+        hibernation or mating periods).
 
 \end{description}
 
 Detecting and adapting to concept drift is crucial for maintaining model
 performance. The primary approaches include:
-- **Statistical Tests and Distribution Monitoring:** Methods such as
+
+\begin{description}
+
+    \item[Statistical Tests and Distribution Monitoring:] Methods such as
 Kullback-Leibler divergence, Kolmogorov-Smirnov tests, and hypothesis testing
 can identify drift by comparing past and present distributions.
-- **Windowing Techniques:** Sliding windows, fixed or adaptive, monitor recent
+
+    \item[Windowing Techniques:] Sliding windows, fixed or adaptive, monitor recent
 data points and adjust the model accordingly.
-- **Ensemble Methods:** Combining multiple models with different levels of
+
+    \item[Ensemble Methods:] Combining multiple models with different levels of
 adaptability to mitigate the effects of drift.
-- **Online Learning and Incremental Updates:** Continuously updating models
+
+    \item[Online Learning and Incremental Updates:] Continuously updating models
 with new data to reflect the latest trends.
-- **Drift-Aware Bayesian and Probabilistic Models:** Approaches such as
+
+    \item[Drift-Aware Bayesian and Probabilistic Models:] Approaches such as
 Bayesian Online Learning allow probabilistic reasoning over changing data
 distributions.
-- **Unsupervised Drift Detection:** Methods such as clustering evolution,
+
+    \item[Unsupervised Drift Detection:] Methods such as clustering evolution,
 density estimation changes, and autoencoder-based monitoring can detect drift
 without labeled data.
 
+\end{description}
+
+
+\begin{comment}
 **Concept Drift: A Review**
 
 ### 1. Introduction
@@ -424,8 +442,9 @@ decision-making becomes increasingly prevalent, developing effective
 methodologies to handle drift is essential for building reliable and resilient
 AI systems.
 
+\end{comment}
 
-# bayesian online learning
+% bayesian online learning
 
 \subsubsection*{Long processing times for very large datasets}
 

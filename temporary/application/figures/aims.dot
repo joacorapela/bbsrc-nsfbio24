@@ -1,19 +1,20 @@
 digraph g {
-  extractMeaning [label=<<FONT COLOR="BLACK">Aim 1:<br/>knowledge extraction</FONT>>,shape=box,style=filled,fillcolor=lightblue];
+  methodsLib [label=<<FONT COLOR="BLACK">Methods library<br/>for processing<br/>NaLoDuCo data</FONT>>];
   visualExploration [label=<<FONT COLOR="BLACK">intelligent<br/>visual<br/>exploration</FONT>>];
+  dataAnalysis [label=<<FONT COLOR="BLACK">data<br/>analysis</FONT>>];
   offlineML [label=<<FONT COLOR="BLACK">offline<br/>machine<br/>learning</FONT>>];
   offlineSpikeSorting [label=<<FONT COLOR="BLACK">offline<br/>spike<br/>sorting</FONT>>];
-  dissemination [label=<<FONT COLOR="BLACK">Aim 2:<br/>dissemination</FONT>>,shape=box,style=filled,fillcolor=lightblue];
-  extension [label=<<FONT COLOR="BLACK">Aim 3:<br/>AEON extension</FONT>>,shape=box,style=filled,fillcolor=lightblue];
   realTimeML [label=<<FONT COLOR="BLACK">real-time<br/>machine<br/>learning</FONT>>];
   onlineSpikeSorting [label=<<FONT COLOR="BLACK">online<br/>spike<br/>sorting</FONT>>];
 
-  extractMeaning -> visualExploration;
-  extractMeaning -> offlineML;
-  dissemination;
+  methodsLib -> visualExploration;
+  methodsLib -> dataAnalysis;
+  visualExploration -> dataAnalysis [dir=none];
+  dataAnalysis -> offlineML;
   offlineSpikeSorting -> offlineML;
-  extension -> realTimeML;
+  dataAnalysis -> realTimeML;
   onlineSpikeSorting -> realTimeML;
 
+  {rank=same; visualExploration; dataAnalysis;}
   {rank=sink; offlineSpikeSorting; onlineSpikeSorting;}
 }

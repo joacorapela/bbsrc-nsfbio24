@@ -1,0 +1,126 @@
+\documentclass{article}
+
+\usepackage[colorlinks]{hyperref}
+% \usepackage{enumitem}
+% \setlist[description]{style=nextline}
+
+\title{Simulations for NaLoDuCo experimentation with reinforcement learning
+agents}
+
+\author{Joaqu\'{i}n Rapela}
+
+\begin{document}
+
+\maketitle
+
+\section{Motivations}
+
+In physics, engineering and robotics simulations are widely used to test, debug
+and optimize experiments before real wold trials. However, neuroscience
+experiments lack equivalent tools.
+
+In short-duration experiments one can iterate over several experimental
+configurations quickly to find the best one.
+%
+This possibility in NaLoDuCo experiments is drastically limited.
+%
+Therefore, it is critical to have an environment to simulate in detail NaLoDuCo
+experiments with realistically behaving agents to allow scientists to quickly
+try different experimental setups.
+%
+Simulations can save high costs of iterations. Every failed experiment means
+months of lost work, as well as the cost of caring for animals and maintaining
+experimental setups.
+
+\section{Proposed solution}
+
+We propose to develop a realistic, detailed simulation framework that allows
+scientists to pretest their foraging experiments before running them on real
+animals.
+
+\section{Key features of the simulation}
+
+\begin{description}
+    \item[Reinforcement Learning-Based Virtual Mice]\leavevmode\\
+
+        \begin{enumerate}
+
+            \item We will use RL agents to simulate mouse behavior in foraging tasks.
+
+            \item Agents will be trained using prior data and reward structures that match real foraging constraints.
+
+            \item Previous work has developed RL-based foraging models (e.g.,
+                \href{https://arxiv.org/abs/2210.08085}{arXiv:2210.08085}), which we can build upon.  
+
+        \end{enumerate}
+
+    \item[Realistic Environmental and Experimental Constraints]\leavevmode\\
+
+        \begin{enumerate}
+
+            \item The simulation will include environmental factors (e.g., food
+                availability, maze layouts, reward schedules).
+
+            \item We will incorporate biological constraints (e.g., circadian
+                rhythms, fatigue, adaptation).
+
+            \item The system will model sensor noise and drift to match
+                real-world data collection.
+
+        \end{enumerate}
+
+    \item[Interactive Experiment Design and Debugging]\leavevmode\\
+
+        \begin{enumerate}
+
+            \item Users can customize parameters of the experiment (e.g.,
+                reward schedules, number of patches, number of nets, number,
+                resolution and positions of cameras).
+
+            \item RL agents will be visualised as realistic mice and their
+                motion will be recorded by the different cameras, at the
+                corresponding resolutions and frame rates. These recordings
+                will allow to run body part tracking and pose estimation
+                algorithms on simulated data, and test if the cameras
+                specification and layout allows required estimation
+                accuracy.
+
+            \item Scientists will be able to run and iterate simulations
+                quickly, testing different hypotheses before committing to real
+                experiments.
+
+            \item The platform will provide detailed logs, making it easier to
+                diagnose potential pitfalls in experiment design.
+
+        \end{enumerate}
+
+    \item[Data-Driven Model Updating]\leavevmode\\
+        \begin{enumerate}
+
+            \item As new foraging experimental data is collected, it will be
+                used to update the simulation for better accuracy.
+
+            \item This allows for a continual refinement of the RL-based
+                foraging models.
+
+        \end{enumerate}
+
+\end{description}
+
+\section{How can simulations help NaLoDuCo experimentation?}
+
+If I want to test if the validity of Marginal Value Theorem in a NaLoDuCo
+experiment setup is it better to use one or two patches?, what food reward rate
+should we use?, what inter-patch distance should I set?, would it be helpful to
+introduce predators? I could quickly address all these questions in realistically
+simulated the foraging experiments.
+
+Does foraging become more efficient over time? If so, how long should an
+experiment be to reveal this increase in efficiency? We could address these
+questions with an optimal RL foraging agent.
+
+Is an animal behavior adapting over time? To address this question I can
+estimate parameters of optimal RL models at different points in time and check
+if these parameters change significantly.
+
+\end{document}

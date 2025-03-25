@@ -10,6 +10,8 @@
 *.out
 *.toc
 *.nfs*
+*.svg
+*.png
 
 loi/*.csh
 loi/loi.*

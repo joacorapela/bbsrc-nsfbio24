@@ -21,6 +21,8 @@ loi/loi.*
 loi/figures/*
 loi/old/*
 
+application/bibunits/
+
 deliverablesPastFutureWork/deliverablesPastFutureWork.*
 !deliverablesPastFutureWork/deliverablesPastFutureWork.tex
 !deliverablesPastFutureWork/deliverablesPastFutureWork.pdf

@@ -9,119 +9,172 @@ aspects of brain function and behaviour that only manifest in more naturalistic
 and extended conditions.
 
 At the Sainsbury Wellcome Centre (SWC) and Gatsby Computational Neuroscience
-Unit (GCNU) we are pioneering Naturalistic, Long-Duration, and Continual
-(NaLoDuCo) foraging experiments in mice that span weeks to months. During these
-experiments, we collect high-resolution behavioural and neural recordings in
-naturalistic settings.
+Unit (GCNU) we are pioneering \textbf{Naturalistic, Long-Duration, and
+Continual (NaLoDuCo) experiments} in mice that span weeks to months. During
+these experiments, we collect high-resolution behavioural and neural recordings
+in naturalistic settings.
 
-This novel  approach will enable researchers to explore neural mechanisms
+To support this endeavor, we are developing the \textbf{AEON platform}, an
+innovative set of hardware and software tools for NaLoDuCo experimental
+control, data store and access. We are using this platform to investigate the
+neural basis of foraging behavior in mice over prolonged periods of
+time~\citep{campagnerEtAl24}.
+
+Our US partner, the \textbf{Allen Institute for Neural Dynamics (AIND)} is also
+performing NaLoDuCo experimentation, using the AEON platform, studying
+naturalistic olfactory learning over weeks to month outside conventional task
+structures~\citep{finkEtAl24}.
+
+\textbf{NeuroGEARS Ltd}, our industrial partner, is a UK-based company
+supporting academic institutions implementing innovative technology for
+scientific investigation.
+%
+It is the main developer of the \textbf{Bonsai} software ecosystem for
+experimental control~\citep{lopesEtAl15}, used by thousands of scientists
+around the world, and powering the AEON platform.
+%
+NeuroGEARS  has played a central role in the development of the AEON platform,
+and provides services to both the SWC and the AIND.
+
+NaLoDuCo experimentation will enable researchers to explore neural mechanisms
 underlying ethological behaviours in naturalistic environments over months, for
 the first time.  The experiments will shed new light on a wide range of poorly
 understood neural mechanisms, including how the brain structures complex
 behavioural sequences as a function of the animal needs, learning, adaptation,
 sleep-dependent memory consolidation and social dynamics.
 %
-The data generated from NaLoDuCo experiments represent an entirely new resource
-in neuroscience, with the potential to drive breakthroughs and discoveries that
-are beyond the reach of traditional experiments.
+\textbf{The data generated from NaLoDuCo experiments represent an entirely new
+resource in neuroscience}, with the potential to drive breakthroughs and
+discoveries that are beyond the reach of traditional experiments.
 
-While naturalistic, long-duration, or continuous neuroscience experiments have
+% Since the project started in 2021, our UK business partner, NeuroGEARS Ltd.\
+% has been contracted by the SWC to lead the implementation of the NaLoDuCo
+% experimental framework. NeuroGEARS also provides services to the AIND.
+
+While \textbf{naturalistic, long-duration, or continuous} neuroscience experiments have
 been conducted in the past
-\citep{nagyEtAl23,hoEtAl23,rayEtAl25,weissbrodEtAl13,dhawaleEtAl17}, to the
-best of our knowledge, we are the first to integrate all three of these
-features in a single experimental paradigm.
+\citep{nagyEtAl23,hoEtAl23,rayEtAl25,weissbrodEtAl13,dhawaleEtAl17,newmanEtAl24}, to the
+best of our knowledge, \textbf{we are the first ones to integrate all three of these
+features in a single experimental paradigm}.
 %
-Experiments of this type have been advocated by experts in the field years ago
-\citep[][p19]{dattaEtAl19}, yet they have not been implemented so far.
+% Experiments of this type have been advocated by experts in the field years ago
+% \citep[][p19]{dattaEtAl19}, yet they have not been implemented so far.
 
-This new type of experimentation will become mainstream in the coming years.
+This emerging paradigm of long-duration experimentation is poised to become
+mainstream in the coming years.
 %
-However, experiments spanning weeks to months generate extremely large
-datasets—often reaching hundreds of terabytes—which present substantial
-challenges across data acquisition, management, distribution, visualisation,
-and analysis.
+However, experiments spanning weeks to months generate massive datasets—often
+reaching hundreds of terabytes—posing significant challenges in data
+acquisition, management, distribution, visualization, and analysis.
 %
-Together, with our US partner, the Allen Institute for Neural Dynamics (AIND),
-we will address these challenges building software infrastructure to help
-scientists around the world perform NaLoDuCo experiments.
+To address these challenges, we (GCNU, SWC, AIND, and NeuroGEARS Ltd) will
+collaboratively extend the AEON platform with functionality to
+\textbf{visualise and statistically analyze previously collected NaLoDuCo
+experimental data on the cloud}, and to \textbf{perform real-time machine to enable the
+intelligent control of NaLoDuCo experiments}.
 
-Since the project started in 2021, our UK business partner, NeuroGEARS Ltd.\
-has been contracted by the SWC to lead the implementation of the NaLoDuCo
-experimental framework. It also provides services to the AIND.
+\subsubsection{Specific aims}
 
-\subsubsection{Focus areas}
+Data generated by NaLoDuCo experiments will be of general interest to the
+neuroscience community. \textbf{We want to share our NaLoDuCo foraging data and
+allow other groups collecting this type of data to share their own.}
+%
+However, this dissemination is not trivial, as datasets are of the order of
+hundreds of terabytes, and it will take users several days to download them
+over standard Internet connections.
 
-Developing \textbf{platform technologies} to enable:
+Instead of bringing data to users, we will bring users to data, by storing
+datasets in the cloud (or in institutional clusters), and providing
+\textbf{cloud software to allow users to visually explore and statistically
+analyse behavioural and neural NaLoDuCo datasets where they live}
+(1 and 2 in Figure~\ref{fig:aims}).
 
+Our statistical analysis of neural time series will require knowledge of the
+spiking activity of single units; i.e., spike sorting. In long-duration
+experiments with freely moving animals spike sorting is a challenging problem,
+because movements of recording probes change the shape of spike waveforms over
+time and complicate the assignment of spikes to units based on their waveforms.
+We will address this problem by developing \textbf{spike sorting methods for
+long-duration, continual and high-channel-count recordings} (3 in
+Figure~\ref{fig:aims}).
 
-\begin{description}
+Funded by a BBSRC award we are adding machine learning functionality to Bonsai
+in order to enable a new type of experimentation controlled by advanced machine
+learning inference on behavioral and neural
+recordings~\citep[Bonsai.ML,][]{bonsaiML25}. We have developed this
+functionality for conventional short duration experiments. We will
+\textbf{add to Bonsai.ML real-time machine learning functionality tailored to
+nonstationary data}, such as that generated in NaLoDuCo experiments.
 
-    \item[Scalable Data Sharing] – Establishing infrastructure for \textbf{efficient storage and sharing} of massive, long-duration behavioral and neural datasets across research communities.
+Most of the neural data analysis methods that we will add to AEON require
+sorted spikes. We will \textbf{adapt the offline spike sorting methods
+mentioned above to operate under the strict time constraints of real-time
+experiments} (5 in Figure~\ref{fig:aims}).
 
-	\item[Interactive Data Exploration] – Creating high-performance visualization tools to navigate and analyze multi-scale behavioral and neural recordings, enabling \textbf{immediate} insights into complex datasets.
+\begin{figure}
+    \begin{center}
+        \includegraphics[width=3in]{figures/aims.png}
+    \end{center}
+    \caption{Specific aims}
+    \label{fig:aims}
+\end{figure}
 
-	\item[Advanced Data Analysis] – Developing \textbf{online and distributed} machine learning algorithms to characterize \textbf{non-stationary} behavioral and neural dynamics in continuous, high-dimensional data streams.
+\subsubsection{Opportunities}
 
-	\item[Scalable Spike Sorting] – Designing \textbf{robust and adaptive spike sorting methods} to accurately assign spikes to neurons in \textbf{long-duration, non-stationary recordings}, supporting both \textbf{real-time and offline analysis}.
+\paragraph{More expressive models}
+%
+Our long-duration recordings, spanning weeks to months and generating hundreds
+of terabytes per experiment, will be transformative for neuroscience, much like
+the advent of large-scale datasets in computer vision.  Just as the creation of
+MNIST—and later, ImageNet—enabled the training of deeper neural networks,
+leading to unprecedented performance breakthroughs, our massive,
+high-resolution neural and behavioural datasets will allow the estimation of far
+more expressive models than previously possible.
+%
+For instance, large NaLoDuCo datasets will allow to estimate latent variable
+models with highly nonlinear and expressive models of observation given latent
+variables using recognition parametrised models~\citep{walkerEtAl23}.
+%
+By capturing neural dynamics over extended timescales, we may uncover novel
+insights into learning, memory, and long-term neural adaptations that remain
+inaccessible with conventional short-duration studies.
 
-	\item[Adaptive Neural Perturbations] – Implementing \textbf{real-time neuromodulatory interventions} to test causal relationships between neural activity and behavior over \textbf{extended time scales}.
+\paragraph{Forecasting over much longer horizons}
+%
+Short-duration studies often fail to capture dependencies that unfold over long
+timescales. In contrast, NaLoDuCo experimental data allow forecasting models to
+incorporate past events spanning hours to weeks, enabling more reliable
+predictions of behavioral and neural activity over extended horizons.
+%
+For example, forecasting models trained on NaLoDuCo data could predict upcoming
+behavioral transitions, such as shifts in movement patterns, attention, or task
+engagement, hours in advance—a capability that is unattainable with
+shorter-duration experiments.
 
-\end{description}
+\paragraph{Very slow behavioural and neural rhythmic patterns}
+%
+Continuously monitoring detailed behavioural and neural activity over weeks to
+months enables the study of slow rhythmic processes that extend beyond
+traditional circadian (~24-hour) rhythms, including ultradian (hours),
+infradian (days to weeks), and even multi-month cycles. These long-duration
+fluctuations influence learning, memory consolidation, motivation, and
+cognitive function, yet they remain largely unexplored in controlled
+experiments. By capturing these dynamics, we can gain new insights into neural
+plasticity, attention, and mood regulation, as well as the progression of
+neurological disorders like Parkinson’s disease and depression, which exhibit
+slow symptom fluctuations.
 
-\subsubsection{Synergistic developments}
-
-Currently, both GCNU and AIND are independently developing methods to address
-the previous focus areas. We will join forces to co-develop these methods and
-our foraging research programs, leveraging our combined expertise for greater
-impact.
-
-\begin{comment}
-\subsubsection{Use case}
-
-A user connects to a dashboard to examine recordings from a one month long
-foraging experiments in micce. She begins by \textbf{visualising continuous
-behavioural measurements}, such as the kinematics (speed and acceleration) of a
-mouse during a months-long experiment measured by the IMU of an ONIX probe.
-
-Next, she \textbf{examines the results of a machine learning analysis},
-such as behavioural states inferred by a Switching Hidden Markov Model (SHMM)
-using kinematic data.
-
-The SHMM was initially trained on the first two hours of the experiment
-and was periodically retrained to \textbf{adapt to non-stationarities},
-such as sensor fluctuations, changes in motivation, fatigue, or learning.
-
-She then \textbf{visualises epoched data}, such as SHMM states aligned to
-key events—e.g., the onset of a foraging bout in the richer patch at a
-specific time of day.
-
-Curious about the neural basis of these SHMM states, she checks the neural
-recordings but realises they have not yet been spike-sorted. She runs our
-\textbf{offline spike sorting method}, developed for very long continuous
-recordings, and performs quality control on its results.
-
-Based on quality metrics, she detects drift in the recorded signal,
-adjusts the drift correction parameters, and reruns the sorting algorithm.
-
-		After examining the sorted spikes from a large neural population,  she
-finds it challenging to interpret activity across so many neurons.  So she
-decides to summarise the population spiking activity by \textbf{estimating
-continuous latent variables}.
-
-She then returns to the behavioural visualisation software, integrates
-machine learning indices corresponding to these latent variables, and
-\textbf{visualises behavioural data aligned to the newly estimated latents}.
-
-Through these explorations, she hypothesises that a peak in a neural latent
-variable from the prefrontal cortex signals the moment when mice decide
-to begin a foraging bout.
-
-To test this, she \textbf{runs an online machine learning model} to estimate
-latent variables from prefrontal cortex activity, predicting when this
-peak will occur. She then \textbf{optogenetically inactivates the neural
-population} at the forecasted time.
-
-Because inactivation prevented the mouse from initiating a foraging bout,
-her hypothesis was supported.
-\end{comment}
+\paragraph{New neuromodulation opportunities}
+%
+In traditional short-duration experiments, the effects of neuromodulation are
+tested immediately. In contrast, our long-duration experiments will enable
+repeated neuromodulation over extended periods and allow us to assess its
+impact over much longer timescales.
+%
+For instance, in a mouse model of Alzheimer's disease, we could apply
+optogenetic stimulation to the hippocampus for one hour per day over the course
+of a month and assess its impact on memory retention and synaptic plasticity in
+the following weeks. This approach could reveal whether intermittent
+neuromodulation promotes long-term neural circuit stability and delays
+cognitive decline.
 

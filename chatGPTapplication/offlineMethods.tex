@@ -1,80 +1,97 @@
 
-Modern neuroscience lacks robust methods to characterize \textit{long-duration
+
+\textbf{Modern neuroscience lacks robust methods to characterize long-duration
 and continual time series}, especially in settings where the statistical
-properties of the data evolve over time. Furthermore, few approaches are
-currently capable of performing accurate \textit{long-horizon forecasting}—over
-hours, days, or weeks—on behavioral or neural data. These limitations present a
+properties of the data evolve over time. This limitation present a
 methodological gap that must be addressed in order to unlock the scientific
 potential of NaLoDuCo experiments.
 
-To bridge this gap, we will develop and disseminate software libraries that
-implement offline analysis methods specifically tailored to: (1) operate
-effectively under \textbf{non-stationary conditions}, and (2) scale to
-\textbf{very long time series}. All implementations will be optimized for
-high-throughput, distributed computation on large datasets.
+To bridge this gap, we will develop and disseminate a software library
+containing new implementations of existing machine learning methods
+specifically tailored to: (1) operate effectively under \textbf{non-stationary}
+conditions, and (2) scale to \textbf{very long time series}.
 
-\subsubsection*{Initial List of Methods to Include in the Library}
+\subsubsubsection{Initial List of Methods to Include in the Library}
 \label{sec:initialListOfMethods}
 
-We will initially populate this library with the methods already in use at
-GCNU, SWC, and AIND to analyze neural and behavioral data in NaLoDuCo foraging
-and olfactory learning experiments in mice. These methods span multiple
-domains—kinematics, neural dynamics, behavioral state segmentation,
-forecasting, and joint modeling—and are grouped below by function.
+We will initially populate this library with new implementations of methods
+already in use at the GCNU, SWC, and AIND to analyze neural and behavioral time
+series from NaLoDuCo foraging and olfactory learning experiments in mice. These
+methods span multiple domains—kinematics, neural dynamics, behavioral state
+segmentation, forecasting, and joint modeling—and are designed to work together
+within an integrated analysis pipeline.
 
 \vspace{1em}
 \noindent\textbf{Behavioral Analysis:}  
 The first step in behavioral analysis involves multi-body-part tracking. For
 this, we will use \textbf{deep learning-based pose estimation} methods such as
-\href{https://github.com/talmolab/sleap}{SLEAP}, which allow tracking of
-multiple unmarked mice across long durations.
+\href{https://github.com/talmolab/sleap}{SLEAP}, which enable accurate and
+efficient tracking of multiple unmarked mice across long recording sessions.
 
-Next, we will infer continuous kinematic variables from these pose estimates
-using \textbf{linear dynamical systems (LDS)}, including variants based on
-particle filters (see \href{https://github.com/joacorapela/lds}{LDS}). These
-features will be used to infer discrete behavioral states with \textbf{Hidden
-Markov Models (HMMs)}, as implemented in tools such as
+From the tracked poses, we will infer continuous kinematic variables using
+\textbf{linear dynamical systems (LDS)}, including particle filter-based
+variants to handle uncertainty and measurement noise. These kinematic features
+will be used to infer discrete behavioral states with \textbf{Hidden Markov
+Models (HMMs)}, as implemented in tools such as
 \href{https://dattalab.github.io/moseq2-website/index.html}{MoSeq}.
 
-We will relate behavioral kinematics and inferred states to foraging-related
-outcomes (e.g., patch-leaving decisions) using both \textbf{generalized linear
-models (GLMs)} and \textbf{deep neural networks}. For long-horizon prediction
-of behavioral trajectories, we will implement \textbf{recurrent neural networks
-(RNNs)} and \textbf{transformer architectures}. To infer behavioral policies,
-we will apply \textbf{inverse reinforcement learning} methods such as
-\href{https://github.com/haozhu10015/hiql}{HIQL}.
+We will relate these inferred states and kinematic variables to
+foraging-related outcomes—such as patch-leaving decisions—using both
+\textbf{generalized linear models (GLMs)} and \textbf{deep neural networks}.
+These models will allow us to capture both interpretable and high-capacity
+representations of behavioral decision-making processes.
+
+To recover the latent strategies guiding animal behavior, we will apply
+\textbf{inverse reinforcement learning} methods such as
+\href{https://github.com/haozhu10015/hiql}{HIQL}, which estimate the underlying
+reward functions and policies based on observed actions.
+
+NaLoDuCo recordings uniquely support behavioral forecasting over extended
+horizons—ranging from hours to days—far beyond what is feasible in conventional
+short-duration experiments. To capitalize on this, we will apply
+long-horizon forecasting models using \textbf{recurrent neural networks (RNNs)}
+and \textbf{transformer architectures}, which are well-suited to modeling
+long-range temporal dependencies.
 
 \vspace{1em}
 \noindent\textbf{Neural Data Analysis:}  
 Analysis of high-density electrophysiology will begin with \textbf{latent
-variable modeling} to reduce the dimensionality of multi-electrode recordings.
-We will use both linear and nonlinear approaches, including
-\href{https://github.com/joacorapela/svGPFA}{svGPFA} (a Gaussian Process latent
-dynamical model) and \href{https://snel.ai/resources/lfads/}{LFADS} (a deep
-generative model based on RNNs).
+variable modeling} to reduce the dimensionality of population neural
+recordings. We will use both linear and nonlinear latent dynamics models,
+including \href{https://github.com/joacorapela/svGPFA}{svGPFA}, which uses
+Gaussian processes, and \href{https://snel.ai/resources/lfads/}{LFADS}, a deep
+generative model based on recurrent neural networks.
 
-The latent trajectories will be used as inputs to infer discrete neural states
-via \textbf{HMMs}, using libraries such as
-\href{https://github.com/lindermanlab/ssm}{SSM}. For long-duration forecasting
-of neural activity, we will again employ \textbf{RNNs} and
-\textbf{transformers}.
+The resulting low-dimensional trajectories will be used to infer discrete
+neural states via \textbf{HMMs}, using methods such as
+\href{https://github.com/lindermanlab/ssm}{SSM}. For neural activity
+forecasting across long durations, we will again employ \textbf{RNNs} and
+\textbf{transformers}, which can model complex temporal structure in spiking
+activity.
 
-We will also perform spatial decoding from hippocampal spikes using
-\textbf{point-process decoders}, enabling the study of long-term replay during
-naturalistic foraging, as implemented in
+We will also decode the animal’s position from hippocampal spike trains using
+\textbf{point-process decoders}, enabling the analysis of spatial coding and
+replay phenomena during naturalistic foraging behavior. We will build on
+existing implementations such as
 \href{https://github.com/Eden-Kramer-Lab/replay_trajectory_classification}{replay\_trajectory\_classification}.
 
 \vspace{1em}
 \noindent\textbf{Joint Neural-Behavioral Modeling:}  
-To better understand the relationships between neural and behavioral processes,
-we will develop models that extract \textbf{shared latent variables} from both
-domains. This includes
-\href{https://github.com/gatsby-sahani/rpm-aistats-2023}{Recognition-Parametrized
-Models (RPM)}, a method developed at the GCNU for joint inference from multiple
-modalities, and \href{https://cebra.ai/}{CEBRA}, a recent contrastive learning
-approach for multimodal representation learning.
+To understand the interactions between neural dynamics and behavior, we will
+use models that extract \textbf{shared latent representations} from both
+domains. These models will help reveal how cognitive and behavioral states are
+jointly encoded in neural activity.
 
-\subsubsection*{Non-stationarity}
+We will adapt
+\href{https://github.com/gatsby-sahani/rpm-aistats-2023}{Recognition-Parametrized
+Models (RPM)}, a Bayesian approach developed at the GCNU, which infers latent
+variables that explain multiple observation streams through highly nonlinear
+relationships. We will also use \href{https://cebra.ai/}{CEBRA}, a
+state-of-the-art contrastive learning framework designed for multimodal
+representation learning, to discover temporally and semantically aligned
+neural-behavioral structure.
+
+\subsubsubsection{Non-stationarity}
 
 Many conventional methods for analyzing neural and behavioral time series
 assume that the underlying data-generating processes are stationary—that is,
@@ -92,7 +109,7 @@ explicitly designed to operate in non-stationary environments. Our approach
 draws on techniques from multiple domains, including adaptive signal
 processing, machine learning, and Bayesian inference.
 
-\paragraph{Adaptive Signal Processing.}  
+\paragraph{Adaptive Signal Processing.}
 
 The field of adaptive signal processing has produced robust methods for
 modeling linear systems with time-varying dynamics~\citep{haykin02}.
@@ -101,24 +118,27 @@ The recursive least-squares (RLS) algorithm, for example, is a well-known
 adaptation of the ordinary least squares algorithm that continuously updates
 model parameters to perform linear regression under non-stationary conditions.
 %
-We will use generalized versions of RLS to study time-varying relations between
-behavioral states, as inferred by hidden Markov models, and mice decisions,
-like when to leave a foraging patch.
+We will use RLS to study time-varying relations between
+behavioral states, as inferred by hidden Markov models, and foraging visit
+durations.
 
-\paragraph{Neural Networks and Continual Learning.}  
+\paragraph{Continual Learning.}
 
-For nonlinear models such as artificial neural networks, a wide range of
-strategies have been proposed to handle non-stationarity. The subfield of
-\emph{continual learning} has introduced techniques such as Elastic Weight
-Consolidation (EWC) and Learning Without Forgetting (LwF), which preserve
-performance on previously learned tasks while adapting to new data. Experience
-Replay (ER), another technique from this domain, maintains a buffer of
-historical data that is replayed during training to avoid catastrophic
-forgetting. Ensemble methods further enhance robustness by combining models
-with different adaptability profiles, for example, models trained on different
-time windows or with varied learning rates.
+The field of continual learning develops adaptive methods for
+artificial neural networks.  In classic continual learning, a model learns a
+sequence of discrete, well-defined tasks.  But in NaLoDuCo experimentation, as
+in many real-world settings there are not specific task boundaries. So methods
+that do not require task boundaries are needed. They are studied by the
+subfield of task-free continual learning and include online
+regularization (which constrain the update of relevant weights), experience
+replay (which maintain a small, representative buffer of past samples) and
+ensemble methods (which combine the predictions of multiple individual models
+with, for example, different learning rates).
+%
+We will use these techniques, for example, to train pose tracking models on
+month-long continuous recordings.
 
-\paragraph{Adaptive State-Space Models.}  
+\paragraph{Adaptive State-Space Models.}
 
 In state-space modeling, the Kalman filter provides a principled way to handle
 non-stationary Gaussian processes with drifting mean and covariance. More
@@ -129,25 +149,34 @@ discrete changes in underlying system dynamics. For nonlinear, non-Gaussian
 signals, particle filters approximate the posterior distribution through
 sequential sampling. Bayesian online learning techniques offer a general
 framework for continually updating model parameters as new data arrive.
+%
+Using these techniques we will build models that robustly infer kinematics
+over months.
 
-\paragraph{Concept Drift in Machine Learning.}  
+\begin{comment}
+
+\paragraph{Concept Drift in Machine Learning.}
 
 In the machine learning literature, non-stationarity is often studied under the
 framework of \emph{concept drift}~\citep{conceptdriftReview}, which refers to
-shifts in the joint distribution of inputs and outputs over time. Unlike
-adaptive signal processing, many concept drift techniques are model-agnostic
-and can be layered on top of various learning architectures. Drift may be
-sudden, gradual, or cyclical (e.g., re-emergence of behavioral patterns linked
-to circadian modulation). Effective strategies involve drift detection followed
-by targeted model updates or retraining. Ensemble approaches can also be used
-to mitigate drift by weighting component models according to recent predictive
-accuracy.
-
-Although many concept drift methods have been developed for supervised
-learning, unsupervised extensions exist, including drift detection via
-clustering evolution, density monitoring, or changes in autoencoder
-reconstruction loss. These tools are particularly relevant in our setting,
-where labeled data may be sparse or unavailable.
+shifts in the joint distribution of inputs and outputs over time.
+%
+Drift may be sudden, gradual, or cyclical (e.g., re-emergence of behavioral
+patterns linked to circadian modulation).
+%
+Techniques for handling concept drift fall into several broad categories: (1)
+detection methods, which monitor for significant distributional changes; (2)
+adaptation methods, which adjust models incrementally using sliding windows,
+online learning, or ensemble updates; and (3) forgetting mechanisms, which
+allow models to "forget" outdated information while retaining relevant past
+knowledge.
+%
+We will use techniques from concept drift for models that do not fall in the
+previous categories (i.e.; they are not linear models, artificial neural
+network models or state-space models).
+%
+For instance, we will use these techniques to build \href{RPM}s to estimate
+joint behavioral and neural latents across months.
 
 In summary, robust modeling of NaLoDuCo datasets demands tools that adapt
 continuously to changing data distributions. Our offline analysis framework
@@ -155,7 +184,37 @@ will incorporate both well-established adaptive algorithms and cutting-edge
 methods from continual learning and concept drift research to address this
 fundamental challenge.
 
-\subsubsection*{Computational efficiency}
+\end{comment}
+
+\paragraph{Concept Drift in Machine Learning.}
+
+In the machine learning literature, non-stationarity is often framed under the
+concept of \emph{concept drift}~\citep{conceptdriftReview}, which refers to
+changes in the joint distribution of inputs and outputs over time. Such drift
+can take various forms—sudden, gradual, or cyclical (e.g., re-emergence of
+behavioral patterns linked to circadian or ultradian rhythms).
+
+Techniques for handling concept drift generally fall into three categories: (1)
+\emph{detection methods}, which monitor for significant changes in data
+distribution; (2) \emph{adaptation methods}, which incrementally update models
+using strategies such as sliding windows, online learning, or ensemble-based
+approaches; and (3) \emph{forgetting mechanisms}, which allow models to discard
+outdated information while retaining relevant past knowledge.
+
+We will apply techniques from the concept drift literature to models that fall
+outside our primary categories of focus (e.g., linear models, artificial neural
+networks, and state-space models). In particular, we will explore their use in
+building
+\href{https://github.com/gatsby-sahani/rpm-aistats-2023}{Recognition-Parametrized
+Models (RPMs)} to estimate joint behavioral and neural latent variables over
+timescales of weeks to months.
+
+In summary, robust analysis of NaLoDuCo datasets requires models that
+continuously adapt to evolving data distributions. Our offline analysis
+framework will integrate both established adaptive algorithms and cutting-edge
+methods from continual learning and concept drift to meet this challenge.
+
+\subsubsubsection{Computational efficiency}
 
 Neural and behavioral data analysis is most effective when computations are
 performed quickly, ideally in real time. Slow computations discourage data
@@ -185,50 +244,52 @@ Distributed computing allows to split workload across multiple machines,
 overcoming memory and computational limitations. It is particularly useful for
 scaling to massive datasets (e.g., long-term time series recordings).
 
-\begin{comment}
-
 For distributed computing to deliver substantial speed improvements,
 computations must be decomposable into independent parallel tasks. Due to their
 serial dependencies, time series models are difficult to decomposed in this
 manner.
-%
-Still, time series models can benefit from distributed computing
-infrastructures.
 
-While not
-all algorithms naturally support such decomposition, in machine learning
-distributed computing remains valuable even for non-parallelizable algorithms.
-For instance, it enables efficient hyperparameter optimization, where multiple
-algorithm configurations can be tested in parallel, significantly reducing
-overall runtime.
+Still, time series models can benefit from distributed computing
+infrastructures, as many parts of time series pipelines are parallelizable,
+like preprocessing steps (e.g., filtering, feature extraction, normalization)
+or parallel model evaluation across hyperparameter sweeps.
+
+In addtion,  when datasets are too large to fit in memory, distributed
+computing (e.g., with Ray, Dask, or Spark) can Distribute I/O and
+preprocessing, train models in parallel on different subsets (e.g., one model
+per animal or time window) and run hyperparameter sweeps or model variants in
+parallel.
+
+Furthermore, even with serial dependencies GPU acceleration significantly
+speeds up the processing of each item in the time series, specially when large
+matrix operation are involved.
 
 % distributed computing for time series models
 
 % parallel version of the Kalman filter
 
-\end{comment}
+We will develop accelerated implementations of all methods in the library.
+These implementations will use \href{https://docs.jax.dev/}{JAX} for model
+learning, inference, and numerical computation,
+\href{https://spark.apache.org/}{Apache Spark} or
+\href{https://www.dask.org/}{Dask} to distribute pre-processing and feature
+extraction, and \href{https://docs.ray.io/}{Ray} to distribute machine learning
+and deep learning functionality.
 
-We will develop accelerated implementations of all methods in the library of
-methods to process NaLoDuCo experimental data
-(Section~\ref{sec:offlineAnalysisMethods}). These implementations will use
-JAX\footnote{\url{https://docs.jax.dev/}} for model learning, inference, and numerical computation, Apache
-Spark\footnote{\url{https://spark.apache.org/}} or
-Dask\footnote{\url{https://www.dask.org/}} to distribute pre-processing and
-feature extraction, and Ray\footnote{\url{https://docs.ray.io/}} to distribute
-machine learning and deep learning functionality.
-
-Thunder~\cite{} is a library developed in 2014 to accelerate the analysis of
-large scale neural data. It was pioneering by introducing the use of
-distributed computing in neural data analysis.
+Related to this item is the library
+\href{Thunder}{https://github.com/thunder-project/thunder}, which accelerate the
+analysis of large scale neural data. It was pioneering by introducing the use
+of distributed computing in neural data analysis.
 %
-Our library is different from Thunder in that, besides analyzing large scale
-neural data, it processes continual recordings, and needs to overcome
-non-stationarity problems.
+Our library is different from
+\href{Thunder}{https://github.com/thunder-project/thunder} in that, besides
+analyzing large scale neural data, it processes continual recordings, and needs
+to overcome non-stationarity problems.
 %
-In addition, it includes methods to characterize behavior, while
-Thunder focuses on neural activity.
+In addition, it includes methods to characterize behavior, while Thunder
+focuses on neural activity.
 %
-Finally, Thunder implements simpler methods assuming independent and
-identically distributed data, while our library contains more sophisticated
-time series ones.
+Furthermore, \href{Thunder}{https://github.com/thunder-project/thunder}
+implements simpler methods assuming independent and identically distributed
+data, while our library contains more sophisticated time series ones.
 

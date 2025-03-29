@@ -1,0 +1,167 @@
+Visualizations are essential for extracting insight from any dataset.
+%
+Given the scale of NaLoDuCo datasets, downloading them locally is impractical.
+Therefore, visualization methods must operate where the data resides—either in
+the cloud or on institutional compute clusters.
+
+We will develop visualization functionality for both continuous datasets
+(Section~\ref{sec:visContinuous}) and epoched datasets, where epochs are
+anchored around events identified by advanced machine learning methods
+(Section~\ref{sec:visEpoched}).
+
+\subsubsubsection{Continuous Visualizations}
+\label{sec:visContinuous}
+
+Continuous visualizations will enable users to seamlessly explore large-scale
+behavioral and neural datasets spanning weeks to months. Users should be able
+to fluidly zoom out to gain a high-level overview (e.g., across an entire
+month) and zoom in to inspect millisecond-level detail. Our goal is to provide
+an interactive experience analogous to Google Maps—where one can zoom from a
+global perspective down to individual buildings—with time series data.
+
+To achieve this, we will employ a combination of tiling, hierarchical storage,
+and streaming techniques:
+
+\paragraph{Multi-Resolution Tiling.}
+\begin{itemize}
+          \item Large volumetric and time series datasets will be preprocessed
+              into tiles at multiple spatial and temporal resolutions.
+                \item When the user zooms into a specific time or spatial
+                    window, only the relevant tiles at the appropriate
+                    resolution will be rendered, minimizing latency and
+                    resource use.
+\end{itemize}
+
+\paragraph{Hierarchical Storage.}
+\begin{itemize}
+          \item Data will be organized using hierarchical file formats (e.g.,
+              Zarr, HDF5) that support chunked access and multi-resolution
+              storage.
+                \item These formats allow efficient random access to specific
+                    subsets of data and integration with modern data
+                    infrastructure.
+\end{itemize}
+
+\paragraph{On-Demand Streaming.}
+\begin{itemize}
+          \item Visualizations will stream data dynamically based on the user’s
+              current view, leveraging cloud infrastructure to deliver data at
+              the required resolution and scale.
+                \item We will develop custom APIs for real-time access and
+                    transformation of neural and behavioral data streams.
+\end{itemize}
+
+\subsubsubsection{Epoched and Interactive Visual Analytics}
+\label{sec:visEpochedInteractive}
+
+A key strength of our platform is its support for \textbf{epoched visualization and interactive, closed-loop visual analytics}, which together enable the discovery and refinement of neural and behavioral patterns in long-duration datasets.
+
+Epoched visualizations are essential for analyzing data around events of interest—such as decision points, sensory cues, or machine learning-inferred transitions. These visualizations will support:
+\begin{itemize}
+  \item Grouping trials or epochs by event type, time of day, or machine learning-inferred state
+  \item Overlaying neural, behavioral, and environmental variables aligned to key event markers
+  \item Flexible sorting and filtering of epochs to uncover context-dependent patterns
+\end{itemize}
+
+We will implement interactive interfaces that allow researchers to define, explore, and compare arbitrary epoch-based segments. These will support exploratory data analysis as well as hypothesis-driven comparisons across conditions, individuals, and time periods.
+
+\paragraph{Machine Learning-Defined Events.}
+A core feature of our system will be the ability to align epochs not just to experimenter-defined events, but also to latent state transitions inferred via unsupervised methods (e.g., hidden Markov models, behavioral clustering, inverse reinforcement learning). This will support deeper investigation into emergent patterns in long-duration, naturalistic behavior.
+
+\paragraph{Closed-Loop Analytics.}
+There will be a \emph{closed-loop interaction} between visualizations and machine learning algorithms: algorithmic outputs will generate new visualizations, and visual insights will guide further machine learning analysis, forming an iterative discovery cycle. This process allows the visualization platform to function not just as a display tool, but as a central component in data-driven scientific inquiry.
+
+In this loop:
+\begin{itemize}
+  \item \textbf{Machine learning algorithms} extract latent states, classify behaviors, infer structure, or forecast dynamics from NaLoDuCo data.
+  \item These outputs feed into the visualization engine to generate novel views (e.g., state-aligned rasters, dynamic embeddings, attention maps).
+  \item \textbf{Users explore these visualizations interactively}, discovering unexpected, task-agnostic, or contextual patterns.
+  \item New queries and insights drive further rounds of machine learning analysis—closing the loop.
+\end{itemize}
+
+This design enables researchers to co-develop computational models and scientific hypotheses iteratively, with human insight and machine inference deeply intertwined.
+
+\subsubsubsection{Software Stack for Interactive Visualizations}
+\label{sec:visSoftwareStack}
+
+To support scalable, cloud-based, and interactive visualization of NaLoDuCo
+datasets, we will develop our system using a modern and modular software stack
+optimized for high performance, extensibility, and ease of integration with
+existing neuroscience infrastructure.
+
+\paragraph{Frontend (User Interface).}
+\begin{itemize}
+          \item \textbf{React.js} will serve as the primary framework for
+              building a dynamic, modular, and responsive web-based interface.
+                \item Visualization components will leverage libraries such as
+                    \textbf{D3.js}, \textbf{Plotly}, and \textbf{Deck.gl} to
+                    render interactive time series, raster plots, and
+                    behavioral trajectories at scale.
+                      \item For GPU-accelerated rendering of large datasets, we
+                          will use \textbf{WebGL} and related technologies such
+                          as \textbf{regl} or \textbf{Three.js}.
+\end{itemize}
+
+\paragraph{Backend (Computation and Data Services).}
+\begin{itemize}
+          \item The backend will be written in \textbf{Python}, using
+              \textbf{FastAPI} or \textbf{Flask} to serve data and model
+              outputs to the frontend.
+                \item Time series pre-processing, tiling, and downsampling will
+                    be handled via \textbf{NumPy}, \textbf{Xarray}, and
+                    \textbf{Dask} to enable scalable, distributed processing.
+                      \item For storage, we will use chunked, cloud-native
+                          formats such as \textbf{Zarr} and \textbf{HDF5},
+                          which allow efficient retrieval and hierarchical
+                          access to long-duration recordings.
+                            \item Machine learning integration will rely on
+                                \textbf{PyTorch}, \textbf{scikit-learn}, and
+                                model serving frameworks such as
+                                \textbf{TorchServe} or \textbf{ONNX Runtime}.
+\end{itemize}
+
+\paragraph{Cloud Infrastructure.}
+\begin{itemize}
+          \item The system will be deployable on commercial or academic cloud
+              platforms (e.g., AWS, GCP, or institutional clusters).
+                \item For orchestration of services, we will use
+                    \textbf{Kubernetes}, enabling auto-scaling and distributed
+                    deployment of visualization and ML services.
+                      \item \textbf{Docker} containers will ensure
+                          reproducibility and portability across environments.
+                            \item The visualization system will integrate
+                                directly with the \textbf{DANDI Archive} for
+                                cloud-native access to neurophysiology data.
+\end{itemize}
+
+\paragraph{Data Interoperability.}
+\begin{itemize}
+          \item All tools will be compatible with \textbf{Neurodata Without
+              Borders (NWB)} and follow FAIR data principles.
+                \item The system will expose APIs for programmatic access to
+                    raw and derived data, enabling integration with existing
+                    tools like \textbf{Bonsai}, \textbf{CaImAn}, or
+                    \textbf{napari}.
+\end{itemize}
+
+This software stack ensures that our visualization tools will be performant,
+scalable, and usable across a wide range of environments, from local lab
+systems to cloud-based scientific platforms.
+
+\subsubsubsection{Deliverables}
+
+\begin{enumerate}
+
+    \item visualisations for continuous behavioural and neural recording
+
+    \item visualisations for epoched behavioural and neural recording
+
+    \item visualisations for model outputs
+
+    \item indexing system to support intelligent visualisations
+
+    \item deployment of the above items to allow users to visualise NaLoDuCo
+        DANDI datasets on the cloud
+
+\end{enumerate}
+

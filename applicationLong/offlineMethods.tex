@@ -7,9 +7,9 @@ methodological gap that must be addressed in order to unlock the scientific
 potential of NaLoDuCo experiments.
 
 To bridge this gap, we will develop and disseminate a software library
-containing new implementations of existing machine learning methods
-specifically tailored to: (1) operate effectively under \textbf{non-stationary}
-conditions, and (2) scale to \textbf{very long time series}.
+containing new implementations of machine learning methods specifically
+tailored to: (1) operate effectively under \textbf{non-stationary} conditions,
+and (2) scale to \textbf{very long time series}.
 
 \subsubsubsection{Initial List of Methods to Include in the Library}
 \label{sec:initialListOfMethods}
@@ -19,7 +19,8 @@ already in use at the GCNU, SWC, and AIND to analyze neural and behavioral time
 series from NaLoDuCo foraging and olfactory learning experiments in mice. These
 methods span multiple domains—kinematics, neural dynamics, behavioral state
 segmentation, forecasting, and joint modeling—and are designed to work together
-within an integrated analysis pipeline.
+within an integrated analysis pipeline. We described these methods below and
+summarise them in Table~\ref{table:initialMethodsToDisseminate}.
 
 \vspace{1em}
 \noindent\textbf{Behavioral Analysis:}  
@@ -91,6 +92,50 @@ state-of-the-art contrastive learning framework designed for multimodal
 representation learning, to discover temporally and semantically aligned
 neural-behavioral structure.
 
+\begin{table}
+    \caption{Initial data analysis methods to disseminate}
+    \label{table:initialMethodsToDisseminate}
+    \begin{longtable}{|p{1.9cm}|p{3cm}|p{2.5cm}|p{4.5cm}|}
+        \hline
+        \textbf{Domain} & \textbf{Functionality} & \textbf{Method} & \textbf{Model Type} \\
+        \hline\hline
+        behaviour & multi-body-part tracking & SLEAP & deep neural network \\
+        \hline
+        behaviour & kinematics inference & LDS & linear dynamical system \\
+        \hline
+        behaviour & kinematics inference & LDS & particle filter \\
+        \hline
+        behaviour & state inference & SSM & hidden Markov model \\
+        \hline
+        behaviour & regression &  & generalized linear model \\
+        \hline
+        behaviour & regression &  & deep neural network \\
+        \hline
+        behaviour & policy inference & L(M)V-IQL & reinforcement learning \\
+        \hline
+        behaviour & long-duration forecasting &  & RNN \\
+        \hline
+        behaviour & long-duration forecasting &  & transformers \\
+        \hline\hline
+        brain & latents inference & svGPFA & Gaussian processes \\
+        \hline
+        brain & latents inference & LFADS & RNN \\
+        \hline
+        brain & state inference & SSM & hidden Markov model \\
+        \hline
+        brain & long-duration forecasting &  & RNN \\
+        \hline
+        brain & long-duration forecasting &  & transformers \\
+        \hline
+        brain & decoding & NA & point-process decoder \\
+        \hline\hline
+        brain \& behaviour & latents inference & RPM & Bayesian inference + deep neural network \\
+        \hline
+        brain \& behaviour & latents inference & CEBRA & contrastive learning \\
+        \hline
+    \end{longtable}
+\end{table}
+
 \subsubsubsection{Non-stationarity}
 
 Many conventional methods for analyzing neural and behavioral time series
@@ -153,46 +198,13 @@ framework for continually updating model parameters as new data arrive.
 Using these techniques we will build models that robustly infer kinematics
 over months.
 
-\begin{comment}
-
-\paragraph{Concept Drift in Machine Learning.}
-
-In the machine learning literature, non-stationarity is often studied under the
-framework of \emph{concept drift}~\citep{conceptdriftReview}, which refers to
-shifts in the joint distribution of inputs and outputs over time.
-%
-Drift may be sudden, gradual, or cyclical (e.g., re-emergence of behavioral
-patterns linked to circadian modulation).
-%
-Techniques for handling concept drift fall into several broad categories: (1)
-detection methods, which monitor for significant distributional changes; (2)
-adaptation methods, which adjust models incrementally using sliding windows,
-online learning, or ensemble updates; and (3) forgetting mechanisms, which
-allow models to "forget" outdated information while retaining relevant past
-knowledge.
-%
-We will use techniques from concept drift for models that do not fall in the
-previous categories (i.e.; they are not linear models, artificial neural
-network models or state-space models).
-%
-For instance, we will use these techniques to build \href{RPM}s to estimate
-joint behavioral and neural latents across months.
-
-In summary, robust modeling of NaLoDuCo datasets demands tools that adapt
-continuously to changing data distributions. Our offline analysis framework
-will incorporate both well-established adaptive algorithms and cutting-edge
-methods from continual learning and concept drift research to address this
-fundamental challenge.
-
-\end{comment}
-
 \paragraph{Concept Drift in Machine Learning.}
 
 In the machine learning literature, non-stationarity is often framed under the
-concept of \emph{concept drift}~\citep{conceptdriftReview}, which refers to
-changes in the joint distribution of inputs and outputs over time. Such drift
-can take various forms—sudden, gradual, or cyclical (e.g., re-emergence of
-behavioral patterns linked to circadian or ultradian rhythms).
+concept of \emph{concept drift}, which refers to changes in the joint
+distribution of inputs and outputs over time. Such drift can take various
+forms—sudden, gradual, or cyclical (e.g., re-emergence of behavioral patterns
+linked to circadian or ultradian rhythms).
 
 Techniques for handling concept drift generally fall into three categories: (1)
 \emph{detection methods}, which monitor for significant changes in data
@@ -202,7 +214,7 @@ approaches; and (3) \emph{forgetting mechanisms}, which allow models to discard
 outdated information while retaining relevant past knowledge.
 
 We will apply techniques from the concept drift literature to models that fall
-outside our primary categories of focus (e.g., linear models, artificial neural
+outside the previous categories of focus (e.g., linear models, artificial neural
 networks, and state-space models). In particular, we will explore their use in
 building
 \href{https://github.com/gatsby-sahani/rpm-aistats-2023}{Recognition-Parametrized
@@ -233,33 +245,33 @@ Units (GPUs) to accelerate computational tasks. Unlike traditional Central
 Processing Units (CPUs), which execute a few complex operations sequentially,
 GPUs consist of thousands of smaller cores optimized for executing many
 operations simultaneously.
-
-Distributed and GPU computing address different bottlenecks in large-scale
-computation. GPUs are highly efficient at parallelizing operations within a
-single machine. They excel at matrix operations and batch processing. However,
-GPUs are limited by memory and cannot scale indefinitely when dealing with huge
-datasets that exceed the GPU memory.
+%
+% Distributed and GPU computing address different bottlenecks in large-scale
+% computation. GPUs are highly efficient at parallelizing operations within a
+% single machine. They excel at matrix operations and batch processing. However,
+% GPUs are limited by memory and cannot scale indefinitely when dealing with huge
+% datasets that exceed the GPU memory.
 %
 Distributed computing allows to split workload across multiple machines,
 overcoming memory and computational limitations. It is particularly useful for
-scaling to massive datasets (e.g., long-term time series recordings).
+scaling to massive datasets.
 
 For distributed computing to deliver substantial speed improvements,
 computations must be decomposable into independent parallel tasks. Due to their
 serial dependencies, time series models are difficult to decomposed in this
 manner.
-
+%
 Still, time series models can benefit from distributed computing
 infrastructures, as many parts of time series pipelines are parallelizable,
 like preprocessing steps (e.g., filtering, feature extraction, normalization)
 or parallel model evaluation across hyperparameter sweeps.
-
+%
 In addtion,  when datasets are too large to fit in memory, distributed
 computing (e.g., with Ray, Dask, or Spark) can Distribute I/O and
 preprocessing, train models in parallel on different subsets (e.g., one model
 per animal or time window) and run hyperparameter sweeps or model variants in
 parallel.
-
+%
 Furthermore, even with serial dependencies GPU acceleration significantly
 speeds up the processing of each item in the time series, specially when large
 matrix operation are involved.
@@ -277,19 +289,37 @@ extraction, and \href{https://docs.ray.io/}{Ray} to distribute machine learning
 and deep learning functionality.
 
 Related to this item is the library
-\href{Thunder}{https://github.com/thunder-project/thunder}, which accelerate the
+\href{https://github.com/thunder-project/thunder}{Thunder}, which accelerate the
 analysis of large scale neural data. It was pioneering by introducing the use
 of distributed computing in neural data analysis.
 %
 Our library is different from
-\href{Thunder}{https://github.com/thunder-project/thunder} in that, besides
+\href{https://github.com/thunder-project/thunder}{Thunder} in that, besides
 analyzing large scale neural data, it processes continual recordings, and needs
 to overcome non-stationarity problems.
 %
-In addition, it includes methods to characterize behavior, while Thunder
-focuses on neural activity.
+% In addition, it includes methods to characterize behavior, while Thunder
+% focuses on neural activity.
 %
-Furthermore, \href{Thunder}{https://github.com/thunder-project/thunder}
+In addition, \href{https://github.com/thunder-project/thunder}{Thunder}
 implements simpler methods assuming independent and identically distributed
 data, while our library contains more sophisticated time series ones.
+
+\subsubsubsection{Deliverables}
+\label{sec:deliverablesOfflineAnalysis}
+
+\begin{enumerate}
+
+    \item repository containing implementations of machine learning algorithms
+        for offline processing NaLoDuCo experimental data, adapted to operate
+        in non-stationary environments, and optimized to perform at scale when
+        running on public clouds or institutional
+        high-performance-computing clusters.
+
+    \item SWC NaLoDuCo foraging dataset storred in DANDI.
+
+    \item deployment of the methods in 1 in Amazon EC2 instances, to allow
+        users to analyze on the cloud the datasets in 2.
+
+\end{enumerate}
 

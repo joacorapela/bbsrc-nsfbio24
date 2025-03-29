@@ -1,15 +1,15 @@
 digraph g {
-  methodsLib [label=<<FONT COLOR="BLACK">Methods library<br/>for processing<br/>NaLoDuCo data</FONT>>];
-  visualExploration [label=<<FONT COLOR="BLACK">intelligent<br/>visual<br/>exploration</FONT>>];
-  dataAnalysis [label=<<FONT COLOR="BLACK">data<br/>analysis</FONT>>];
-  offlineML [label=<<FONT COLOR="BLACK">offline<br/>machine<br/>learning</FONT>>];
-  offlineSpikeSorting [label=<<FONT COLOR="BLACK">offline<br/>spike<br/>sorting</FONT>>];
-  realTimeML [label=<<FONT COLOR="BLACK">real-time<br/>machine<br/>learning</FONT>>];
-  onlineSpikeSorting [label=<<FONT COLOR="BLACK">online<br/>spike<br/>sorting</FONT>>];
+  methodsLib [label=<<FONT COLOR="BLACK">Methods library<br/>for processing<br/>NaLoDuCo data</FONT>>,shape=box];
+  visualExploration [label=<<FONT COLOR="BLACK">1: intelligent<br/>visual<br/>exploration</FONT>>];
+  dataAnalysis [label=<<FONT COLOR="BLACK">data<br/>analysis</FONT>>,shape=box];
+  offlineML [label=<<FONT COLOR="BLACK">2: offline<br/>machine<br/>learning</FONT>>];
+  offlineSpikeSorting [label=<<FONT COLOR="BLACK">3: offline<br/>spike<br/>sorting</FONT>>];
+  realTimeML [label=<<FONT COLOR="BLACK">4: real-time<br/>machine<br/>learning</FONT>>];
+  onlineSpikeSorting [label=<<FONT COLOR="BLACK">5: online<br/>spike<br/>sorting</FONT>>];
 
   methodsLib -> visualExploration;
   methodsLib -> dataAnalysis;
-  visualExploration -> dataAnalysis [dir=none];
+  visualExploration -> offlineML [dir=none];
   dataAnalysis -> offlineML;
   offlineSpikeSorting -> offlineML;
   dataAnalysis -> realTimeML;

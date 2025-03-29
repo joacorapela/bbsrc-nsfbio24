@@ -1,58 +1,60 @@
-
 \subsubsection{Offline Analysis Methods}
 \label{sec:offlineAnalysisMethods}
 
-Modern neuroscience lacks robust methods to characterize \textit{long-duration
+\textbf{Modern neuroscience lacks robust methods to characterize long-duration
 and continual time series}, especially in settings where the statistical
-properties of the data evolve over time. Furthermore, few approaches are
-currently capable of performing accurate \textit{long-horizon forecasting}—over
-hours, days, or weeks—on behavioral or neural data. These limitations present a
+properties of the data evolve over time. This limitation present a
 methodological gap that must be addressed in order to unlock the scientific
 potential of NaLoDuCo experiments.
 
-To bridge this gap, we will develop and disseminate software libraries that
-implement offline analysis methods specifically tailored to: (1) operate
-effectively under \textbf{non-stationary conditions}, and (2) scale to
-\textbf{very long time series}. When existing methods prove inadequate, we will
-create new algorithms. All implementations will be optimized for
-high-throughput, distributed computation on large datasets.
+To bridge this gap, we will develop and disseminate a software library
+containing new implementations of existing machine learning methods
+specifically tailored to: (1) operate effectively under \textbf{non-stationary}
+conditions, and (2) scale to \textbf{very long time series}.
 
 \subsubsection*{Initial List of Methods to Include in the Library}
 \label{sec:initialListOfMethods}
 
-We will initially populate this library with the methods already in use at
-GCNU, SWC, and AIND to analyze neural and behavioral data in NaLoDuCo foraging
-and olfactory learning experiments in mice. These methods span multiple
-domains—kinematics, neural dynamics, behavioral state segmentation,
-forecasting, and joint modeling—and are grouped below by function.
+We will initially populate this library with new implementations of methods
+already in use at GCNU, SWC, and AIND to analyze neural and behavioral time
+series in NaLoDuCo foraging and olfactory learning experiments in mice. These
+methods span multiple domains—kinematics, neural dynamics, behavioral state
+segmentation, forecasting, and joint modeling. They are related to each other
+in the following use case.
 
 \vspace{1em}
-\noindent\textbf{Behavioral Analysis:}  
+\noindent\textbf{Behavioral Analysis:}
 The first step in behavioral analysis involves multi-body-part tracking. For
 this, we will use \textbf{deep learning-based pose estimation} methods such as
 \href{https://github.com/talmolab/sleap}{SLEAP}, which allow tracking of
-multiple unmarked mice across long durations.
+multiple unmarked mice.
 
 Next, we will infer continuous kinematic variables from these pose estimates
 using \textbf{linear dynamical systems (LDS)}, including variants based on
-particle filters (see \href{https://github.com/joacorapela/lds}{LDS}). These
-features will be used to infer discrete behavioral states with \textbf{Hidden
-Markov Models (HMMs)}, as implemented in tools such as
-\href{https://dattalab.github.io/moseq2-website/index.html}{MoSeq}.
+particle filters. These features will be used to infer discrete behavioral
+states with \textbf{Hidden Markov Models (HMMs)}, as implemented in tools such
+as \href{https://dattalab.github.io/moseq2-website/index.html}{MoSeq}.
 
 We will relate behavioral kinematics and inferred states to foraging-related
 outcomes (e.g., patch-leaving decisions) using both \textbf{generalized linear
-models (GLMs)} and \textbf{deep neural networks}. For long-horizon prediction
-of behavioral trajectories, we will implement \textbf{recurrent neural networks
-(RNNs)} and \textbf{transformer architectures}. To infer behavioral policies,
+models (GLMs)} and \textbf{deep neural networks}.
+%
+To infer behavioral policies,
 we will apply \textbf{inverse reinforcement learning} methods such as
 \href{https://github.com/haozhu10015/hiql}{HIQL}.
 
+NaLoDuCo recordings enable reliable forecasting over much longer time horizons
+than is possible with conventional, short-duration datasets.
+%
+Leveraging this unique property, we will use methods for long-horizon
+behavioral forecasting as \textbf{recurrent neural networks (RNNs)} and
+\textbf{transformer architectures}.
+
 \vspace{1em}
-\noindent\textbf{Neural Data Analysis:}  
+\noindent\textbf{Neural Data Analysis:}
 Analysis of high-density electrophysiology will begin with \textbf{latent
 variable modeling} to reduce the dimensionality of multi-electrode recordings.
-We will use both linear and nonlinear approaches, including
+We will use models with both linear and nonlinear dynamics, including
 \href{https://github.com/joacorapela/svGPFA}{svGPFA} (a Gaussian Process latent
 dynamical model) and \href{https://snel.ai/resources/lfads/}{LFADS} (a deep
 generative model based on RNNs).
@@ -69,93 +71,13 @@ naturalistic foraging, as implemented in
 \href{https://github.com/Eden-Kramer-Lab/replay_trajectory_classification}{replay\_trajectory\_classification}.
 
 \vspace{1em}
-\noindent\textbf{Joint Neural-Behavioral Modeling:}  
+\noindent\textbf{Joint Neural-Behavioral Modeling:}
 To better understand the relationships between neural and behavioral processes,
 we will develop models that extract \textbf{shared latent variables} from both
 domains. This includes
 \href{https://github.com/gatsby-sahani/rpm-aistats-2023}{Recognition-Parametrized
-Models (RPM)}, a method developed at the GCNU for joint inference from multiple
-modalities, and \href{https://cebra.ai/}{CEBRA}, a recent contrastive learning
+Models (RPM)}, a method developed at the GCNU allowing inferences of latent
+variables related to observations in highly nonlinear ways,
+and \href{https://cebra.ai/}{CEBRA}, a recent contrastive learning
 approach for multimodal representation learning.
-
-\subsubsection*{Non-stationarity}
-
-Conventional offline methods used to characterize neural time series assume
-that the statistical characteristics of the modeled data do not change with
-time (i.e., that the probability of the data is time invariant --
-stationarity). This assumption may be valid for shorter experiments. However,
-for long-duration experiments, where animals learn and adapt, where their
-motivation fluctuates, and their activity is modulated by circadian, utradiem
-and peridiem rhythms, this assumption may not hold. In nonstationary
-environments, a non-adaptive model trained under the false stationarity
-assumption is bound to become obsolete in time, and perform sub-optimally at
-best, or fail catastrophically at worst.
-%
-Below we briefly describe the type of methods we will use to adapt the
-disseminated methods to non-stationary environments.
-
-The field of adaptive signal processing develops algorithms to characterize
-non-stationary systems~\citep{haykin02}. In this field adaptations to specific
-algorithms have been developed to improve their performance in non-stationary
-environments.
-
-For example, the recursive least-squares algorithm \citep[][Chapter
-9]{haykin02} is an adaptation of the ordinary least square algorithm to perform
-\textbf{linear regression} with non-stationary data.
-
-For non-linear regression using \textbf{artificial neural networks}, a very large number
-of strategies have been developed to address data non-stationarity. To mention
-a few, continual learning has introduced algorithms like  Elastic Weight
-Consolidation~\citep[EWC][]{} and Learning Without Forgetting~\citep[LwF][]{}
-to allow models to adapt to changes over time without catastrophic forgetting.
-Also from this subfield is the Experience Replay (ER) algorithm that stores
-past data samples in a buffer and replays them alongside new data during
-training. A different type of strategy is used by ensemble methods~\citep{},
-which combine multiple models trained on different time windows to capture
-evolving data patterns.
-
-Algorithms for \textbf{state-space models}, such as the Kalman filter, perform well in
-relatively simple non-stationary environments where data exhibit a Gaussian
-distribution with time-varying mean and covariance. However, in more complex
-settings with abrupt regime shifts or structured variability, more flexible
-approaches are required.
-
-Switching state-space models, such as the switching linear dynamical system
-(SLDS) and the switching Hidden Markov model (sHMM), address discrete changes
-in system dynamics by adapting to different latent states. For tracking
-nonlinear and non-Gaussian processes, particle filters offer a powerful
-alternative by approximating posterior distributions through sequential
-sampling. Additionally, Bayesian online learning provides a principled
-framework for adapting probabilistic models to evolving data distributions,
-enabling continual adaptation in dynamic environments.
-
-% RL
-
-% concept drift
-In the machine learning literature the study of non-stationary systems is done
-under the label of \textbf{concept drift}~\citep{}, which refers to a change in
-the statistical properties of data that causes a model to perform poorly.
-%
-Differently from adaptive signal processing, most methods developed to tackle
-concept drift are model agnostic and can be used with multiple machine learning
-models.
-
-Concept drift can happen suddenly or gradually, and follow a periodic pattern
-where old concepts periodically reappear (e.g., circadian rhythm variations in
-neural firing rates). In such scenarios algorithms should remember previous
-contexts and re-instate them as soon as they reappear, overcoming catastrophic
-forgetting.
-
-A basic strategy to address concept drift is to test for data distribution
-changes in data windows and retrain or update models when changes are detected.
-Several options exist for testing for distributional changes and for performing
-model updates.
-%
-Alternatively, one could use ensemble methods that combine multiple models to
-mitigate the negative effects of drift (e.g., combine classifiers with
-different learning rates and weight them according to their accuracy.
-%
-Most concept drift methods are designed for supervised learning, but methods
-such as clustering evolution, density estimation changes, and autoencoder-based
-monitoring can detect drift without labeled data.
 

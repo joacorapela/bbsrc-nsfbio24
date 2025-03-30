@@ -1,45 +1,46 @@
-% # Context
+\subsubsubsection{Real-Time Machine Learning in Neuroscience}
 
-% ## RTML is used in many disciplines
+Real-time machine learning (RTML) is now widely used across many disciplines.
 
-Real time machine learning (RTML) is used pervasively across disciplines.
-%
-For example, in climate and environmental monitoring it is used for real-time
-flood or wildfire detection from satellite or sensor data, and for predicting
-extreme weather events using streaming radar and temperature data.
-%
-Another example is food delivery where RTML is used for predicting delivery
-time based on live traffic, restaurant queues, and historical patterns and
-dynamic route planning for drivers and shoppers.
+For example, in climate and environmental monitoring, RTML supports real-time detection of floods and wildfires using satellite and sensor data, and predicts extreme weather events from streaming radar and temperature data.
 
-% ## Despite its potential in neuroscience, it has not find many applications
+In food delivery, RTML predicts delivery times using live traffic, restaurant queues, and historical patterns, and dynamically plans optimal routes for drivers and shoppers.
 
-The potential of RTML for neuroscience experimental control is enormous.
+Despite its potential, RTML remains underutilized in neuroscience. This is surprising given its promise for next-generation experiments involving navigation, learning, and dynamic control (NaLoDuCo).
 
-Conventional neuroscience data analysis is most often performed offline. An
-experiment is performed, experimental data is saved to disk, and later data is
-analyzed without time constraints.
+\paragraph{Real-time experimental design verification.}
+Neuroscience experiments typically rely on offline analysis. These analyses often uncover flaws in data collection only after experiments are complete, requiring multiple iterations.
 
+This is impractical for long-duration experiments that span weeks or months. A better approach is to perform real-time analysis and adapt experimental protocols dynamically when issues are detected.
 
-A new form of online data analysis if possible, where data is analyzed while it
-is being collected, real-time analysis results determine how the experiment
-unfolds (e.g., what visual/auditory/odour stimuli to present to experimental
-subjects, how to guide neural modulations) and what part of the recorded data
-to save and what to discard.
+\paragraph{Intelligent neuromodulation.}
+Brain activity can be modulated optically, chemically, or electrically. Traditionally, such interventions are scheduled at fixed times or based on simple behavioral cues.
 
-% Bonsai & Bonsai.ML
+A more sophisticated method uses inferences from machine learning to guide modulation. For example, a scientist may hypothesize that a peak in a latent neural variable (derived from prefrontal cortex activity) signals a decision to forage. By estimating this latent variable online and forecasting its peak, the scientist can optogenetically inactivate the relevant neural population just before the predicted peak. If this prevents the mouse from initiating foraging, the hypothesis is supported.
 
-% Need to build adaptive implementations of real-time machine learning algorithms
+\paragraph{Intelligent data storage.}
+As NaLoDuCo experiments increase in duration and data richness, storing all raw data becomes unfeasible. Intelligent real-time data pruning becomes essential.
 
-% Approach
+For instance, in a large arena monitored by ten high-resolution cameras, it is more efficient to store footage only from the cameras actively observing the mouse. Real-time probabilistic tracking can guide this, saving all footage when tracking confidence is low, and selectively saving when confidence is high.
 
-Requirements for real time ML
-- hard time constraints
-- on pass algorithms
+\subsubsubsection{Bonsai and Bonsai.ML}
 
-% Deliverables
-%   - repository of real time ML methods for neuroscience experimental control
-%     adapted to work in non-stationary environments
-%
-%   - collaborate with scientists at the SWC and AIND to apply the RTML methods
-%     to neuroscience problems
+Bonsai is a widely used software ecosystem for experimental control in neuroscience~\citep{lopesEtAl15}.
+
+With support from the \href{https://gow.bbsrc.ukri.org/grants/AwardDetails.aspx?FundingReference=BB\%2FW019132\%2F1}{BBSRC}, we are building infrastructure for intelligent experimentation through the \href{https://bonsai-rx.org/machinelearning/}{Bonsai.ML} package.
+
+Bonsai.ML currently includes online machine learning models such as linear regression, linear dynamical systems, hidden Markov models, and Bayesian point-process decoders. In collaboration with researchers at SWC and UCL, we apply these models to neuroscience challenges including receptive field estimation, foraging behavior analysis, behavioral state inference, and hippocampal position decoding.
+
+However, Bonsai.ML models assume data stationarity, which is incompatible with NaLoDuCo experiments (see Section~\ref{sec:offlineAnalysisMethods}). We are adapting these models for non-stationary settings using techniques described in Section~\ref{sec:non-stationarity}.
+
+These new machine learning modules for real-time control in non-stationary environments will be released as part of the open-source \href{https://bonsai-rx.org/machinelearning/}{Bonsai.ML} package.
+
+At SWC and AIND, Bonsai is a core part of our experimental infrastructure. In partnership with scientists at both institutions, we will deploy these RTML methods in state-of-the-art NaLoDuCo neuroscience experiments.
+
+\subsubsubsection{Deliverables}
+
+\begin{enumerate}
+    \item A repository of real-time machine learning methods for experimental control in non-stationary environments.
+    \item Collaborative publications with SWC and AIND researchers reporting scientific findings from NaLoDuCo experiments using non-stationary Bonsai.ML methods.
+\end{enumerate}
+

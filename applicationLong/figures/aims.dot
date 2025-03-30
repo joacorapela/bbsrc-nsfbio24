@@ -1,0 +1,20 @@
+digraph g {
+  AEON [label=<<FONT COLOR="BLACK">AEON</FONT>>,shape=box];
+  visualExploration [label=<<FONT COLOR="BLACK">1: intelligent<br/>visual<br/>exploration</FONT>>];
+  dataAnalysis [label=<<FONT COLOR="BLACK">data<br/>analysis</FONT>>,shape=box];
+  offlineML [label=<<FONT COLOR="BLACK">2: offline<br/>machine<br/>learning</FONT>>];
+  offlineSpikeSorting [label=<<FONT COLOR="BLACK">3: offline<br/>spike<br/>sorting</FONT>>];
+  realTimeML [label=<<FONT COLOR="BLACK">4: real-time<br/>machine<br/>learning</FONT>>];
+  onlineSpikeSorting [label=<<FONT COLOR="BLACK">5: online<br/>spike<br/>sorting</FONT>>];
+
+  AEON -> visualExploration;
+  AEON -> dataAnalysis;
+  visualExploration -> offlineML [dir=none];
+  dataAnalysis -> offlineML;
+  offlineSpikeSorting -> offlineML;
+  dataAnalysis -> realTimeML;
+  onlineSpikeSorting -> realTimeML;
+
+  {rank=same; visualExploration; dataAnalysis;}
+  {rank=sink; offlineSpikeSorting; onlineSpikeSorting;}
+}

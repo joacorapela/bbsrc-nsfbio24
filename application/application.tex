@@ -1,10 +1,12 @@
 
 \documentclass[12pt]{article}
 
-\usepackage[numbers]{natbib}
-\usepackage{bibunits}
-% \usepackage{apalike}
+\usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{bibunits}
+\usepackage{longtable}
+\usepackage{natbib}
+\usepackage{titlesec}
 \hypersetup{
     colorlinks = true,
     linkcolor = {green},
@@ -13,12 +15,46 @@
 
 \newenvironment{instruction}{\par\color{red}}{\par}
 
+% begin add subsubsubsection
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+%\def\toclevel@paragraph{6}
+\def\toclevel@subparagraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+% end add subsubsubsection
+
 \title{Enabling Naturalistic, Long-Duration and Continual Experimentation with
 Advanced Machine Learning Methods}
 
 \begin{document}
-\defaultbibliography{longDurationExperimentation,neuroEthology,machineLearning,signalProcessing}
-\defaultbibliographystyle{plain}
+\defaultbibliography{longDurationExperimentation,neuroEthology,machineLearning,signalProcessing,bonsai}
+\defaultbibliographystyle{apalike}
 
 \section{Summary}
 
@@ -77,6 +113,69 @@ References may be included within this section.
 
 \pagebreak
 \subsection{Approach}
+
+\begin{instruction}
+
+Word limit: 3,300
+
+How are you going to deliver your proposed work?
+
+What the assessors are looking for in your response
+
+Explain how you have designed your approach so that it:
+
+\begin{enumerate}
+
+    \item is effective and appropriate to achieve your objectives
+
+    \item is feasible, and comprehensively identifies any risks to delivery and
+    how they will be managed
+
+    \item uses a clearly written and transparent methodology (if applicable)
+
+    \item summarises the previous work and describes how this will be built
+    upon and progressed (if applicable)
+
+    \item will maximise translation of outputs into outcomes and impacts
+
+    \item describes how your, and if applicable your team’s, research
+    environment (in terms of the place and relevance to the project) will
+    contribute to the success of the work
+
+\end{enumerate}
+
+You may demonstrate elements of your responses in visual form if relevant.
+
+Please make sure to check sizing and readability of the image using ‘read view’
+prior to submission. Further details are provided in the Funding Service.
+
+References may be included within this section.
+
+Within the ‘Approach’ section we also expect you to:
+
+\begin{itemize}
+
+    \item provide a detailed and comprehensive project plan including
+    milestones and timelines in the form of an embedded Gantt chart or similar
+    (please make sure to check sizing and readability of the image using ‘read
+    view’ prior to submission)
+
+\end{itemize}
+
+BBSRC’s
+\href{https://www.ukri.org/publications/bbsrc-equality-diversity-and-inclusion-action-plan/bbsrc-action-plan-for-equality-diversity-and-inclusion-in-the-biosciences-2022-to-2025/}{action
+plan for EDI} outlines our commitment to removing barriers to participation in
+our programmes, ensuring investments do not inadvertently prevent access or
+usage by individuals from minority groups, for example disabled researchers.
+
+To this end, applications should identify how accessibility and inclusiveness
+in the widest sense have been incorporated into the design of the project. For
+example, you may wish to reference relevant institutional strategies and
+policies which support equality, diversity, and inclusion as they relate to
+access to equipment and facilities and indicate how the proposed project has
+been designed and will be delivered with broad access in mind.
+
+\end{instruction}
 
 \begin{bibunit}
 \input{approach}

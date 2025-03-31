@@ -1,0 +1,110 @@
+
+Visualizations are essential  for extracting meaning from any dataset.
+
+Because NaLoDuCo datasets are so large, it is not practical to download them,
+and visualisation methods should run where the data lives, on the cloud or on
+institutional clusters.
+
+We will develop visualisation functionality for continuous
+(Section~\ref{sec:visContinuous}) and for epoched
+datasets, where the epochs could be built around events derived by advanced
+machine learning methods 
+(Section~\ref{sec:visEpoched}).
+
+\subsubsubsection{Continuous visualisations}
+\label{sec:continousVis}
+
+With continuous visualisations users will be able to seamlessly explore large
+behaviorald and neural datasets, expanding weeks to months. They should easily be able to zoom out and
+explore the data at the month level and then zoom in to visualize the data at
+the millisecond resolution. We aim at providing an experience similar to that
+obtained from Google Maps, where we can zoom back and forth from a whole world
+view to a single house view.
+
+To make this possible we will use a combination of tiling, hierarchical
+storage, and streaming techniques.
+
+\paragraph{Multi-Resolution Tiling.}
+
+- Large volumetric datasets will be preprocessed into small tiles at multiple resolutions.
+- When a user zooms in, only the necessary tiles at the appropriate resolution
+will be loaded, reducing bandwidth and memory requirements.
+
+\paragraph{Cloud and Distributed Storage}
+
+- Data will be stored in cloud object storage (e.g., AWS S3 used by DANDI) and
+networked file systems (e.g., ceph used by institutional clusters)
+
+- This allows seamless access to massive datasets without requiring local storage.
+
+\paragraph{Efficient Streaming and On-Demand Loading}
+
+- Instead of loading entire datasets into memory, the system will stream to
+cliens only the visible portion of the data.
+
+- This is similar to how Google Maps loads small sections of a map as you navigate.
+
+\paragraph{WebGL-Based Rendering}
+
+- We will use WebGL for GPU-accelerated rendering, allowing real-time visualization of high-resolution images directly in a web browser.
+
+\paragraph{Sparse Annotation Handling}
+
+- Annotations (e.g., sorted unit) will be stored in separate, compressed layers and fetched as needed.
+
+- This will reduce memory usage and speeds up interactions.
+
+\paragraph{Open Source \& API Integration}
+- The system will be open-source, meaning researchers can integrate it with their own pipelines.
+- It will support Python APIs for automated data handling and visualization.
+
+\paragraph{Related software}
+
+- Google maps
+
+- Webknossos
+
+\subsubsubsection{Intelligently epoched visualisations}
+\label{sec:intelligentlyEpochedVis}
+
+We will provide users means to visualise behavioral and neural datasets epoched
+around events of interest. For example, users will be able to visualize spikes
+counts of a given mouse, when the mouse was at a particular odor delivery port
+of the home cage, in a time range of the day (e.g., 9pm-11pm) and when its
+neural activity was in given neural state (as inferred from a hidden Markov
+model). That is, the visualisation indices will be built with spatio-temporal
+information and with information obtained by advanced data analysis methods.
+
+There will be a close loop between visualisations and data analysis. As
+described above, data analysis will shape visualisations. But also
+visualisations will demand new data analysis, that in turn will in turn
+generate new visualisations.
+
+Enabling these visualisation will require advanced indexing systems in
+high-performance databases, where each
+data item to be visualised (e.g., spike times, local field potential, subject
+position, velocity and acceleration) can be associated with a dynamically
+evolving set of features.
+
+\subsubsubsection{Related work}
+
+- a spatio-temporal indexing system is part of the current AEON platform
+
+- the AEON platform uses MySQL databases
+
+\subsubsubsection{Outputs}
+
+\begin{enumerate}
+
+    \item visualisations for continuous behavioural and neural recording
+
+    \item visualisations for epoched behavioural and neural recording
+
+    \item visualisations for model outputs
+
+    \item indexing system to support intelligent visualisations
+
+    \item deployment of the above items to allow users to visualise NaLoDuCo
+        DANDI datasets on the cloud
+
+\end{enumerate}

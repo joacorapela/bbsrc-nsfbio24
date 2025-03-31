@@ -24,3 +24,5 @@ application/bibunits/
 deliverablesPastFutureWork/deliverablesPastFutureWork.*
 !deliverablesPastFutureWork/deliverablesPastFutureWork.tex
 !deliverablesPastFutureWork/deliverablesPastFutureWork.pdf
+
+applicationLong/figures/interactiveVisualAnalytics*.*

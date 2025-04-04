@@ -1,0 +1,111 @@
+% \subsbusubsection{Challenges}
+
+Spike sorting of continuous, month-long Neuropixel recordings is challenging
+for at least four reasons.
+%
+First, neural waveforms shift gradually over days due to electrode-tissue
+movement. This problems is commonly referred as electrode drift.
+%
+Second, neuronal firing patterns, waveforms, and recording noise evolve due to
+circadian rhythms, animal state changes, and electrode aging, generating highly
+non-stationary measurements.
+%
+Third, conventional approaches to spiking require manual curation to, for
+example, decide whether to split or merge spike waveform clusters. For
+long-duration recordings manual curation is impractical, and automated
+curation methods become mandatory.
+%
+And fourth, hundreds of terabytes of raw data are difficult to handle on single
+GPUs or single computers.
+
+% \subsbusubsection{Potential solutions}
+
+To address these challenges we will attempt a multi-faceted solution.
+%
+Experimentally, we will cement recording probes to the skull of mice, as
+described in \citep[][supplementary discussion]{schnoonoverEtAl21}, to minimise
+electrode-tissue movement.
+
+Methodologically, we will use existing methods, and try to improve them, to
+tackle the problem of electrode-tissue movement and that of non-stationarity in
+neuronal measurements.
+
+Spike sorting month-long neural recordings on a single computer is a
+prohibitedly long process. To accelerate it we will use distributed and GPU
+accelerated computing.
+
+\subsubsubsection{Methods addressing electrode drift and non stationarities in NaLoDuCo recordings}
+
+Most current spike sorting methods for high-count probes, like Neuropixels
+probes, target shorter-duration experiments, of at most a few
+hours~\citep[e.g.,][]{pachitariuEtAl24}.
+%
+Most of these methods address the electrode-drift
+problem for short-duration experiments~\citep{steinmetzEtAl21}.
+
+Few methods have been developed to spike-sort recordings from long-duration
+experiments.
+%
+One such method is UnitMatch~\citep{vanBeestEtAl24}, which is designed to to
+sort spikes in long-duration, but not contiguous, recordings.
+%
+It targets the problem of stitching together spike-sorting results from shorter
+sessions, obtained using any base spike sorting method.
+%
+Using Neuropixels recordings, UnitMatch reliably tracked single neurons from
+different brain regions across weeks.
+
+Another method is FAST~\citep{dhawaleEtAl17A}, which is designed to handle
+long-duration and continual recordings. It does this by clustering spike
+waveforms over short time windows and tracing clusters centroids across time.
+This method can operate on real time. We will adapt this method for oline spike
+sorting of NaLoDuCo recordings (Section~\ref{sec:onlineSpikeSorting}).
+
+To spike sort NaLoDuCo recordings offline we will follow the approach of
+UnitMatch. We will first spike sort recording chunks of size equal to the GPU
+memory size using a base (short-duration) spike sorting method. These chunks
+will be processed in parallel across different nodes in a distributed computing
+environment.
+%
+We will then stitch the spike sorted chunks using UnitMatch.
+%
+For automatic quality control and automatic unit labeling (e.g., good, bad,
+multimunit) we will use BombCell.
+
+To implement the previous pipeline we will benchmark different spike sorting
+base methods on short sessions from (a) foraging NaLoDuCo recordings acquired
+at the SWC and (b) odour learning NaLoDuCo recordings acquired at the AIND. For
+this we will use SpikeInterface~\citep{buccinoEtAl20}.
+
+Most short-duration spike-sorting methods only address non-stationarities due to
+eletrode drift. However, in NaDoLuCo recordings display many other types of
+non-stationarities, like 
+Using the UnitMatch approach spike sorting of very long-duration recordings is
+highly parallelizable, as different recordings chunks can be sorted in parallel
+across multiple computers, and then stitched together.
+However, the continuity of NaLoDuCo recordings does not require matching units
+across experimental and methods building on this continuity should perform
+better than methods not using it.
+
+\citep{dhawaleEtAl17} developed a method to spike sort units in week-long continuous
+tetrode recordings that could be used in real time, although the authors only
+evaluated it offline.
+
+However, long-duration experiments cause small electrode drifts, over extended
+periods of time, which cannot be address with previous drift-correction methods
+for shorter recordings.
+
+\subsubsubsection{Accelerating spike sorting in NaLoDuCo recordings}
+
+\subsubsubsection{Deliverables}
+
+\begin{enumerate}
+    \item Benchmarking of offline spike sorting methods for NaLoDuCo recordings
+    \item Method to overcome other non-stationarities in NaLoDuCo recordings, different from electrode drift (see )
+    \item Web-based interface to allow users to spike sort NaLoDuCo recordings on the cloud, or in institutional computer clusters
+    \item Server side software to run spike sorting tasks in parallel using distributed computing and GPUs
+    \item New spike sorting methods
+    \item Web-based interface to allow users to view results of spike sorting, curate them and perform quality control
+
+\end{enumerate}
+

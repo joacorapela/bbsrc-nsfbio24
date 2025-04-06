@@ -15,7 +15,7 @@ We will address three key challenges:
 
 Our approach integrates experimental, statistical, and computational strategies. Experimentally, we will minimize electrode-tissue movement by cementing probes to the skull, as in \citep{schoonoverEtAl21}. Statistically, we will develop and adapt spike sorting algorithms to handle the non-stationary nature of the data. Computationally, we will distribute computation across multiple nodes and use GPU acceleration to manage scale.
 
-\subsubsubsection{Methods Addressing Non-Stationarities in NaLoDuCo Recordings}
+\subsubsubsection{Methods addressing non-stationarities in NaLoDuCo recordings}
 \label{sec:offlineMethodsNonStationarity}
 
 Current spike sorting algorithms—such as Kilosort \citep{pachitariuEtAl24}, JRClust \citep{chungEtAl17}, and SpyKING CIRCUS \citep{ygerEtAl18}—are designed primarily for recordings spanning hours, not weeks or months.
@@ -42,7 +42,7 @@ Beyond electrode drift, NaLoDuCo recordings are affected by a range of non-stati
 
 We will extend UnitMatch to incorporate detection and reconciliation of unit identity across epochs in which units disappear or change waveform shape. We will also adapt FAST for Neuropixels, incorporating spatial footprint information.
 
-\subsubsubsection{Accelerating Spike Sorting for NaLoDuCo Recordings}
+\subsubsubsection{Accelerating spike sorting for NaLoDuCo recordings}
 \label{sec:offlineMethodsScaling}
 
 To scale spike sorting to long-duration recordings, we will use both distributed and GPU-based computation.
@@ -52,7 +52,7 @@ To scale spike sorting to long-duration recordings, we will use both distributed
     \item \textbf{FAST:} Although it requires serial propagation of cluster centroids across time, its core computations can be accelerated with GPU parallelism.
 \end{itemize}
 
-\subsubsubsection{Spike Sorting on the Cloud}
+\subsubsubsection{Spike sorting on the cloud}
 \label{sec:offlineMethodsCloud}
 
 Spike sorting large datasets on individual workstations is impractical. We will develop a cloud-based interface that allows users to:
@@ -71,7 +71,7 @@ deployment of SpikeInterface \citep{buccinoEtAl20}. We will adapt this
 functionality to operate on long-duration NaLoDuCo recordings and integrate
 with visualization tools from Section~\ref{sec:visualExploration}.
 
-\subsubsubsection{Quality Control}
+\subsubsubsection{Quality control}
 \label{sec:offlineQC}
 
 % We will perform automatic quality control using \textbf{BombCell} \citep{fabreEtAl23}, which supports automated curation and unit labeling (e.g., good, noise, multiunit) from spike sorting outputs. Benchmarking of base sorters for UnitMatch will be done using SpikeInterface.

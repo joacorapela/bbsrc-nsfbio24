@@ -1,111 +1,118 @@
-% \subsbusubsection{Challenges}
+Extracting single-unit activity from raw, long-duration extracellular
+recordings presents major challenges. Continuous neural recordings over weeks
+or months, as in NaLoDuCo experiments, exhibit complex non-stationarities in
+signal properties and produce massive datasets—often hundreds of terabytes in
+size. These characteristics break many assumptions underlying conventional
+spike sorting approaches and make manual curation infeasible.
 
-Spike sorting of continuous, month-long Neuropixel recordings is challenging
-for at least four reasons.
-%
-First, neural waveforms shift gradually over days due to electrode-tissue
-movement. This problems is commonly referred as electrode drift.
-%
-Second, neuronal firing patterns, waveforms, and recording noise evolve due to
-circadian rhythms, animal state changes, and electrode aging, generating highly
-non-stationary measurements.
-%
-Third, conventional approaches to spiking require manual curation to, for
-example, decide whether to split or merge spike waveform clusters. For
-long-duration recordings manual curation is impractical, and automated
-curation methods become mandatory.
-%
-And fourth, hundreds of terabytes of raw data are difficult to handle on single
-GPUs or single computers.
+We will address three key challenges:
 
-% \subsbusubsection{Potential solutions}
+\begin{itemize}
+    \item \textbf{Non-stationarity:} Neural signals evolve over time due to electrode drift, changes in animal behavior and physiology, and plasticity in brain circuits.
+    \item \textbf{Scalability:} The massive data volumes preclude the use of standard pipelines limited to single-GPU or single-node processing.
+    \item \textbf{Automation:} Manual inspection of spike clusters becomes impractical at these scales. Fully automated and robust quality control is essential.
+\end{itemize}
 
-To address these challenges we will attempt a multi-faceted solution.
-%
-Experimentally, we will cement recording probes to the skull of mice, as
-described in \citep[][supplementary discussion]{schnoonoverEtAl21}, to minimise
-electrode-tissue movement.
+Our approach integrates experimental, statistical, and computational strategies. Experimentally, we will minimize electrode-tissue movement by cementing probes to the skull, as in \citep{schoonoverEtAl21}. Statistically, we will develop and adapt spike sorting algorithms to handle the non-stationary nature of the data. Computationally, we will distribute computation across multiple nodes and use GPU acceleration to manage scale.
 
-Methodologically, we will use existing methods, and try to improve them, to
-tackle the problem of electrode-tissue movement and that of non-stationarity in
-neuronal measurements.
+\subsubsubsection{Methods Addressing Non-Stationarities in NaLoDuCo Recordings}
+\label{sec:offlineMethodsNonStationarity}
 
-Spike sorting month-long neural recordings on a single computer is a
-prohibitedly long process. To accelerate it we will use distributed and GPU
-accelerated computing.
+Current spike sorting algorithms—such as Kilosort \citep{pachitariuEtAl24}, JRClust \citep{chungEtAl17}, and SpyKING CIRCUS \citep{ygerEtAl18}—are designed primarily for recordings spanning hours, not weeks or months.
 
-\subsubsubsection{Methods addressing electrode drift and non stationarities in NaLoDuCo recordings}
+We will evaluate two complementary spike sorting approaches for long-duration datasets:
 
-Most current spike sorting methods for high-count probes, like Neuropixels
-probes, target shorter-duration experiments, of at most a few
-hours~\citep[e.g.,][]{pachitariuEtAl24}.
-%
-Most of these methods address the electrode-drift
-problem for short-duration experiments~\citep{steinmetzEtAl21}.
+\begin{description}
+    \item[\textbf{UnitMatch}] \citep{vanBeestEtAl24} stitches together spike-sorting results from non-contiguous recording sessions. It assumes the availability of already spike-sorted short chunks, and matches units across them. However, it does not address situations in which neurons appear or disappear across time due to biological or recording variability.
+    
+    \item[\textbf{FAST}] \citep{dhawaleEtAl17} is an algorithm for continual, long-duration tetrode recordings. It clusters waveforms in short temporal windows and tracks cluster centroids over time. FAST is designed to accommodate waveform drift and changing firing rates. Although originally developed for tetrode recordings, we will adapt it for high-density Neuropixels data.
+\end{description}
 
-Few methods have been developed to spike-sort recordings from long-duration
-experiments.
-%
-One such method is UnitMatch~\citep{vanBeestEtAl24}, which is designed to to
-sort spikes in long-duration, but not contiguous, recordings.
-%
-It targets the problem of stitching together spike-sorting results from shorter
-sessions, obtained using any base spike sorting method.
-%
-Using Neuropixels recordings, UnitMatch reliably tracked single neurons from
-different brain regions across weeks.
+While UnitMatch is modular and highly parallelizable, it cannot track units that periodically disappear and reappear. FAST supports tracking across time but is computationally heavier due to its serial dependencies.
 
-Another method is FAST~\citep{dhawaleEtAl17A}, which is designed to handle
-long-duration and continual recordings. It does this by clustering spike
-waveforms over short time windows and tracing clusters centroids across time.
-This method can operate on real time. We will adapt this method for oline spike
-sorting of NaLoDuCo recordings (Section~\ref{sec:onlineSpikeSorting}).
+\paragraph{Types of Non-Stationarities in Long-Term Recordings}
+Beyond electrode drift, NaLoDuCo recordings are affected by a range of non-stationarities:
 
-To spike sort NaLoDuCo recordings offline we will follow the approach of
-UnitMatch. We will first spike sort recording chunks of size equal to the GPU
-memory size using a base (short-duration) spike sorting method. These chunks
-will be processed in parallel across different nodes in a distributed computing
-environment.
-%
-We will then stitch the spike sorted chunks using UnitMatch.
-%
-For automatic quality control and automatic unit labeling (e.g., good, bad,
-multimunit) we will use BombCell.
+\begin{itemize}
+    \item \textbf{Tissue–electrode interaction:} Over time, inflammation and gliosis can increase electrode impedance and reduce signal amplitude.
+    \item \textbf{Probe degradation:} Chronic implants may suffer from corrosion or microfractures, degrading signal quality.
+    \item \textbf{Neural plasticity:} Neurons may alter their firing properties or synaptic connections, reflecting learning or adaptation.
+    \item \textbf{Brain state fluctuations:} Transitions between behavioral states (e.g., exploration, sleep) modulate overall firing statistics and background noise.
+\end{itemize}
 
-To implement the previous pipeline we will benchmark different spike sorting
-base methods on short sessions from (a) foraging NaLoDuCo recordings acquired
-at the SWC and (b) odour learning NaLoDuCo recordings acquired at the AIND. For
-this we will use SpikeInterface~\citep{buccinoEtAl20}.
+We will extend UnitMatch to incorporate detection and reconciliation of unit identity across epochs in which units disappear or change waveform shape. We will also adapt FAST for Neuropixels, incorporating spatial footprint information.
 
-Most short-duration spike-sorting methods only address non-stationarities due to
-eletrode drift. However, in NaDoLuCo recordings display many other types of
-non-stationarities, like 
-Using the UnitMatch approach spike sorting of very long-duration recordings is
-highly parallelizable, as different recordings chunks can be sorted in parallel
-across multiple computers, and then stitched together.
-However, the continuity of NaLoDuCo recordings does not require matching units
-across experimental and methods building on this continuity should perform
-better than methods not using it.
+\subsubsubsection{Accelerating Spike Sorting for NaLoDuCo Recordings}
+\label{sec:offlineMethodsScaling}
 
-\citep{dhawaleEtAl17} developed a method to spike sort units in week-long continuous
-tetrode recordings that could be used in real time, although the authors only
-evaluated it offline.
+To scale spike sorting to long-duration recordings, we will use both distributed and GPU-based computation.
 
-However, long-duration experiments cause small electrode drifts, over extended
-periods of time, which cannot be address with previous drift-correction methods
-for shorter recordings.
+\begin{itemize}
+    \item \textbf{UnitMatch:} Chunks of data can be spike sorted in parallel across machines, then stitched together. This process is inherently scalable and highly parallelizable.
+    \item \textbf{FAST:} Although it requires serial propagation of cluster centroids across time, its core computations can be accelerated with GPU parallelism.
+\end{itemize}
 
-\subsubsubsection{Accelerating spike sorting in NaLoDuCo recordings}
+\subsubsubsection{Spike Sorting on the Cloud}
+\label{sec:offlineMethodsCloud}
+
+Spike sorting large datasets on individual workstations is impractical. We will develop a cloud-based interface that allows users to:
+
+\begin{itemize}
+    \item Upload configuration files to specify algorithms and parameters.
+    \item Launch spike sorting jobs on cloud or institutional clusters.
+    \item Monitor progress and visualize results.
+    \item Curate units and run automated quality control.
+\end{itemize}
+
+This interface will extend
+\href{https://www.youtube.com/watch?v=F652nwcdYSE&list=PLQVnU1OJzOn_mFlUL8aWQym4HfVvhlrGE&index=28&t=20s}{existing
+tools developed at AIND for short-duration experiments}, using a cloud
+deployment of SpikeInterface \citep{buccinoEtAl20}. We will adapt this
+functionality to operate on long-duration NaLoDuCo recordings and integrate
+with visualization tools from Section~\ref{sec:visualExploration}.
+
+\subsubsubsection{Quality Control}
+\label{sec:offlineQC}
+
+% We will perform automatic quality control using \textbf{BombCell} \citep{fabreEtAl23}, which supports automated curation and unit labeling (e.g., good, noise, multiunit) from spike sorting outputs. Benchmarking of base sorters for UnitMatch will be done using SpikeInterface.
+
+% \subsubsection{Extending Bombcell for Long-Duration Recordings}
+% \label{sec:extendingBombcell}
+
+Bombcell~\citep{fabreEtAl23} is a state-of-the-art tool for automatic quality control (QC) of spike sorting results. It evaluates spike clusters using a variety of metrics (e.g., waveform stability, firing rate variability, contamination) and assigns quality labels such as ``good,'' ``multiunit,'' or ``noise.'' However, Bombcell is designed for short-duration recordings, typically lasting tens of minutes to a few hours, and assumes stationarity in unit properties over the recording duration.
+
+To support quality control in NaLoDuCo recordings—continuous experiments lasting weeks to months—we will extend Bombcell in the following key directions:
+
+\paragraph{Windowed and Time-Resolved QC.}
+We will modify Bombcell to operate on time windows (e.g., 30-minute or 1-hour segments) rather than treating the entire dataset as a single session. Metrics will be computed per window, enabling dynamic tracking of unit quality over time. This approach will allow us to detect gradual quality degradation, state-dependent visibility, or abrupt changes in unit characteristics.
+
+\paragraph{Integration with Long-Term Unit Tracking.}
+In long-duration recordings, neurons may transiently disappear and reappear due to brain state fluctuations, tissue response, or probe drift. To handle such dynamics, we will integrate Bombcell QC with drift-aware unit tracking algorithms such as UnitMatch~\citep{vanBeestEtAl24} or FAST~\citep{dhawaleEtAl17}. This integration will allow us to propagate QC labels across time and summarize unit quality over its entire lifespan.
+
+\paragraph{Drift-Robust Metrics.}
+Many standard QC metrics assume relatively stable waveforms. We will adapt these metrics to account for gradual waveform drift and firing rate variability by normalizing them across windows and applying temporal smoothing. For example, amplitude stability and interspike interval violations will be recomputed in a drift-aware fashion, accommodating expected waveform evolution.
+
+\paragraph{Scalable and Distributed Computation.}
+Given the size of NaLoDuCo datasets, Bombcell will be adapted for distributed and chunk-wise processing. We will enable streaming input using chunked storage formats such as \texttt{Zarr}, and support execution on cloud and HPC clusters using frameworks like \texttt{Ray} or \texttt{Dask}. This will ensure QC remains tractable across terabyte-scale datasets.
+
+\paragraph{Longitudinal Visualization and Reporting.}
+To facilitate interpretation, we will implement new visualizations for temporal evolution of unit quality. Researchers will be able to inspect quality trends over hours to weeks, identify periods of instability, and automatically flag clusters with inconsistent or transient quality labels.
+
+\paragraph{Outputs.}
+\begin{itemize}
+    \item A modular extension of Bombcell supporting time-resolved QC across long-duration recordings.
+    \item Integration with spike sorting pipelines that perform long-term unit tracking (e.g., UnitMatch, FAST).
+    \item Scalable execution on distributed/cloud environments with support for chunked data formats.
+    \item Visual analytics dashboards summarizing unit quality dynamics over time.
+\end{itemize}
+
+These extensions will transform Bombcell into the first fully automated QC tool suitable for evaluating spike sorting performance in long-duration, continual recordings, enabling high-confidence interpretation of neural activity across days to weeks.
 
 \subsubsubsection{Deliverables}
-
 \begin{enumerate}
-    \item Benchmarking of offline spike sorting methods for NaLoDuCo recordings
-    \item Method to overcome other non-stationarities in NaLoDuCo recordings, different from electrode drift (see )
-    \item Web-based interface to allow users to spike sort NaLoDuCo recordings on the cloud, or in institutional computer clusters
-    \item Server side software to run spike sorting tasks in parallel using distributed computing and GPUs
-    \item New spike sorting methods
-    \item Web-based interface to allow users to view results of spike sorting, curate them and perform quality control
-
+    \item Robust extensions of UnitMatch and FAST adapted to Neuropixels and long-duration recordings.
+    \item Automatic unit tracking and quality control via BombCell.
+    \item Cloud-based spike sorting pipeline integrated with the AEON platform.
+    \item Distributed and GPU-accelerated implementations to ensure scalability.
 \end{enumerate}
 

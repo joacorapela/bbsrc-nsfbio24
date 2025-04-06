@@ -21,6 +21,8 @@ loi/old/*
 
 application/bibunits/
 
+applicationLong/application.pdf
+
 deliverablesPastFutureWork/deliverablesPastFutureWork.*
 !deliverablesPastFutureWork/deliverablesPastFutureWork.tex
 !deliverablesPastFutureWork/deliverablesPastFutureWork.pdf

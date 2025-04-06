@@ -1,0 +1,300 @@
+
+Extracting single-unit spiking activity from raw extracellular recordings
+collected continuously over weeks to months presents substantial technical
+challenges for which no fully adequate solutions currently exist.
+
+First, neural waveforms undergo gradual shifts over time due to movement
+between the electrode and brain tissue—a phenomenon commonly referred to as
+electrode drift. In addition, neuronal firing pattens, spike waveform
+shapes, and recording noise evolve over time due to circadian rhythms,
+changes in animal state, and electrode degradation, resulting in
+highly non-stationary signals.
+
+Second, traditional spike sorting pipelines typically rely on manual
+curation, such as deciding whether to split or merge spike waveform clusters.
+While feasible for short recordings, manual curation becomes impractical for
+long-duration datasets, making the development and deployment of robust
+automated quality control and curation tools essential.
+
+Third, the scale of the data poses serious computational constraints. NaLoDuCo recordings can reach hundreds of terabytes per experiment, which cannot be efficiently processed on a single GPU or workstation using conventional approaches.
+
+To address these challenges, we propose a multi-pronged strategy:
+
+\begin{itemize}
+
+	\item \textbf{Experimentally}, we will minimize electrode-tissue movement
+by rigidly affixing Neuropixels probes to the skull, following techniques
+described in \citet[][Supplementary Discussion]{schoonoverEtAl21}.
+
+	\item \textbf{Statistically}, we will extend existing spike sorting
+algorithms and, where needed, develop new methods specifically designed to
+handle the non-stationarity inherent in long-term neural recordings.
+
+	\item \textbf{Computationally}, we will leverage distributed and
+GPU-accelerated computing to scale spike sorting to datasets spanning weeks or
+months. Sorting these recordings on a single machine would be prohibitively
+slow; distributed infrastructure will enable timely and scalable processing.
+
+\end{itemize}
+
+\begin{comment}
+% \subsbusubsection{Challenges}
+
+
+Extracting single-unit spiking activity from raw data collected over weeks and
+months of continuous extracellular recordings presents significant challenges
+for which there is currently no adequate solution.
+%
+First, neural waveforms shift gradually over days due to electrode-tissue
+movement. This problems is commonly referred as electrode drift.
+%
+Also, neuronal firing patterns, waveforms, and recording noise evolve due to
+circadian rhythms, animal state changes, and electrode aging, generating highly
+non-stationary measurements.
+%
+Second, conventional approaches to spiking require manual curation to, for
+example, decide whether to split or merge spike waveform clusters. For
+long-duration recordings manual curation is impractical, and automated curation
+methods become mandatory.
+%
+And third, hundreds of terabytes of raw data are difficult to handle on single
+GPUs or single computers.
+
+% \subsbusubsection{Potential solutions}
+
+To address these challenges we will attempt a multi-faceted solution.
+%
+Experimentally, we will cement recording probes to the skull of mice, as
+described in \citet[][supplementary discussion]{schoonoverEtAl21}, to minimise
+electrode-tissue movement.
+%
+Statistically, we will extend existing methods and, if necessary, develop
+new ones to tackle the problem of non-stationarities in neuronal measurements.
+%
+Computationally, spike sorting month-long neural recordings on a single computer is a
+prohibitedly long process. To accelerate it we will use distributed and GPU
+accelerated computing.
+
+\end{comment}
+
+\subsubsubsection{Methods for Addressing Non-Stationarities in NaLoDuCo Recordings}
+
+Most existing spike sorting methods for high-density probes, such as
+Neuropixels, are optimized for short-duration recordings, typically spanning
+only a few hours~\citep{pachitariuEtAl24,chungEtAl17,ygerEtAl18}. These methods
+primarily address short-timescale electrode drift, often assuming a relatively
+stable recording environment~\citep{steinmetzEtAl21}.
+
+Only a few methods have been developed to handle the unique challenges posed by
+long-duration spike sorting. Two notable approaches are:
+
+\paragraph{UnitMatch~\citep{vanBeestEtAl24}.}  
+UnitMatch is designed to stitch together spike sorting results from temporally
+separated (non-continuous) recording sessions. It operates on the outputs of
+any base spike sorting algorithm and identifies consistent neuronal units
+across days or weeks by comparing spike templates. While highly effective at
+tracking neurons across large temporal gaps, UnitMatch was not developed to
+handle fully continuous data streams or to model dynamic appearance and
+disappearance of neuronal units.
+
+\paragraph{FAST~\citep{dhawaleEtAl17}.}  
+FAST (Feature-Assisted Spike Tracker) is designed to track neurons over
+long-duration, continuous tetrode recordings. It addresses variability in
+waveform shape, firing rate, and signal quality by clustering spikes in short
+temporal windows and linking cluster centroids across time. Though capable of
+real-time execution, FAST was evaluated only in offline mode. While promising,
+it was designed for low-channel count recordings, and adaptations are required
+to extend it to high-density probes like Neuropixels.
+
+\paragraph{Beyond Drift: Broader Non-Stationarities.}  
+Although most spike sorting methods focus on correcting for electrode drift,
+NaLoDuCo recordings exhibit many other sources of non-stationarity that must be
+addressed:
+
+\begin{description}
+
+	\item[Tissue-probe interaction:] Chronic implants can cause glial scarring
+or inflammation, which change the electrode impedance and reduce
+signal-to-noise ratios over time.
+
+	\item[Electrode degradation:] Long-term use may degrade probe quality due
+to corrosion, microfractures, or biological encapsulation, leading to reduced
+recording fidelity.
+
+	\item[Neural plasticity:] Learning and adaptation over time can change
+neuronal firing rates and patterns. Neurons may transiently disappear or
+re-emerge as circuits remodel.
+
+	\item[Brain state fluctuations:] Transitions between arousal, sleep, quiet
+wakefulness, and exploration induce global shifts in firing rate distributions
+and noise levels. These changes can suppress or enhance activity in entire
+neural populations over hours or days.
+
+\end{description}
+
+\paragraph{Our Approach.}  
+
+To address the diversity of non-stationarities in NaLoDuCo recordings, we will
+evaluate and further develop both FAST and UnitMatch:
+
+\begin{itemize}
+
+	\item \textbf{Extending UnitMatch.} While UnitMatch can track stable units
+across non-contiguous sessions, it cannot currently handle dynamic appearance
+or disappearance of units. We will extend it to address these cases, allowing
+tracking through long-term circuit reconfigurations and brain state
+transitions.
+
+	\item \textbf{Adapting FAST.} Originally designed for tetrode recordings,
+FAST will be adapted to operate on high-channel-count Neuropixels data,
+enabling robust unit tracking in continuous recordings.
+
+	\item \textbf{Automated Quality Control.} We will apply
+BombCell~\citep{fabreEtAl23} to label units (e.g., good, multi-unit, noise) and
+assess their stability and isolation automatically, minimizing the need for
+manual curation.
+
+	\item \textbf{Benchmarking Base Sorters.} For UnitMatch, we will
+systematically benchmark different underlying spike sorting algorithms (e.g.,
+Kilosort variants) using the SpikeInterface framework~\citep{buccinoEtAl20}.
+
+\end{itemize}
+
+\begin{comment}
+\subsubsubsection{Methods addressing non-stationarities in NaLoDuCo recordings}
+
+Most current spike sorting methods for high-count probes, like Neuropixels,
+target shorter-duration experiments, of at most a few
+hours~\citep{pachitariuEtAl24,chungEtAl17,ygerEtAl18}.
+%
+% Most of these methods address the electrode-drift problem for short-duration
+% experiments~\citep{steinmetzEtAl21}.
+
+Two methods have been developed to spike sort recordings from long-duration
+experiments.
+%
+First, UnitMatch~\citep{vanBeestEtAl24}, designed to
+sort spikes in long-duration, but not contiguous, recordings.
+%
+It targets the problem of stitching together spike-sorting results from shorter
+sessions, obtained using any base spike sorting method.
+%
+% Using Neuropixels recordings, UnitMatch reliably tracked single neurons from
+% different brain regions across weeks.
+%
+Second, FAST~\citep{dhawaleEtAl17}, which handles long-duration and
+continual tetrode recordings.
+%
+It addresses challenges such as significant data volume, variability in
+neuronal firing rates, and temporal changes in spike waveforms that complicate
+traditional spike-sorting methods.
+%
+It does this by clustering spike waveforms over short time windows and tracing
+clusters centroids across time. This method can operate on real time, although
+\citet{dhawaleEtAl17} only evaluated it for offline processing.
+
+Current spike-sorting methods only address non-stationarities due
+to eletrode drift. However, NaDoLuCo recordings display many other types of
+non-stationarities as
+
+\begin{description}
+
+
+    \item[Tissue-probe interaction over time:] Glial scarring or inflammation
+        can alter electrode impedance and signal amplitude, which results in
+        gradual loss or transformation of signal quality (e.g., reduced SNR).
+
+    \item[Electrode degradation or impedance change:] Over weeks to months, the
+        recording quality can degrade due to microfractures in probes,
+        corrosion, glial scarring or inflamation.
+
+    \item[Neural plasticity:] Long-term recordings capture learning,
+        adaptation, and memory. Neurons may change their firing rates and
+        Synaptic strengths. Network dynamics can change and neurons may even
+        disappear or reappear for prolonged periods of time as circuits change.
+
+    \item[Brain state fluctuations:] Awake, drowsy, sleep (REM/NREM), quiet
+        wakefulness, exploration alter spike statistics and background noise
+        levels. They can completely inhibit whole circuits and make neurons
+        dissapear or reappear for extended time intervals as brain states
+        fluctuate.
+
+\end{description}
+
+To spike sort NaLoDuCo recordings offline we will evaluate FAST and UnitMatch.
+%
+However, UnitMatch cannot address the above non-stationarities; for example, it
+cannot handle neurons that appear and dissappear periodically. We will extend
+it to do so.
+%
+And FAST was designed for tetrodes recordings, so we will adapt it to process
+recordings from Neuropixels probes.
+
+For automatic quality control and automatic unit labeling (e.g., good, bad,
+multimunit) we will use BombCell~\citep{fabreEtAl23}.
+
+For UniMatch, we will benchmark different base methods using
+SpikeInterface~\citep{buccinoEtAl20}.
+
+% Due to these non-stationarities units may dissappear and appear a few days
+% later. These dynamics are not accounted by UnitMatch and we will develop method
+% to addrss them.
+% 
+% However, the continuity of NaLoDuCo recordings does not require matching units
+% across experimental and methods building on this continuity should perform
+% better than methods not using it.
+
+% \citep{dhawaleEtAl17} developed a method to spike sort units in week-long continuous
+% tetrode recordings that could be used in real time, although the authors only
+% evaluated this method offline.
+% 
+% However, long-duration experiments cause small electrode drifts, over extended
+% periods of time, which cannot be address with previous drift-correction methods
+% for shorter recordings.
+\end{comment}
+
+
+\subsubsubsection{Accelerating spike sorting for NaLoDuCo recordings}
+
+The UnitMatch approach spike sorting of very long-duration recordings is
+highly parallelizable, as different recordings chunks can be sorted in parallel
+across multiple computers, and then stitched together.
+
+Due to its serial dependencies FAST is less parallelisable than UNitMatch.
+Still, the use of GPUs should greatly accelerate it.
+
+\subsubsubsection{Spike sorting on the cloud}
+
+Spike sorting should be done on the cloud, or in institutional clusters. For
+this we will provide a web based interface for users to specify the spike
+sorting algorithm, its parameters, initiatete the spike sorting process,
+monitor its progress, view its results, curate them and perform quality
+control.
+
+The AIND is performing all data analysis, including electrophysiological
+processing, to the cloud. For short duration experiments, it has already
+developed the above functionality, as a cloud-based implementation of
+SpikeInterface.
+%
+We will extend this functionality to operate on NaLoDuCo experimental datasets.
+This includes developing web-based visualisation tools
+spanning weeks to months. For this we will use visualisation technologies similar to those
+described in Section~\ref{sec:visContinuous}.
+
+We will develop distributed verions of sorting algorithms allow them to run at
+speed with NaLoDuCo datasets.
+
+\subsubsubsection{Deliverables}
+
+\begin{enumerate}
+    % \item Benchmarking of offline spike sorting methods for NaLoDuCo recordings
+    \item Methods to overcome non-stationarities in NaLoDuCo recordings.
+    \item Web-based interface to allow users to spike sort NaLoDuCo recordings
+        on the cloud, or in institutional computer clusters, view results of
+        spike sorting, curate them and perform quality control.
+    \item Server side software to run spike sorting tasks in parallel using
+        distributed computing and GPUs.
+    % \item New spike sorting methods
+
+\end{enumerate}
+

@@ -1,0 +1,50 @@
+
+Few methods exist today for online spike sorting with high-channel-count
+probes, as Neuropixels. However, online spike sorting is an active are of
+research and new methods may appear soon. We will evaluate online spike sorting
+methods on NaLoDuCo foraging recordings collected at the SWC and on NaLoDuCo
+odour learning recordings collected at the AIND.
+
+Two current methods to include in this comparison are
+FAST and RT-Sort.
+%
+FAST~\citep{dhawaleEtAl17}, described in Section~\ref{sec:offlineSpikeSorting},
+is a real-time spike sorting method, but its authors only used it offline. We
+will attempt an efficient implemenation suitable for real-time spike sorting.
+%
+RT-Sort~\citep{vanDerMolenEtAl24} is a real-time spike detection and
+sorting algorithm developed to enable low-latency processing of high-density
+electrophysiological recordings, such as those obtained with Neuropixels
+probes.
+
+RT-Sort operates in two stages. First, it uses a lightweight
+convolutional neural network (CNN) to continuously detect spikes in
+streaming multichannel voltage recordings.
+%
+Second, RT-Sort performs spike sorting based on the spatiotemporal
+propagation patterns of the detected spikes. Specifically, it analyzes the
+timing of voltage extrema across electrodes to characterize the propagation of
+the spike waveform through the neural tissue. These features are matched to an
+evolving library of unit templates, enabling robust and online classification
+of spikes to neurons. Templates are updated dynamically as new spikes are
+detected, allowing the system to adapt to waveform drift and changing recording
+conditions.
+%
+It also offers robustness to non-stationarities such as
+electrode drift and waveform shape changes, which are common in long-duration
+recordings.
+
+The above methods have been tested on short duration experiments. We will
+bechmark their performance in NaLoDuCo recordings and, if necessary, we will
+adapt them to efficiently process non-stationarities in NaLoDuCo
+experimentation.
+
+\subsubsubsection{Outputs}
+
+\begin{enumerate}
+
+    \item Repository with adaptions of online spike sorting methods to process
+    NaLoDuCo recordings and benchmarking of these adaptations.
+
+\end{enumerate}
+

@@ -8,12 +8,12 @@ spike sorting approaches and make manual curation infeasible.
 We will address three key challenges:
 
 \begin{itemize}
-    \item \textbf{Non-stationarity:} Neural signals evolve over time due to electrode drift, changes in animal behavior and physiology, and plasticity in brain circuits.
+    \item \textbf{Non-stationarity:} Neural signals evolve over time due to electrode drift, changes in animal behaviour and physiology, and plasticity in brain circuits.
     \item \textbf{Scalability:} The massive data volumes preclude the use of standard pipelines limited to single-GPU or single-node processing.
     \item \textbf{Automation:} Manual inspection of spike clusters becomes impractical at these scales. Fully automated and robust quality control is essential.
 \end{itemize}
 
-Our approach integrates experimental, statistical, and computational strategies. Experimentally, we will minimize electrode-tissue movement by cementing probes to the skull, as in \citep{schoonoverEtAl21}. Statistically, we will develop and adapt spike sorting algorithms to handle the non-stationary nature of the data. Computationally, we will distribute computation across multiple nodes and use GPU acceleration to manage scale.
+Our approach integrates experimental, statistical, and computational strategies. Experimentally, we will minimise electrode-tissue movement by cementing probes to the skull, as in \citep{schoonoverEtAl21}. Statistically, we will develop and adapt spike sorting algorithms to handle the non-stationary nature of the data. Computationally, we will distribute computation across multiple nodes and use GPU acceleration to manage scale.
 
 \subsubsubsection{Methods addressing non-stationarities in NaLoDuCo recordings}
 \label{sec:offlineMethodsNonStationarity}
@@ -37,7 +37,7 @@ Beyond electrode drift, NaLoDuCo recordings are affected by a range of non-stati
     \item \textbf{Tissue–electrode interaction:} Over time, inflammation and gliosis can increase electrode impedance and reduce signal amplitude.
     \item \textbf{Probe degradation:} Chronic implants may suffer from corrosion or microfractures, degrading signal quality.
     \item \textbf{Neural plasticity:} Neurons may alter their firing properties or synaptic connections, reflecting learning or adaptation.
-    \item \textbf{Brain state fluctuations:} Transitions between behavioral states (e.g., exploration, sleep) modulate overall firing statistics and background noise.
+    \item \textbf{Brain state fluctuations:} Transitions between behavioural states (e.g., exploration, sleep) modulate overall firing statistics and background noise.
 \end{itemize}
 
 We will extend UnitMatch to incorporate detection and reconciliation of unit identity across epochs in which units disappear or change waveform shape. We will also adapt FAST for Neuropixels, incorporating spatial footprint information.
@@ -60,7 +60,7 @@ Spike sorting large datasets on individual workstations is impractical. We will 
 \begin{itemize}
     \item Upload configuration files to specify algorithms and parameters.
     \item Launch spike sorting jobs on cloud or institutional clusters.
-    \item Monitor progress and visualize results.
+    \item Monitor progress and visualise results.
     \item Curate units and run automated quality control.
 \end{itemize}
 
@@ -69,7 +69,7 @@ This interface will extend
 tools developed at AIND for short-duration experiments}, using a cloud
 deployment of SpikeInterface \citep{buccinoEtAl20}. We will adapt this
 functionality to operate on long-duration NaLoDuCo recordings and integrate
-with visualization tools from Section~\ref{sec:visualExploration}.
+with visualisation tools from Section~\ref{sec:visualExploration}.
 
 \subsubsubsection{Quality control}
 \label{sec:offlineQC}
@@ -87,23 +87,23 @@ To support quality control in NaLoDuCo recordings—continuous experiments lasti
 We will modify Bombcell to operate on time windows (e.g., 30-minute or 1-hour segments) rather than treating the entire dataset as a single session. Metrics will be computed per window, enabling dynamic tracking of unit quality over time. This approach will allow us to detect gradual quality degradation, state-dependent visibility, or abrupt changes in unit characteristics.
 
 \paragraph{Integration with Long-Term Unit Tracking.}
-In long-duration recordings, neurons may transiently disappear and reappear due to brain state fluctuations, tissue response, or probe drift. To handle such dynamics, we will integrate Bombcell QC with drift-aware unit tracking algorithms such as UnitMatch~\citep{vanBeestEtAl24} or FAST~\citep{dhawaleEtAl17}. This integration will allow us to propagate QC labels across time and summarize unit quality over its entire lifespan.
+In long-duration recordings, neurons may transiently disappear and reappear due to brain state fluctuations, tissue response, or probe drift. To handle such dynamics, we will integrate Bombcell QC with drift-aware unit tracking algorithms such as UnitMatch~\citep{vanBeestEtAl24} or FAST~\citep{dhawaleEtAl17}. This integration will allow us to propagate QC labels across time and summarise unit quality over its entire lifespan.
 
 \paragraph{Drift-Robust Metrics.}
-Many standard QC metrics assume relatively stable waveforms. We will adapt these metrics to account for gradual waveform drift and firing rate variability by normalizing them across windows and applying temporal smoothing. For example, amplitude stability and interspike interval violations will be recomputed in a drift-aware fashion, accommodating expected waveform evolution.
+Many standard QC metrics assume relatively stable waveforms. We will adapt these metrics to account for gradual waveform drift and firing rate variability by normalising them across windows and applying temporal smoothing. For example, amplitude stability and interspike interval violations will be recomputed in a drift-aware fashion, accommodating expected waveform evolution.
 
 \paragraph{Scalable and Distributed Computation.}
 Given the size of NaLoDuCo datasets, Bombcell will be adapted for distributed and chunk-wise processing. We will enable streaming input using chunked storage formats such as \texttt{Zarr}, and support execution on cloud and HPC clusters using frameworks like \texttt{Ray} or \texttt{Dask}. This will ensure QC remains tractable across terabyte-scale datasets.
 
-\paragraph{Longitudinal Visualization and Reporting.}
-To facilitate interpretation, we will implement new visualizations for temporal evolution of unit quality. Researchers will be able to inspect quality trends over hours to weeks, identify periods of instability, and automatically flag clusters with inconsistent or transient quality labels.
+\paragraph{Longitudinal Visualisation and Reporting.}
+To facilitate interpretation, we will implement new visualisations for temporal evolution of unit quality. Researchers will be able to inspect quality trends over hours to weeks, identify periods of instability, and automatically flag clusters with inconsistent or transient quality labels.
 
 \paragraph{Outputs.}
 \begin{itemize}
     \item A modular extension of Bombcell supporting time-resolved QC across long-duration recordings.
     \item Integration with spike sorting pipelines that perform long-term unit tracking (e.g., UnitMatch, FAST).
     \item Scalable execution on distributed/cloud environments with support for chunked data formats.
-    \item Visual analytics dashboards summarizing unit quality dynamics over time.
+    \item Visual analytics dashboards summarising unit quality dynamics over time.
 \end{itemize}
 
 These extensions will transform Bombcell into the first fully automated QC tool suitable for evaluating spike sorting performance in long-duration, continual recordings, enabling high-confidence interpretation of neural activity across days to weeks.

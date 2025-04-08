@@ -1,9 +1,9 @@
 \subsubsubsection{Real-Time Machine Learning in Neuroscience}
 \label{sec:rtmlNeuro}
 
-Real-time machine learning (RTML) is widely used in domains such as finance, logistics, and environmental monitoring. For instance, in climate science, RTML enables real-time wildfire and flood detection from satellite imagery, as well as the forecasting of extreme weather events using live radar and sensor data. In food delivery systems, RTML is used to estimate delivery times based on traffic, kitchen load, and historical data, and to dynamically optimize dispatching routes.
+Real-time machine learning (RTML) is widely used in domains such as finance, logistics, and environmental monitoring. For instance, in climate science, RTML enables real-time wildfire and flood detection from satellite imagery, as well as the forecasting of extreme weather events using live radar and sensor data. In food delivery systems, RTML is used to estimate delivery times based on traffic, kitchen load, and historical data, and to dynamically optimise dispatching routes.
 
-Surprisingly, RTML remains underutilized in neuroscience. This represents a missed opportunity—especially in the context of NaLoDuCo experimentation—where adaptive, low-latency computation could greatly enhance experimental control and scientific discovery.
+Surprisingly, RTML remains underutilised in neuroscience. This represents a missed opportunity—especially in the context of NaLoDuCo experimentation—where adaptive, low-latency computation could greatly enhance experimental control and scientific discovery.
 
 In this project, we will develop and deploy RTML methods for a range of applications in NaLoDuCo experiments. While experimental work is not part of this grant, it will be supported by core funding at the SWC and AIND. We will contribute by developing RTML methods, and in turn benefit from access to state-of-the-art experimental platforms.
 
@@ -11,7 +11,7 @@ In this project, we will develop and deploy RTML methods for a range of applicat
 In traditional workflows, data analysis often takes place days or weeks after acquisition. As a result, design flaws or hardware issues are only detected post hoc—sometimes requiring repetition of entire experiments. This is especially problematic in NaLoDuCo settings, where experiments may last for weeks or months. RTML can address this by enabling online monitoring of experimental progress and data quality, allowing early identification of problems and adaptive, in-situ protocol adjustment.
 
 \paragraph{Intelligent Neuromodulation.}
-Neuromodulation—delivered optically, chemically, or electrically—is typically triggered by fixed schedules or simple threshold rules. RTML allows for more flexible and context-aware interventions. For example, a scientist may hypothesize that a peak in a latent variable (inferred in real time from prefrontal cortex activity) predicts the onset of a foraging decision. Using an online latent variable model, she forecasts the peak and triggers optogenetic inactivation just before it occurs. If the intervention disrupts foraging onset, the hypothesis gains causal support.
+Neuromodulation—delivered optically, chemically, or electrically—is typically triggered by fixed schedules or simple threshold rules. RTML allows for more flexible and context-aware interventions. For example, a scientist may hypothesise that a peak in a latent variable (inferred in real time from prefrontal cortex activity) predicts the onset of a foraging decision. Using an online latent variable model, she forecasts the peak and triggers optogenetic inactivation just before it occurs. If the intervention disrupts foraging onset, the hypothesis gains causal support.
 
 Such intelligent neuromodulation is critical for NaLoDuCo experiments, where internal states fluctuate significantly. Fixed stimulation regimes are often ineffective in such dynamic contexts.
 
@@ -23,7 +23,7 @@ As NaLoDuCo experiments grow in richness and duration, storing all raw data beco
 
 Bonsai is a widely adopted open-source software ecosystem for experimental control in neuroscience~\citep{lopesEtAl15}. With support from the \href{https://gow.bbsrc.ukri.org/grants/AwardDetails.aspx?FundingReference=BB\%2FW019132\%2F1}{BBSRC}, we are developing infrastructure for intelligent, closed-loop experimentation through the \href{https://bonsai-rx.org/machinelearning/}{Bonsai.ML} package.
 
-We have already integrated several real-time ML models into Bonsai.ML, including linear regression, linear dynamical systems, hidden Markov models, and Bayesian point-process decoders. In collaboration with researchers at SWC and UCL, we are applying these models to real-time inference of visual receptive fields, foraging kinematics, behavioral state classification, and spatial decoding of hippocampal spiking activity.\footnote{\url{https://bonsai-rx.org/machinelearning/examples/README.html}}
+We have already integrated several real-time ML models into Bonsai.ML, including linear regression, linear dynamical systems, hidden Markov models, and Bayesian point-process decoders. In collaboration with researchers at SWC and UCL, we are applying these models to real-time inference of visual receptive fields, foraging kinematics, behavioural state classification, and spatial decoding of hippocampal spiking activity.\footnote{\url{https://bonsai-rx.org/machinelearning/examples/README.html}}
 
 However, current Bonsai.ML models assume stationarity—a strong and often invalid assumption in NaLoDuCo contexts (see Section~\ref{sec:offlineAnalysisMethods}). We will adapt these methods to operate under non-stationary conditions using techniques described in Section~\ref{sec:non-stationarity}.
 

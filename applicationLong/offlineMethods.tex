@@ -1,6 +1,6 @@
 
 
-\textbf{Modern neuroscience lacks robust methods to characterize long-duration
+\textbf{Modern neuroscience lacks robust methods to characterise long-duration
 and continual time series}, especially in settings where the statistical
 properties of the data evolve over time. This limitation present a
 methodological gap that must be addressed in order to unlock the scientific
@@ -15,16 +15,16 @@ and (2) scale to \textbf{very long time series}.
 \label{sec:initialListOfMethods}
 
 We will initially populate this library with new implementations of methods
-already in use at the GCNU, SWC, and AIND to analyze neural and behavioral time
+already in use at the GCNU, SWC, and AIND to analyse neural and behavioural time
 series from NaLoDuCo foraging and olfactory learning experiments in mice. These
-methods span multiple domains—kinematics, neural dynamics, behavioral state
-segmentation, forecasting, and joint modeling—and are designed to work together
+methods span multiple domains—kinematics, neural dynamics, behavioural state
+segmentation, forecasting, and joint modelling—and are designed to work together
 within an integrated analysis pipeline. We described these methods below and
 summarise them in Table~\ref{table:initialMethodsToDisseminate}.
 
 \vspace{1em}
-\noindent\textbf{Behavioral Analysis:}  
-The first step in behavioral analysis involves multi-body-part tracking. For
+\noindent\textbf{Behavioural Analysis:}  
+The first step in behavioural analysis involves multi-body-part tracking. For
 this, we will use \textbf{deep learning-based pose estimation} methods such as
 \href{https://github.com/talmolab/sleap}{SLEAP}, which enable accurate and
 efficient tracking of multiple unmarked mice across long recording sessions.
@@ -32,32 +32,32 @@ efficient tracking of multiple unmarked mice across long recording sessions.
 From the tracked poses, we will infer continuous kinematic variables using
 \textbf{linear dynamical systems (LDS)}, including particle filter-based
 variants to handle uncertainty and measurement noise. These kinematic features
-will be used to infer discrete behavioral states with \textbf{Hidden Markov
+will be used to infer discrete behavioural states with \textbf{Hidden Markov
 Models (HMMs)}, as implemented in tools such as
 \href{https://dattalab.github.io/moseq2-website/index.html}{MoSeq}.
 
 We will relate these inferred states and kinematic variables to
 foraging-related outcomes—such as patch-leaving decisions—using both
-\textbf{generalized linear models (GLMs)} and \textbf{deep neural networks}.
+\textbf{generalised linear models (GLMs)} and \textbf{deep neural networks}.
 These models will allow us to capture both interpretable and high-capacity
-representations of behavioral decision-making processes.
+representations of behavioural decision-making processes.
 
-To recover the latent strategies guiding animal behavior, we will apply
+To recover the latent strategies guiding animal behaviour, we will apply
 \textbf{inverse reinforcement learning} methods such as
 \href{https://github.com/haozhu10015/hiql}{HIQL}, which estimate the underlying
 reward functions and policies based on observed actions.
 
-NaLoDuCo recordings uniquely support behavioral forecasting over extended
+NaLoDuCo recordings uniquely support behavioural forecasting over extended
 horizons—ranging from hours to days—far beyond what is feasible in conventional
-short-duration experiments. To capitalize on this, we will apply
+short-duration experiments. To capitalise on this, we will apply
 long-horizon forecasting models using \textbf{recurrent neural networks (RNNs)}
-and \textbf{transformer architectures}, which are well-suited to modeling
+and \textbf{transformer architectures}, which are well-suited to modelling
 long-range temporal dependencies.
 
 \vspace{1em}
 \noindent\textbf{Neural Data Analysis:}  
 Analysis of high-density electrophysiology will begin with \textbf{latent
-variable modeling} to reduce the dimensionality of population neural
+variable modelling} to reduce the dimensionality of population neural
 recordings. We will use both linear and nonlinear latent dynamics models,
 including \href{https://github.com/joacorapela/svGPFA}{svGPFA}, which uses
 Gaussian processes, and \href{https://snel.ai/resources/lfads/}{LFADS}, a deep
@@ -66,31 +66,31 @@ generative model based on recurrent neural networks.
 The resulting low-dimensional trajectories will be used to infer discrete
 neural states via \textbf{HMMs}, using methods such as
 \href{https://github.com/lindermanlab/ssm}{SSM}. For neural activity
-forecasting across long durations, we will again employ \textbf{RNNs} and
+forecasting across long duration, we will again employ \textbf{RNNs} and
 \textbf{transformers}, which can model complex temporal structure in spiking
 activity.
 
 We will also decode the animal’s position from hippocampal spike trains using
 \textbf{point-process decoders}, enabling the analysis of spatial coding and
-replay phenomena during naturalistic foraging behavior. We will build on
+replay phenomena during naturalistic foraging behaviour. We will build on
 existing implementations such as
 \href{https://github.com/Eden-Kramer-Lab/replay_trajectory_classification}{replay\_trajectory\_classification}.
 
 \vspace{1em}
-\noindent\textbf{Joint Neural-Behavioral Modeling:}  
-To understand the interactions between neural dynamics and behavior, we will
+\noindent\textbf{Joint Neural-Behavioural Modelling:}  
+To understand the interactions between neural dynamics and behaviour, we will
 use models that extract \textbf{shared latent representations} from both
-domains. These models will help reveal how cognitive and behavioral states are
+domains. These models will help reveal how cognitive and behavioural states are
 jointly encoded in neural activity.
 
 We will adapt
-\href{https://github.com/gatsby-sahani/rpm-aistats-2023}{Recognition-Parametrized
+\href{https://github.com/gatsby-sahani/rpm-aistats-2023}{Recognition-Parameterised
 Models (RPM)}, a Bayesian approach developed at the GCNU, which infers latent
 variables that explain multiple observation streams through highly nonlinear
 relationships. We will also use \href{https://cebra.ai/}{CEBRA}, a
 state-of-the-art contrastive learning framework designed for multimodal
 representation learning, to discover temporally and semantically aligned
-neural-behavioral structure.
+neural-behavioural structure.
 
 \begin{table}
     \caption{Initial data analysis methods to disseminate}
@@ -107,7 +107,7 @@ neural-behavioral structure.
         \hline
         behaviour & state inference & SSM & hidden Markov model \\
         \hline
-        behaviour & regression &  & generalized linear model \\
+        behaviour & regression &  & generalised linear model \\
         \hline
         behaviour & regression &  & deep neural network \\
         \hline
@@ -139,13 +139,13 @@ neural-behavioral structure.
 \subsubsubsection{Non-stationarity}
 \label{sec:non-stationarity}
 
-Many conventional methods for analyzing neural and behavioral time series
+Many conventional methods for analysing neural and behavioural time series
 assume that the underlying data-generating processes are stationary—that is,
 their statistical properties remain constant over time. While this assumption
 may be acceptable in short-duration experiments, it breaks down in
 long-duration and continual recordings. In such settings, animals
 learn and adapt, their internal states and motivations fluctuate, and their
-behavior and physiology are influenced by biological rhythms such as circadian,
+behaviour and physiology are influenced by biological rhythms such as circadian,
 ultradian, and infradian cycles. These changes induce non-stationarity in the
 data, making models that assume stationarity progressively less reliable or
 even obsolete.
@@ -158,15 +158,15 @@ processing, machine learning, and Bayesian inference.
 \paragraph{Adaptive Signal Processing.}
 
 The field of adaptive signal processing has produced robust methods for
-modeling linear systems with time-varying dynamics~\citep{haykin02}.
+modelling linear systems with time-varying dynamics~\citep{haykin02}.
 %
 The recursive least-squares (RLS) algorithm, for example, is a well-known
 adaptation of the ordinary least squares algorithm that continuously updates
 model parameters to perform linear regression under non-stationary conditions.
 %
 We will use RLS to study time-varying relations between
-behavioral states, as inferred by hidden Markov models, and foraging visit
-durations.
+behavioural states, as inferred by hidden Markov models, and foraging visit
+duration.
 
 \paragraph{Continual Learning.}
 
@@ -175,8 +175,8 @@ artificial neural networks.  In classic continual learning, a model learns a
 sequence of discrete, well-defined tasks.  But in NaLoDuCo experimentation, as
 in many real-world settings there are not specific task boundaries. So methods
 that do not require task boundaries are needed. They are studied by the
-subfield of task-free continual learning and include online
-regularization (which constrain the update of relevant weights), experience
+sub field of task-free continual learning and include online
+regularisation (which constrain the update of relevant weights), experience
 replay (which maintain a small, representative buffer of past samples) and
 ensemble methods (which combine the predictions of multiple individual models
 with, for example, different learning rates).
@@ -186,7 +186,7 @@ month-long continuous recordings.
 
 \paragraph{Adaptive State-Space Models.}
 
-In state-space modeling, the Kalman filter provides a principled way to handle
+In state-space modelling, the Kalman filter provides a principled way to handle
 non-stationary Gaussian processes with drifting mean and covariance. More
 flexible approaches are needed when data exhibit abrupt regime shifts or
 complex latent dynamics. Switching state-space models, such as Switching Linear
@@ -204,7 +204,7 @@ over months.
 In the machine learning literature, non-stationarity is often framed under the
 concept of \emph{concept drift}, which refers to changes in the joint
 distribution of inputs and outputs over time. Such drift can take various
-forms—sudden, gradual, or cyclical (e.g., re-emergence of behavioral patterns
+forms—sudden, gradual, or cyclical (e.g., re-emergence of behavioural patterns
 linked to circadian or ultradian rhythms).
 
 Techniques for handling concept drift generally fall into three categories: (1)
@@ -218,8 +218,8 @@ We will apply techniques from the concept drift literature to models that fall
 outside the previous categories of focus (e.g., linear models, artificial neural
 networks, and state-space models). In particular, we will explore their use in
 building
-\href{https://github.com/gatsby-sahani/rpm-aistats-2023}{Recognition-Parametrized
-Models (RPMs)} to estimate joint behavioral and neural latent variables over
+\href{https://github.com/gatsby-sahani/rpm-aistats-2023}{Recognition-Parameterised
+Models (RPMs)} to estimate joint behavioural and neural latent variables over
 timescales of weeks to months.
 
 In summary, robust analysis of NaLoDuCo datasets requires models that
@@ -229,7 +229,7 @@ methods from continual learning and concept drift to meet this challenge.
 
 \subsubsubsection{Computational efficiency}
 
-Neural and behavioral data analysis is most effective when computations are
+Neural and behavioural data analysis is most effective when computations are
 performed quickly, ideally in real time. Slow computations discourage data
 exploration and hinder scientific discovery. The large dataset sizes generated by
 NaLoDuCo experimentation pose a significant challenge for fast data analysis.
@@ -244,7 +244,7 @@ processing by executing multiple parts of a computation in parallel.
 GPU computing is a parallel computing approach that uses Graphics Processing
 Units (GPUs) to accelerate computational tasks. Unlike traditional Central
 Processing Units (CPUs), which execute a few complex operations sequentially,
-GPUs consist of thousands of smaller cores optimized for executing many
+GPUs consist of thousands of smaller cores optimised for executing many
 operations simultaneously.
 %
 % Distributed and GPU computing address different bottlenecks in large-scale
@@ -264,10 +264,10 @@ manner.
 %
 Still, time series models can benefit from distributed computing
 infrastructures, as many parts of time series pipelines are parallelizable,
-like preprocessing steps (e.g., filtering, feature extraction, normalization)
+like preprocessing steps (e.g., filtering, feature extraction, normalisation)
 or parallel model evaluation across hyperparameter sweeps.
 %
-In addtion,  when datasets are too large to fit in memory, distributed
+In addition,  when datasets are too large to fit in memory, distributed
 computing (e.g., with Ray, Dask, or Spark) can Distribute I/O and
 preprocessing, train models in parallel on different subsets (e.g., one model
 per animal or time window) and run hyperparameter sweeps or model variants in
@@ -296,7 +296,7 @@ of distributed computing in neural data analysis.
 %
 Our library is different from
 \href{https://github.com/thunder-project/thunder}{Thunder} in that, besides
-analyzing large scale neural data, it processes continual recordings, and needs
+analysing large scale neural data, it processes continual recordings, and needs
 to overcome non-stationarity problems.
 %
 % In addition, it includes methods to characterize behavior, while Thunder
@@ -313,15 +313,15 @@ data, while our library contains more sophisticated time series ones.
 
     \item repository containing implementations of machine learning algorithms
         for offline processing NaLoDuCo experimental data, adapted to operate
-        in non-stationary environments, and optimized to perform at scale when
+        in non-stationary environments, and optimised to perform at scale when
         running on public clouds or institutional
         high-performance-computing clusters.
 
-    \item SWC NaLoDuCo foraging datasets and AIND NaLoDuCo odor learning
+    \item SWC NaLoDuCo foraging datasets and AIND NaLoDuCo odour learning
     datasets stored in DANDI.
 
     \item deployment of the methods in 1 in Amazon EC2 instances, to allow
-        users to analyze on the cloud the datasets in 2.
+        users to analyse on the cloud the datasets in 2.
 
 \end{enumerate}
 

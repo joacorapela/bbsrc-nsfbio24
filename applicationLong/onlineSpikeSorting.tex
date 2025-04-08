@@ -1,0 +1,29 @@
+Few methods currently support online spike sorting with high-channel-count probes such as Neuropixels. Nevertheless, this is an active area of research, and new techniques are rapidly emerging. In this project, we will evaluate state-of-the-art online spike sorting algorithms on NaLoDuCo foraging datasets collected at the SWC, and on olfactory learning datasets collected at the AIND.
+
+Two key methods we will evaluate are \textbf{FAST} and \textbf{RT-Sort}.
+
+\paragraph{FAST}~\citep{dhawaleEtAl17}, described in Section~\ref{sec:offlineSpikeSorting}, was originally developed for long-term tetrode recordings. While the original implementation was evaluated offline, FAST is computationally efficient and amenable to online adaptation. We will explore the feasibility of adapting FAST to high-density probes and implementing it for real-time processing. The method clusters spikes in short time windows and links clusters across time via a chaining algorithm, enabling robust tracking of units under waveform drift and neural plasticity.
+
+\paragraph{RT-Sort}~\citep{vanDerMolenEtAl24} is a real-time spike detection and sorting algorithm developed specifically for high-density extracellular recordings. It achieves low-latency processing suitable for closed-loop applications. RT-Sort operates in two stages:
+
+\begin{itemize}
+    \item First, it uses a lightweight \textbf{convolutional neural network (CNN)} to continuously detect spikes in streaming multichannel voltage data.
+    \item Second, it performs spike sorting based on the \textbf{spatiotemporal propagation patterns} of the detected spikes. These patterns—defined by the timing of voltage extrema across channels—are compared against a dynamic library of templates, enabling robust online unit classification. Templates are updated continually as new spikes are observed, allowing the method to adapt to changes in waveform shape over time.
+\end{itemize}
+
+RT-Sort is GPU-accelerated and optimized for real-time performance, making it particularly attractive for use in NaLoDuCo experiments involving adaptive stimulation or closed-loop behavioral control.
+
+As online spike sorting will become essential for future adaptive experiments, we will benchmark these methods in terms of speed, accuracy, and robustness to non-stationarities, and integrate them into our experimental workflows when feasible.
+
+\subsubsubsection{Deliverables}
+
+\begin{enumerate}
+    \item A comprehensive benchmarking of current online spike sorting algorithms—including FAST and RT-Sort—on NaLoDuCo datasets, evaluating accuracy, latency, and robustness to non-stationarities.
+    
+    \item Adaptation and optimization of one or more online spike sorting pipelines (e.g., FAST) for real-time operation on high-density probes like Neuropixels.
+
+    \item Integration of validated online spike sorting methods into existing experimental workflows at the SWC and AIND, enabling closed-loop control and real-time experimental feedback.
+
+    \item Open-source dissemination of code and tools for real-time spike sorting, including documentation and example pipelines using NaLoDuCo data.
+\end{enumerate}
+

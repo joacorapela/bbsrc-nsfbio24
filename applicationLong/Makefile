@@ -1,8 +1,8 @@
 all: application.pdf
 
-%.pdf: %.tex vision.tex approach.tex dataAnalysis.tex offlineMethods.tex rtmlMethods.tex visualExploration.tex offlineSpikeSorting.tex onlineSpikeSorting.tex
-	pdflatex $*
+application.pdf: application.tex vision.tex approach.tex offlineMethods.tex rtmlMethods.tex visualExploration.tex offlineSpikeSorting.tex onlineSpikeSorting.tex
+	pdflatex application.tex
 	bibtex bu1
 	bibtex bu2
-	pdflatex $<
-	pdflatex $<
+	pdflatex application.tex
+	pdflatex application.tex

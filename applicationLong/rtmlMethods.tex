@@ -21,11 +21,115 @@ As NaLoDuCo experiments grow in richness and duration, storing all raw data beco
 \subsubsubsection{Bonsai and Bonsai.ML}
 \label{sec:bonsai}
 
-Bonsai is a widely adopted open-source software ecosystem for experimental control in neuroscience~\citep{lopesEtAl15}. With support from the \href{https://gow.bbsrc.ukri.org/grants/AwardDetails.aspx?FundingReference=BB\%2FW019132\%2F1}{BBSRC}, we are developing infrastructure for intelligent, closed-loop experimentation through the \href{https://bonsai-rx.org/machinelearning/}{Bonsai.ML} package.
+Bonsai is a widely adopted open-source software ecosystem for experimental control in neuroscience~\citep{lopesEtAl15}. With support from the \href{https://gow.bbsrc.ukri.org/grants/AwardDetails.aspx?FundingReference=BB\%2FW019132\%2F1}{BBSRC}, we are extending this framework through the \href{https://bonsai-rx.org/machinelearning/}{Bonsai.ML} package to support intelligent, closed-loop experimentation powered by real-time machine learning (RTML).
 
-We have already integrated several real-time ML models into Bonsai.ML, including linear regression, linear dynamical systems, hidden Markov models, and Bayesian point-process decoders. In collaboration with researchers at SWC and UCL, we are applying these models to real-time inference of visual receptive fields, foraging kinematics, behavioural state classification, and spatial decoding of hippocampal spiking activity.\footnote{\url{https://bonsai-rx.org/machinelearning/examples/README.html}}
+We have already integrated several foundational RTML models into Bonsai.ML, including linear regression, linear dynamical systems, hidden Markov models, and Bayesian point-process decoders. In collaboration with researchers at SWC and UCL, we are applying these models to real-time inference tasks, including visual receptive field estimation, foraging kinematics decoding, behavioral state classification, and spatial decoding from hippocampal spiking activity.\footnote{\url{https://bonsai-rx.org/machinelearning/examples/README.html}}
 
-However, current Bonsai.ML models assume stationarity—a strong and often invalid assumption in NaLoDuCo contexts (see Section~\ref{sec:offlineAnalysisMethods}). We will adapt these methods to operate under non-stationary conditions using techniques described in Section~\ref{sec:non-stationarity}.
+However, these existing models assume stationarity—an assumption often violated in NaLoDuCo experiments, where data distributions evolve over long time periods (see Section~\ref{sec:offlineAnalysisMethods}). We will adapt current methods to non-stationary settings using the techniques discussed in Section~\ref{sec:non-stationarity}.
+
+Linear models from adaptive signal processing, such as least mean squares and recursive least squares, are already suited for real-time use and require no major modification. Nonlinear regression, particularly using artificial neural networks (ANNs), can support real-time inference (especially on GPUs), but real-time learning is more challenging. Continual learning methods—such as experience replay and online regularization—introduce additional computational overhead (e.g., data buffering, importance weight tracking) that may exceed the constraints of real-time systems.
+
+To address these constraints, we will explore several adaptation strategies:
+
+\begin{description}
+    \item[Real-time minibatch updates:] Training is performed on small minibatches as data arrive, balancing learning speed with latency.
+    \item[Bounded-time updates:] Only a subset of model parameters (e.g., output layer weights) is updated to reduce computation time.
+    \item[Hybrid strategy:] A dual-pipeline system in which a lightweight model performs fast inference, while a slower process (running on a separate processor or node) accumulates recent data in a rolling buffer and periodically retrains or updates the model. The updated model is deployed into the fast path only after validation, ensuring continuity in inference.
+\end{description}
+
+State-space models and their adaptive variants are particularly amenable to real-time application. Nevertheless, in non-stationary contexts, these too may benefit from hybrid strategies for continuous adaptation.
+
+For more complex models, concept drift methods can be integrated into the hybrid architecture. For example, in a real-time spatial decoding task from non-stationary hippocampal signals, an ensemble of decoders trained on different recent time windows (e.g., one day, three days, one week) could be maintained. One model from the ensemble performs real-time inference, and its performance is continuously monitored. If its decoding accuracy deteriorates (e.g., due to drift), the system evaluates the other models in the ensemble and switches to the best-performing one—without interrupting real-time processing. This approach ensures both robustness and adaptability in changing environments.
+
+Bonsai is already used extensively for experimental control at the SWC and AIND. Collaborating with researchers at these institutes, we will deploy our RTML enhancements to address major scientific challenges in NaLoDuCo experiments.
+
+All newly developed RTML tools for non-stationary experimental control will be released as open-source extensions to the \href{https://bonsai-rx.org/machinelearning/}{Bonsai.ML} package.
+
+\subsubsubsection{Deliverables}
+
+\begin{enumerate}
+    \item Real-time machine learning methods for non-stationary experimental control, integrated into the \href{https://bonsai-rx.org/machinelearning/}{Bonsai.ML} package.
+    \item RTML enhancements supporting continual learning, concept drift adaptation, and hybrid fast/slow architectures.
+    \item Demonstration of these methods in NaLoDuCo experiments at SWC and AIND.
+    \item Peer-reviewed publications co-authored with SWC and AIND researchers, showcasing new scientific discoveries enabled by RTML.
+    \item Open-source release of all code, usage examples, and documentation.
+\end{enumerate}
+
+\subsubsubsection{Bonsai and Bonsai.ML}
+\label{sec:bonsai}
+
+Bonsai is a widely adopted open-source software ecosystem for experimental
+control in neuroscience~\citep{lopesEtAl15}. With support from the
+\href{https://gow.bbsrc.ukri.org/grants/AwardDetails.aspx?FundingReference=BB\%2FW019132\%2F1}{BBSRC},
+we are developing infrastructure for intelligent, closed-loop experimentation
+through the \href{https://bonsai-rx.org/machinelearning/}{Bonsai.ML} package.
+
+We have already integrated several real-time ML models into Bonsai.ML,
+including linear regression, linear dynamical systems, hidden Markov models,
+and Bayesian point-process decoders. In collaboration with researchers at SWC
+and UCL, we are applying these models to real-time inference of visual
+receptive fields, foraging kinematics, behavioural state classification, and
+spatial decoding of hippocampal spiking
+activity.\footnote{\url{https://bonsai-rx.org/machinelearning/examples/README.html}}
+
+However, current Bonsai.ML models assume stationarity—a strong and often
+invalid assumption in NaLoDuCo contexts (see
+Section~\ref{sec:offlineAnalysisMethods}). We will adapt these methods to
+operate under non-stationary conditions using techniques described in
+Section~\ref{sec:non-stationarity}.
+
+Linear regression algorithms from adaptive signal processing, like
+least-mean square or recursive least square, are designed to operate in real
+time, so they will require no adaptation for real-time operation.
+
+For non-linear regression, artificial neural networks can perform inference in
+real time, especially when deployed on GPUs. However, for learning, techniques from continual
+learning, like experience replay  or online regularization, are not designed
+for real-time operation. They require additional computations, like storing and
+replaying data or computing weight importance, which might not meet real-time
+constrains, depending on model size, available compute, or latency
+requirements.
+%
+To try to overcome this limitation we could use:
+
+\begin{description}
+
+    \item[real-time minibatch updates] where parameters are updated on small
+        minibatches.
+
+    \item[bounded-time online updates] where only a subset of weights are
+        updated (e.g. input or output weights).
+
+    \item[hybrid strategy] that separates computation into two parallel
+        pipelines (running on difference processors or computers): a fast path
+        for real-time inference and a slow path for background model
+        adaptation. The fast path uses a lightweight, pre-trained model to
+        perform inference on incoming data at millisecond latencies.
+        Concurrently, the slow path accumulates recent data in a rolling buffer
+        and periodically updates or retrains models.  This path incorporates
+        methods from continual learning and concept drift adaptation, enabling
+        the system to remain accurate over long timescales. When an updated
+        model is validated, it is seamlessly deployed into the fast path
+        without interrupting real-time performance.
+
+\end{description}
+
+State-space models and their adaptive modifications are well suited to operate
+on real time, but the previous hybrid strategy may be needed to adapt
+model parameters to non-stationary regimes.
+
+For other types of machine learning models, techniques from the concept drift
+literature, combined with the previous hybrid strategy, could be used for
+real-time inference and learning.
+%
+For example, suppose we need a real-time decoder of position from
+non-stationary hippocampal activity. We could use an ensemble of decoders
+trained on different time windows (e.g., last week, last three days,
+yesterday). Among these models, one would be used to perform inference, and we
+will monitor its real-time performance. A performance degradation (e.g.,
+increase in decoding error) would trigger an model update, where we would pick
+the best performing model of the ensemble, and switch over to this model
+without interrupting real-time inference.
 
 Bonsai is already in use at both the SWC and AIND for experimental control. Working closely with researchers at these institutes, we will apply our new RTML methods to process non-stationary data and address leading scientific questions in NaLoDuCo experiments.
 

@@ -23,12 +23,10 @@ Current spike sorting algorithms—such as Kilosort \citep{pachitariuEtAl24}, JR
 We will evaluate two complementary spike sorting approaches for long-duration datasets:
 
 \begin{description}
-    \item[\textbf{UnitMatch}] \citep{vanBeestEtAl24} stitches together spike-sorting results from non-contiguous recording sessions. It assumes the availability of already spike-sorted short chunks, and matches units across them. However, it does not address situations in which neurons appear or disappear across time due to biological or recording variability.
+    \item[\textbf{UnitMatch}] \citep{vanBeestEtAl24} stitches together spike-sorting results from non-contiguous recording sessions. It assumes the availability of already spike-sorted short chunks, and matches units across them. However, it does not address situations in which neurons may appear or disappear across days due to factors such as circadian rhythms or other forms of long-term non-stationarities.
     
     \item[\textbf{FAST}] \citep{dhawaleEtAl17} is an algorithm for continual, long-duration tetrode recordings. It clusters waveforms in short temporal windows and tracks cluster centroids over time. FAST is designed to accommodate waveform drift and changing firing rates. Although originally developed for tetrode recordings, we will adapt it for high-density Neuropixels data.
 \end{description}
-
-While UnitMatch is modular and highly parallelizable, it cannot track units that periodically disappear and reappear. FAST supports tracking across time but is computationally heavier due to its serial dependencies.
 
 \paragraph{Types of Non-Stationarities in Long-Term Recordings}
 Beyond electrode drift, NaLoDuCo recordings are affected by a range of non-stationarities:
@@ -81,7 +79,7 @@ with visualisation tools from Section~\ref{sec:visualExploration}.
 
 Bombcell~\citep{fabreEtAl23} is a state-of-the-art tool for automatic quality control (QC) of spike sorting results. It evaluates spike clusters using a variety of metrics (e.g., waveform stability, firing rate variability, contamination) and assigns quality labels such as ``good,'' ``multiunit,'' or ``noise.'' However, Bombcell is designed for short-duration recordings, typically lasting tens of minutes to a few hours, and assumes stationarity in unit properties over the recording duration.
 
-To support quality control in NaLoDuCo recordings—continuous experiments lasting weeks to months—we will extend Bombcell in the following key directions:
+To support quality control in NaLoDuCo recordings, we will extend Bombcell in the following key directions:
 
 \paragraph{Windowed and Time-Resolved QC.}
 We will modify Bombcell to operate on time windows (e.g., 30-minute or 1-hour segments) rather than treating the entire dataset as a single session. Metrics will be computed per window, enabling dynamic tracking of unit quality over time. This approach will allow us to detect gradual quality degradation, state-dependent visibility, or abrupt changes in unit characteristics.
@@ -110,9 +108,9 @@ These extensions will transform Bombcell into the first fully automated QC tool 
 
 \subsubsubsection{Deliverables}
 \begin{enumerate}
-    \item Robust extensions of UnitMatch and FAST adapted to Neuropixels and long-duration recordings.
-    \item Automatic unit tracking and quality control via BombCell.
-    \item Cloud-based spike sorting pipeline integrated with the AEON platform.
-    \item Distributed and GPU-accelerated implementations to ensure scalability.
+    \item Adaptation of spike sorting methods for high-channel-count and long-duration recordings.
+    \item Distributed and GPU-accelerated implementations to ensure scalability across dataset sizes.
+    \item Cloud-based spike sorting pipeline for scalable and reproducible processing.
+    \item Automated unit tracking and quality control across extended recordings.
+    \item Open-source release of all spike sorting tools, quality metrics, cloud deployment scripts, and documentation.
 \end{enumerate}
-
